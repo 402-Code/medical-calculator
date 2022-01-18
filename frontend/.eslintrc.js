@@ -5,9 +5,9 @@ module.exports = {
     },
     "extends": [
         "airbnb",
-        "prettier",
         "eslint:recommended",
         "plugin:react/recommended",
+        "prettier",
     ],
     "presets": [
         "@babel/preset-react",

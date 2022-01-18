@@ -1,8 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const  PrettierPlugin = require("prettier-webpack-plugin");
-const path = require("path");
 
 module.exports = {
     entry: "./src/index.jsx",
@@ -12,8 +10,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({ template: './src/index.html'}),
         new ESLintPlugin(),
-        new MiniCssExtractPlugin(),
-        new PrettierPlugin()
+        new MiniCssExtractPlugin()
     ],
     resolve: {
         modules: [__dirname, "src", "node_modules"],
