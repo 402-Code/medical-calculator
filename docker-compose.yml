@@ -1,0 +1,15 @@
+services:
+  proxy:
+    build:
+      context: ./proxy
+    ports:
+      - "8083:80"
+  ui:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    container_name: frontend
+    volumes:
+      - ./frontend:/app
