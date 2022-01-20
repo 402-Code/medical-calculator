@@ -9,10 +9,6 @@ module.exports = {
         "plugin:react/recommended",
         "prettier",
     ],
-    "presets": [
-        "@babel/preset-react",
-        "@babel/preset-env"
-    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
