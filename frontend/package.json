@@ -29,7 +29,8 @@
     "@mui/material": "^5.3.0",
     "axios": "^0.25.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-material-ui-carousel": "^3.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
