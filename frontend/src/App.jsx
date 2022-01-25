@@ -1,14 +1,21 @@
-import React from "react";
-import Button from '@mui/material/Button';
-import './App.scss'
+import React, { useState } from "react";
+import Agreement from "./components/Agreement/Agreement";
+import MainPage from "./components/MainPage/MainPage";
+import './App.scss';
 
 function App() {
-   return ( <div>
-        <h1>Hello React</h1>
-       <Button variant="contained" color="primary">
-           Material UI
-       </Button>
-   </div>)
-}
+    const [isAccepted, setAccepted] = useState(() => !!localStorage.getItem("agreement"));
+
+    function accept() {
+        localStorage.setItem("agreement", true);
+        setAccepted(true);
+    }
+
+    return (
+        <div>
+            {isAccepted ? <MainPage /> : <Agreement onAccept={accept} />}
+        </div>
+    );
+};
 
 export default App;
