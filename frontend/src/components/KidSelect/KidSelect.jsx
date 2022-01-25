@@ -35,11 +35,13 @@ function KidSelect(props) {
         PrevIcon={<div/>}
         navButtonsProps={{
           style: {
-            borderRadius: 0,
             position: 'absolute',
             right: 0,
-            top: '0px !important', // TODO - Doesn't work
-            height: "100%", //TODO - and then this
+            // backgroundColor: 'white',
+            // color: 'black',
+            // borderRadius: 0,
+            // top: '0px !important', // TODO - Doesn't work
+            // height: "100%", //TODO - and then this
           },
         }}
       >
@@ -63,7 +65,7 @@ function Kid(props) {
   return (
     <>
       <Card variant="outlined">
-        <CardContent className="kid-select__kid__id" sx={{ p: 1 }}>
+        <CardContent className="kid-select__kid__id" sx={{ p: 2 }}>
           <Avatar sx={{ width: 50, height: 50 }}>MM</Avatar>
           <Typography variant="h4">{props.item.name}</Typography>
         </CardContent>
