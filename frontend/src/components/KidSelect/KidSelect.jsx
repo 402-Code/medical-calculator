@@ -32,6 +32,16 @@ function KidSelect(props) {
         cycleNavigation={true}
         navButtonsAlwaysVisible={true}
         fullHeightHover={true}
+        PrevIcon={<div/>}
+        navButtonsProps={{
+          style: {
+            borderRadius: 0,
+            position: 'absolute',
+            right: 0,
+            top: '0px !important', // TODO - Doesn't work
+            height: "100%", //TODO - and then this
+          },
+        }}
       >
         {kids.map((kid, i) => (
           <Kid key={i} item={kid} />
