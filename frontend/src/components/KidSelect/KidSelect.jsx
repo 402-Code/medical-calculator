@@ -12,62 +12,61 @@ import {
   Typography,
 } from "@mui/material";
 
-function KidSelect(props) {
-  // Temporary kids
-  const kids = [
-    {
-      name: "Franio",
-    },
-    {
-      name: "Ziutka",
-    },
-  ];
+const thereIsOnlyOneKid = (arr) => {
+  return arr.length === 1;
+};
 
-  return (
-    <div className="kid-select">
-      <Carousel
-        autoPlay={false}
-        animation="slide"
-        indicators={false}
-        cycleNavigation={true}
-        navButtonsAlwaysVisible={true}
-        fullHeightHover={true}
-        PrevIcon={<div/>}
-        navButtonsProps={{
-          style: {
-            position: 'absolute',
-            right: 0,
-            // backgroundColor: 'white',
-            // color: 'black',
-            // borderRadius: 0,
-            // top: '0px !important', // TODO - Doesn't work
-            // height: "100%", //TODO - and then this
-          },
-        }}
-      >
-        {kids.map((kid, i) => (
-          <Kid key={i} item={kid} />
-        ))}
-      </Carousel>
-      <Button
-        sx={{ float: "right" }}
-        variant="contained"
-        size="small"
-        startIcon={<AddIcon />}
-      >
-        Dodaj dziecko
-      </Button>
-    </div>
-  );
+function KidSelect({ kids }) {
+  if (thereIsOnlyOneKid(kids)) {
+    return (
+      <div className="kid-select">
+        <Kid kid={kids[0]} />
+      </div>
+    );
+  } else {
+    return (
+      <div className="kid-select">
+        <Carousel
+          navButtonsAlwaysVisible={true}
+          autoPlay={false}
+          animation="slide"
+          indicators={false}
+          cycleNavigation={true}
+          fullHeightHover={true}
+          PrevIcon={<div />}
+          navButtonsProps={{
+            style: {
+              position: "absolute",
+              right: 0,
+              // backgroundColor: 'white',
+              // color: 'black',
+            },
+          }}
+        >
+          {kids.map((kid, i) => (
+            <Kid key={i} kid={kid} />
+          ))}
+        </Carousel>
+        <Button
+          sx={{ float: "right" }}
+          variant="contained"
+          size="small"
+          startIcon={<AddIcon />}
+        >
+          Dodaj dziecko
+        </Button>
+      </div>
+    );
+  }
 }
 
-function Kid(props) {
+function Kid({ kid }) {
   return (
     <>
       <Card variant="outlined">
         <CardContent className="kid-select__kid__id" sx={{ p: 2 }}>
           <Avatar sx={{ width: 50, height: 50 }}>MM</Avatar>
-          <Typography variant="h4">{props.item.name}</Typography>
+          <Typography variant="h4">{kid.name}</Typography>
         </CardContent>
         <CardActions sx={{ pt: 0 }}>
           <ButtonGroup variant="contained">
