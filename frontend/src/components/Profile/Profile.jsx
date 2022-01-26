@@ -25,9 +25,12 @@ function Profile()  {
     }   
 
     const handleBmi = () => {
-      const result = Number((
+      let result = Number((
         ((weight) / (height ** 2 )
-      ) * 100000).toFixed(1))    
+      ) * 100000).toFixed(1))
+      if (!result || result < 0) {
+        result = 0
+      }
        setBmi(result)
     }
 
@@ -35,7 +38,6 @@ function Profile()  {
       if (event.target.files && event.target.files[0]) {
         const img = URL.createObjectURL(event.target.files[0]);
         setImage(img)
-        localStorage.setItem('avatar', img)
       }
      }
 
@@ -105,7 +107,7 @@ function Profile()  {
         BMI:
         </Typography>
         <Typography className='profile__item' variant="subtitle1" gutterBottom component="div">
-        {!bmi ? '0' : bmi}
+        {bmi}
         </Typography>
              
     </Box>
