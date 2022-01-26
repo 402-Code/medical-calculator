@@ -3,12 +3,13 @@ import Button from '@mui/material/Button';
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import Header from './components/Header/Header';
+import 'normalize.css';
 import './App.scss'
 
 
 
 function App() {
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
     const paletteType = darkMode ? "dark" : "light";
     const theme = createTheme({
         palette: {
