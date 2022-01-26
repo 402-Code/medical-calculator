@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0807806e-3afd-4ae2-b9e7-ffe7f1b61712" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/cypress/integration/components/layout/Header/header.spec.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Header/Header.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/cypress/integration/components/layout/Header/header.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/cypress/integration/components/layout/Header/header.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +55,7 @@
       <workItem from="1642941456362" duration="3067000" />
       <workItem from="1642946090409" duration="4999000" />
       <workItem from="1643227684363" duration="3871000" />
-      <workItem from="1643231837883" duration="2600000" />
+      <workItem from="1643231837883" duration="3379000" />
     </task>
     <servers />
   </component>

@@ -19,8 +19,7 @@ import LoginIcon from "@mui/icons-material/Login";
 export default function Header({ darkMode, handleThemeChange }) {
     const [showMenu, setShowMenu] = useState(false);
     const toggleMenu = () => {
-        setShowMenu((prev) => !prev);
-        console.log(showMenu);
+        setShowMenu((prev) => !prev));
     };
 
     const listItems = [
