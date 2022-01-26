@@ -1,6 +1,7 @@
 import React from "react";
 import "./KidSelect.scss";
 import Carousel from "react-material-ui-carousel";
+import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import {
   Button,
@@ -16,11 +17,27 @@ const thereIsOnlyOneKid = (arr) => {
   return arr.length === 1;
 };
 
+const addKidButton = () => {
+  return (
+    <Button
+      sx={{ float: "right" }}
+      variant="contained"
+      size="small"
+      startIcon={<AddIcon />}
+      component={Link}
+      to="/addkid"
+    >
+      Dodaj dziecko
+    </Button>
+  );
+};
+
 function KidSelect({ kids }) {
   if (thereIsOnlyOneKid(kids)) {
     return (
       <div className="kid-select">
         <Kid kid={kids[0]} />
+        {addKidButton()}
       </div>
     );
   } else {
@@ -44,17 +61,10 @@ function KidSelect({ kids }) {
           }}
         >
           {kids.map((kid, i) => (
-            <Kid key={i} kid={kid} />
+            <Kid kid={kid} key={i} />
           ))}
         </Carousel>
-        <Button
-          sx={{ float: "right" }}
-          variant="contained"
-          size="small"
-          startIcon={<AddIcon />}
-        >
-          Dodaj dziecko
-        </Button>
+        {addKidButton()}
       </div>
     );
   }
@@ -70,8 +80,12 @@ function Kid({ kid }) {
         </CardContent>
         <CardActions sx={{ pt: 0 }}>
           <ButtonGroup variant="contained">
-            <Button>Historia dawkowania</Button>
-            <Button>Edytuj</Button>
+            <Button component={Link} to={`/history/${kid.name}`}>
+              Historia dawkowania
+            </Button>
+            <Button component={Link} to={`/edit/${kid.name}`}>
+              Edytuj
+            </Button>
           </ButtonGroup>
         </CardActions>
       </Card>
