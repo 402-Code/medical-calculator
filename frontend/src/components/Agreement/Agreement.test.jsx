@@ -8,20 +8,20 @@ describe('Intro component with agreement', () => {
         it('has proper name', () => {
             render(<Agreement />);
             const agreementButton = screen.getByRole('button');
-            expect(agreementButton).toHaveTextContent('Rozumiem')
+            expect(agreementButton).toHaveTextContent('Rozumiem');
         });
 
         it('not disabled', () => {
             render(<Agreement/>)
             expect(screen.getByRole('button')).not.toBeDisabled();
         })
+
+        it('button calls onAccept', () => {
+            const accept = jest.fn();
+            render(<Agreement onAccept={accept} />);
+            expect(accept).not.toHaveBeenCalled();
+            screen.getByRole('button').click();
+            expect(accept).toHaveBeenCalled();
+        })
     })
-    
-    describe('paragraph', () => {
-        it('has a proper text', () => {
-            render(<Agreement />);
-            const agreementText = screen.getByRole('heading');
-            expect(agreementText).toHaveTextContent('Kalkulator Medyczny nie stanowi oraz nie zastępuje porady lekarskiej. Kliknięcie przycisku Rozumiem jest konieczne, by móc korzystać z aplikacji.');
-        });
-    });
 });

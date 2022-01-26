@@ -1,32 +1,24 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import App from './App';
 import { expect } from '@jest/globals';
 
-xdescribe('App', () => {
-    describe('button', () => {
-        it('has proper name', () => {
-            render(<App />);
-            const button = screen.getByRole('button');
-            expect(button).toHaveTextContent('Material UI')
-        });
+describe('Agreement component', () => {
+    it('should go to main component when "rozumiem" button clicked', () => {
+        render(<App />);
+        screen.getByText('Rozumiem').click();
+        expect(screen.queryByText('Rozumiem')).not.toBeInTheDocument();
+        expect(localStorage.getItem("agreement")).toBe("true");
+    });
 
-        it('not disabled', () => {
-            render(<App/>)
-            expect(screen.getByRole('button')).not.toBeDisabled();
-        })
-    })
-    
-    describe('heading', () => {
-        it('has a proper text', () => {
-            render(<App />);
-            const heading = screen.getByRole('heading');
-            expect(heading).toHaveTextContent('Hello React')
-        });
+    it('should not render Agreement if already accepted', () => {
+        localStorage.setItem('agreement', true)
+        render(<App />);
+        expect(screen.queryByText('Rozumiem')).not.toBeInTheDocument();
     });
 });
 
-test('App component', () => {
-    render(<App />);
-});
+
+
+
