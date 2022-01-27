@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { KidProvider } from "./context/KidConext";
 import RequireAgreement from "./components/Agreement/RequireAgreement";
 import KidSelect from "./components/KidSelect/KidSelect";
 import Profile from "./components/Profile/Profile";
@@ -32,6 +33,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
       <RequireAgreement>
+      <KidProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<KidSelect kids={TEMP_KIDS} />} />
@@ -44,6 +46,7 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
+        </KidProvider>
       </RequireAgreement>
     </ThemeProvider>
   );
