@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./KidSelect.scss";
 import Carousel from "react-material-ui-carousel";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import {
   CardActions,
   Typography,
 } from "@mui/material";
+import { useRef } from "react";
 
 const thereIsOnlyOneKid = (arr) => {
   return arr.length === 1;
@@ -33,17 +34,33 @@ const addKidButton = () => {
 };
 
 function KidSelect({ kids }) {
+  const activeKid = useRef(kids[0]);
+
+  const startNewDragButton = () => {
+    return (
+      <Button
+        sx={{ mt: 4, mx: "auto", display: "table" }}
+        variant="contained"
+        onClick={() => console.log(activeKid.current.name)}
+      >
+        Rozpocznij podawanie leku
+      </Button>
+    );
+  };
+
   if (thereIsOnlyOneKid(kids)) {
     return (
       <div className="kid-select">
         <Kid kid={kids[0]} />
         {addKidButton()}
+        {startNewDragButton()}
       </div>
     );
   } else {
     return (
       <div className="kid-select">
         <Carousel
+          onChange={(active) => (activeKid.current = kids[active])}
           navButtonsAlwaysVisible={true}
           autoPlay={false}
           animation="slide"
@@ -65,6 +82,7 @@ function KidSelect({ kids }) {
           ))}
         </Carousel>
         {addKidButton()}
+        {startNewDragButton()}
       </div>
     );
   }

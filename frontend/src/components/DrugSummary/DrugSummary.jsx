@@ -15,19 +15,18 @@ const DrugSummary = ({ drug }) => {
       <Typography variant="h5" component="div">
         Informacje o wybranym leku:
       </Typography>
-      <List sx={{ width: "100%", bgcolor: "background.paper", p: "0" }}>
-        <ListItem>
+      <List sx={{ width: "100%", bgcolor: "background.paper", p: 0 }}>
+        <ListItem sx={{py: 0.5}}>
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
-                Mininamlny wiek podania leku: {drug.min_access_age_in_months}{" "}
-                miesiące*
+                Ten lek nie może
               </Typography>
             }
           />
         </ListItem>
         <Divider variant="middle" />
-        <ListItem>
+        <ListItem sx={{py: 0.5}}>
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
@@ -39,7 +38,7 @@ const DrugSummary = ({ drug }) => {
           />
         </ListItem>
         <Divider variant="middle" />
-        <ListItem>
+        <ListItem sx={{py: 0.5}}>
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
@@ -50,7 +49,7 @@ const DrugSummary = ({ drug }) => {
           />
         </ListItem>
         <Divider variant="middle" />
-        <ListItem>
+        <ListItem sx={{py: 0.5}}>
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
@@ -61,7 +60,6 @@ const DrugSummary = ({ drug }) => {
             }
           />
         </ListItem>
-        <Divider variant="middle" />
       </List>
     </div>
   );

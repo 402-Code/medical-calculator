@@ -2,7 +2,8 @@ import React from "react";
 import DrugSummary from "../DrugSummary/DrugSummary";
 import KidSelect from "../KidSelect/KidSelect";
 
-const HomeScreen = ({ kids, drug }) => {
+const NewDragScreen = ({ kids, drug }) => {
+
   return (
     <>
       <KidSelect kids={kids} />
@@ -12,4 +13,4 @@ const HomeScreen = ({ kids, drug }) => {
   );
 };
 
-export default HomeScreen;
+export default NewDragScreen;
