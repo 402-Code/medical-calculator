@@ -3,15 +3,8 @@ import "./KidSelect.scss";
 import Carousel from "react-material-ui-carousel";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-import {
-  Button,
-  ButtonGroup,
-  Avatar,
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-} from "@mui/material";
+import { Button } from "@mui/material";
+import Kid from "./Kid/Kid";
 
 const thereIsOnlyOneKid = (arr) => {
   return arr.length === 1;
@@ -57,8 +50,6 @@ function KidSelect({ kids, activeKid }) {
             style: {
               position: "absolute",
               right: 0,
-              // backgroundColor: 'white',
-              // color: 'black',
             },
           }}
         >
@@ -70,29 +61,6 @@ function KidSelect({ kids, activeKid }) {
       </div>
     );
   }
-}
-
-function Kid({ kid }) {
-  return (
-    <>
-      <Card variant="outlined">
-        <CardContent className="kid-select__kid__id" sx={{ p: 2 }}>
-          <Avatar sx={{ width: 50, height: 50 }}>MM</Avatar>
-          <Typography variant="h4">{kid.name}</Typography>
-        </CardContent>
-        <CardActions sx={{ pt: 0 }}>
-          <ButtonGroup variant="contained">
-            <Button component={Link} to={`/history/${kid.name}`}>
-              Historia dawkowania
-            </Button>
-            <Button component={Link} to={`/edit/${kid.name}`}>
-              Edytuj
-            </Button>
-          </ButtonGroup>
-        </CardActions>
-      </Card>
-    </>
-  );
 }
 
 export default KidSelect;
