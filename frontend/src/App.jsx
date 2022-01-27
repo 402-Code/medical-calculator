@@ -3,7 +3,7 @@ import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import History from "./components/History/History";
-import HomeScreen from "./components/HomeScreen/HomeScreen";
+import NewDragScreen from "./components/NewDragScreen/NewDragScreen";
 
 function App() {
   // Temporary kids array
@@ -85,7 +85,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomeScreen kids={TEMP_KIDS} drug={drug} />} />
+        <Route path="/" element={<NewDragScreen kids={TEMP_KIDS} drug={drug} />} />
         <Route path="/addkid" element={<Profile kids={TEMP_KIDS} />} />
         <Route path="/edit/:name" element={<Profile kids={TEMP_KIDS} />} />
         <Route path="/history/:name" element={<History kids={TEMP_KIDS} />} />

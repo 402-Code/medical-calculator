@@ -12,7 +12,7 @@ import {
 const DrugSummary = ({ drug }) => {
   return (
     <div className="drug-summary">
-      <Typography variant="h5" component="div">
+      <Typography variant="h6" component="div">
         Informacje o wybranym leku:
       </Typography>
       <List sx={{ width: "100%", bgcolor: "background.paper", p: 0 }}>
@@ -20,7 +20,7 @@ const DrugSummary = ({ drug }) => {
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
-                Ten lek nie może
+                Czy ten lek może być podany w tym wieku?
               </Typography>
             }
           />
