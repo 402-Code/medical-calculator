@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { KidProvider } from "./context/KidConext";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+import "normalize.css";
+import "./App.scss";
 import RequireAgreement from "./components/Agreement/RequireAgreement";
 import KidSelect from "./components/KidSelect/KidSelect";
 import Profile from "./components/Profile/Profile";
 import History from "./components/History/History";
-import { createTheme } from "@mui/material";
-import { ThemeProvider } from "@emotion/react";
 import Header from "./components/Header/Header";
 import TEMP_KIDS from "./components/mocks/tempKids";
-import "normalize.css";
-import "./App.scss";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -36,8 +36,8 @@ function App() {
       <KidProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<KidSelect kids={TEMP_KIDS} />} />
             <Route path="/" element={<h3>Just checking if App works</h3>} />
+            <Route path="/kidselect" element={<KidSelect kids={TEMP_KIDS} />} />
             <Route path="/addkid" element={<Profile kids={TEMP_KIDS} />} />
             <Route path="/edit/:name" element={<Profile kids={TEMP_KIDS} />} />
             <Route
