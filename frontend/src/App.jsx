@@ -1,11 +1,16 @@
 import React from "react";
-import './App.scss'
+import "./App.scss";
 import Profile from "./components/Profile/Profile";
+import { KidProvider } from "./context/KidConext";
 
 function App() {
-   return ( <div>
-       <Profile />
-   </div>)
+  return (
+    <div>
+      <KidProvider>
+        <Profile />
+      </KidProvider>
+    </div>
+  );
 }
 
 export default App;
