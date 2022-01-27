@@ -9,7 +9,7 @@ describe('Agreement component', () => {
         render(<App />);
         screen.getByText('Rozumiem').click();
         expect(screen.queryByText('Rozumiem')).not.toBeInTheDocument();
-        expect(localStorage.getItem("agreement")).toBe("true");
+        expect(localStorage.getItem('agreement')).toBe('true');
     });
 
     it('should not render Agreement if already accepted', () => {
@@ -18,7 +18,3 @@ describe('Agreement component', () => {
         expect(screen.queryByText('Rozumiem')).not.toBeInTheDocument();
     });
 });
-
-
-
-

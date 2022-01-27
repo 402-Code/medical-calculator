@@ -1,21 +1,17 @@
-import React, { useState } from "react";
-import Agreement from "./components/Agreement/Agreement";
-import MainPage from "./components/MainPage/MainPage";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import RequireAgreement from './components/Agreement/RequireAgreement';
 import './App.scss';
 
 function App() {
-    const [isAccepted, setAccepted] = useState(() => !!localStorage.getItem("agreement"));
-
-    function accept() {
-        localStorage.setItem("agreement", true);
-        setAccepted(true);
-    }
-
     return (
-        <div>
-            {isAccepted ? <MainPage /> : <Agreement onAccept={accept} />}
-        </div>
-    );
+        <RequireAgreement>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<h3>Just checking if App works</h3>} />
+                </Routes>
+            </BrowserRouter>
+        </RequireAgreement>);
 };
 
 export default App;
