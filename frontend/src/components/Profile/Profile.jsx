@@ -1,21 +1,21 @@
 import React from 'react';
 import { Fab, TextField, Radio, RadioGroup, FormControlLabel, FormControl, InputAdornment, Box, Avatar, Typography } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import boy from '../../img/avatars/boy.png';
 import girl from '../../img/avatars/girl.png';
-import '@fontsource/roboto/500.css';
 import './Profile.scss';
 
 
 function Profile()  {
-    const [height, setHeight] = React.useState();
-    const [weight, setWeight] = React.useState();
+    const [name, setName] = React.useState('');
+    const [birthday, setBirthday] = React.useState('');
+    const [height, setHeight] = React.useState(0);
+    const [weight, setWeight] = React.useState(0);
     const [bmi, setBmi] = React.useState(0);
     const [gender, setGender] = React.useState('');
     const [avatar, setAvatar] = React.useState(boy);
-    const [image, setImage] = React.useState('')
-    
+    const [image, setImage] = React.useState('');
+      
     const changeAvatar  = () => {
       if(gender === 'female') {
         setAvatar(boy)
@@ -40,15 +40,9 @@ function Profile()  {
         setImage(img)
       }
      }
-
-    const theme = createTheme({
-      palette: {
-        mode: 'dark',
-      },
-    });
+       
 
     return (
-        <ThemeProvider theme={theme}>
         <Box className='profile'>
         <Fab
         className='profile__avatar'
@@ -63,13 +57,13 @@ function Profile()  {
           />
         </Fab>
     
-        <TextField className="profile__item" id="filled-basic" label="Imię" variant="filled" />
+        <TextField value={name} onChange={e => setName(e.target.value)} className="profile__item" id="filled-basic" label="Imię" variant="filled" />
 
         <Typography className='profile__description' variant="subtitle1" gutterBottom component="div">
         Data urodzenia:
         </Typography>
 
-        <TextField id="date" type="date" defaultValue="dd-MM-yyyy"
+        <TextField value={birthday} onChange={e => setBirthday(e.target.value)} id="date" type="date" defaultValue="dd-MM-yyyy"
         sx={{m: 1, width: 220, backgroundColor: "primary"}} InputLabelProps={{ shrink: true, }} InputProps={{
           endAdornment: <InputAdornment position="end"><CalendarTodayIcon /></InputAdornment>,
         }} />
@@ -111,7 +105,6 @@ function Profile()  {
         </Typography>
              
     </Box>
-    </ThemeProvider>
     )
 }
 
