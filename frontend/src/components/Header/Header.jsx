@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
     AppBar,
     Toolbar,
@@ -15,13 +16,23 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import LoginIcon from "@mui/icons-material/Login";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export default function Header({ darkMode, handleThemeChange }) {
     const [showMenu, setShowMenu] = useState(false);
-    const toggleMenu = () => {
-        setShowMenu((prev) => !prev);
+    const {pathname} = useLocation();
+    const navigate = useNavigate();
+    
+    const toggleMenu = (e) => {
+        if(pathname === '/') setShowMenu((prev) => !prev);
+        else {
+            handlePreviousPage(e);
+        };
     };
-
+    const handlePreviousPage=(e)=>{
+        e.preventDefault();
+        navigate('/');
+    }
     const listItems = [
         { text: "Zaloguj sie", icon: <LoginIcon /> },
         { text: "Zarejestruj sie", icon: <HowToRegIcon /> },
@@ -39,7 +50,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                         sx={{ mr: 2 }}
                         onClick={toggleMenu}
                     >
-                        <MenuIcon />
+                        {pathname === '/' ? <MenuIcon/> : <ArrowBackIcon />}
                     </IconButton>
                 </Toolbar>
                 {listItems.map((anchor) => (
@@ -75,6 +86,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                     </Fragment>
                 ))}
             </AppBar>
+            {/*{params}*/}
         </Box>
     );
 }
