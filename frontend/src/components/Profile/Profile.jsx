@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import {
   Fab,
   TextField,
@@ -10,6 +11,7 @@ import {
   Box,
   Avatar,
   Typography,
+    Button
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -17,39 +19,57 @@ import boy from "../../img/avatars/boy.png";
 import girl from "../../img/avatars/girl.png";
 // import '@fontsource/roboto/500.css';
 import "./Profile.scss";
-import { KidContext } from "../../context/KidConext";
+import { ChildContext } from "../../context/ChildContext";
 
 function Profile() {
-  const context = useContext(KidContext);
+  const [name, setName]=useState('')
+  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [bmi, setBmi] = useState(0);
+  const [age, setAge] = useState(0);
+  const [gender, setGender] = useState("");
+  const [avatar, setAvatar] = useState();
+  const [image, setImage] = useState("");
+  
+  const ctx = useContext(ChildContext);
+  const navigate = useNavigate();
+
+  const handleSubmit =(e)=> {
+    e.preventDefault();
+    const kid = {name, age, height, weight, gender, bmi, avatar};
+    ctx.setKids([...ctx.kids, kid]);
+    console.log({name, age, height, weight, gender, bmi, avatar});
+    navigate('/');
+  }
 
   const changeAvatar = () => {
-    if (context.gender === "female") {
-      context.setAvatar(boy);
-    } else if (context.gender === "male") {
-      context.setAvatar(girl);
+    if (gender === "female") {
+      setAvatar(boy);
+    } else if (gender === "male") {
+      setAvatar(girl);
     }
   };
 
   const handleBmi = () => {
     const result = Number(
-      ((context.weight / context.height ** 2) * 100000).toFixed(1)
+      ((weight / height ** 2) * 100000).toFixed(1)
     );
-    context.setBmi(result);
+    setBmi(result);
   };
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       const img = URL.createObjectURL(event.target.files[0]);
-      context.setImage(img);
+      setImage(img);
     }
   };
 
   return (
-    <>
       <Box className="profile">
+        <form onSubmit={handleSubmit}>
         <Fab className="profile__avatar" component="label">
           <Avatar
-            src={!context.image ? context.avatar : context.image}
+            src={!image ? avatar : image}
             sx={{ width: 100, height: 100 }}
           />
           <input type="file" hidden onChange={onImageChange} />
@@ -60,6 +80,8 @@ function Profile() {
           id="filled-basic"
           label="Imię"
           variant="filled"
+          value={name}
+          onChange={(e)=>setName(e.target.value)}
         />
 
         <Typography
@@ -85,7 +107,24 @@ function Profile() {
             ),
           }}
         />
+          <Typography
+              className="profile__description"
+              variant="subtitle1"
+              gutterBottom
+              component="div"
+          >
+            Wiek:
+          </Typography>
 
+          <TextField
+              sx={{ fontSize: "30" }}
+              onChange={(e) => setAge(e.target.value)}
+              id="filled-number"
+              type="number"
+              InputLabelProps={{ shrink: true }}
+              variant="filled"
+              value={age}
+          />
         <Typography
           className="profile__description"
           variant="subtitle1"
@@ -98,7 +137,7 @@ function Profile() {
         <TextField
           onKeyDown={handleBmi}
           sx={{ fontSize: "30" }}
-          onChange={(e) => context.setHeight(e.target.value)}
+          onChange={(e) => setHeight(e.target.value)}
           id="filled-number"
           type="number"
           InputLabelProps={{ shrink: true }}
@@ -119,7 +158,7 @@ function Profile() {
 
         <TextField
           onKeyDown={handleBmi}
-          onChange={(e) => context.setWeight(e.target.value)}
+          onChange={(e) => setWeight(e.target.value)}
           id="filled-number"
           type="number"
           InputLabelProps={{ shrink: true }}
@@ -149,7 +188,7 @@ function Profile() {
               control={
                 <Radio
                   onChange={(e) => {
-                    context.setGender(e.target.value);
+                    setGender(e.target.value);
                     changeAvatar();
                   }}
                 />
@@ -162,7 +201,7 @@ function Profile() {
               control={
                 <Radio
                   onChange={(e) => {
-                    context.setGender(e.target.value);
+                    setGender(e.target.value);
                     changeAvatar();
                   }}
                 />
@@ -186,10 +225,12 @@ function Profile() {
           gutterBottom
           component="div"
         >
-          {!context.bmi ? "0" : context.bmi}
+          {!bmi ? "0" : bmi}
         </Typography>
+
+          <Button variant='contained' color='primary' type='submit'>Karyna dodaj bombelka</Button>
+        </form>
       </Box>
-    </>
   );
 }
 
