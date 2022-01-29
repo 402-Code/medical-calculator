@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const sendGetRequest = (url, body) => {
+const MEDICATION_LIST_ENDPOINT = "https://jsonplaceholder.typicode.com/todos";
+
+const sendGetRequest = (body) => {
   const dataPromise = axios
-    .get(url, { params: { body } })
+    .get(MEDICATION_LIST_ENDPOINT, { params: { body } })
     .then((res) => res.data);
 
   return dataPromise;

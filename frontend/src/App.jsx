@@ -6,7 +6,8 @@ import { ThemeProvider } from "@emotion/react";
 import "normalize.css";
 import "./App.scss";
 import today from "./utils/today";
-import sendGetRequest from "./request/getRequest";
+import sendGetRequest from "./utils/getRequest";
+import getDataVersion from "./utils/getDataVersion";
 import RequireAgreement from "./components/Agreement/RequireAgreement";
 import KidSelect from "./components/KidSelect/KidSelect";
 import Profile from "./components/Profile/Profile";
@@ -14,8 +15,7 @@ import History from "./components/History/History";
 import Header from "./components/Header/Header";
 import TEMP_KIDS from "./components/mocks/tempKids";
 
-const MEDICATION_LIST_ENDPOINT = "https://jsonplaceholder.typicode.com/todos";
-const DATA_VERSION = { data_version: today };
+let DATA_VERSION = getDataVersion();
 
 function App() {
   const [medicationList, setMedicationList] = useState([]);
@@ -37,8 +37,15 @@ function App() {
   };
 
   useEffect(async () => {
-    const data = await sendGetRequest(MEDICATION_LIST_ENDPOINT, DATA_VERSION);
-    setMedicationList(data);
+    const data = await sendGetRequest(DATA_VERSION);
+    if (data.length === 0) {
+      setMedicationList(JSON.parse(localStorage.getItem("medicationList")));
+    } else {
+      localStorage.setItem("medicationList", JSON.stringify(data));
+      DATA_VERSION = { data_version: today };
+      localStorage.setItem("data_version", JSON.stringify(DATA_VERSION));
+      setMedicationList(data)
+    }
   }, []);
 
   return (
