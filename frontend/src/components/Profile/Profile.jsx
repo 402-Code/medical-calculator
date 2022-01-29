@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   Fab,
   TextField,
@@ -33,6 +33,7 @@ function Profile() {
   
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
+  const params = useParams();
 
   const handleSubmit =(e)=> {
     e.preventDefault();
@@ -66,6 +67,8 @@ function Profile() {
 
   return (
       <Box className="profile">
+          <p>
+              {params.name}</p>
         <form onSubmit={handleSubmit}>
         <Fab className="profile__avatar" component="label">
           <Avatar
