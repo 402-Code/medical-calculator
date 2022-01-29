@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { KidProvider } from "./context/KidConext";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import "normalize.css";
 import "./App.scss";
+import today from "./utils/today";
+import sendGetRequest from "./request/getRequest";
 import RequireAgreement from "./components/Agreement/RequireAgreement";
 import KidSelect from "./components/KidSelect/KidSelect";
 import Profile from "./components/Profile/Profile";
@@ -12,7 +14,11 @@ import History from "./components/History/History";
 import Header from "./components/Header/Header";
 import TEMP_KIDS from "./components/mocks/tempKids";
 
+const MEDICATION_LIST_ENDPOINT = "https://jsonplaceholder.typicode.com/todos";
+const DATA_VERSION = { data_version: today };
+
 function App() {
+  const [medicationList, setMedicationList] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const paletteType = darkMode ? "dark" : "light";
   const theme = createTheme({
@@ -29,6 +35,12 @@ function App() {
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
   };
+
+  useEffect(async () => {
+    const data = await sendGetRequest(MEDICATION_LIST_ENDPOINT, DATA_VERSION);
+    setMedicationList(data);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
