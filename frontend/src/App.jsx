@@ -18,9 +18,6 @@ function App() {
   const theme = createTheme({
     palette: {
       mode: paletteType,
-      // background: {
-      //   default: paletteType === "ligth" ? "#eaeaea" : "#121212",
-      // },
       primary: {
         main: "#1976d2",
       },
