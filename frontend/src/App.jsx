@@ -30,11 +30,11 @@ function App() {
     setDarkMode(!darkMode);
   };
   return (
-    <ThemeProvider theme={theme}>
-      <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
+    <ThemeProvider theme={theme}>      
       <RequireAgreement>
       <KidProvider>
         <BrowserRouter>
+          <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
           <Routes>
             <Route path="/" element={<h3>Just checking if App works</h3>} />
             <Route path="/kidselect" element={<KidSelect kids={TEMP_KIDS} />} />

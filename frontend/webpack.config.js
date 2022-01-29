@@ -3,6 +3,9 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+    devServer: {
+        historyApiFallback: true,
+    },
     entry: "./src/index.jsx",
     output: {
         filename: "bundle.[contenthash].js"
