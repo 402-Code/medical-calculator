@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   Fab,
@@ -33,13 +33,27 @@ function Profile() {
   
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
-  const params = useParams();
+  const {kidname} = useParams();
+  
+  useEffect(()=>{
+      if(kidname !== undefined) {
+          const editedKid = ctx.kids.find(kid => kid.name === kidname)
+         console.log(editedKid, parseInt(editedKid.weight))
+          setName(editedKid.name);
+          setAge(editedKid.age);
+          setWeight(parseInt(editedKid.weight));
+          setHeight(editedKid.height);
+          setAvatar(editedKid.avatar);
+          setBmi(editedKid.bmi);
+          setGender(editedKid.gender);
+          
+      }
+  },[])
 
   const handleSubmit =(e)=> {
     e.preventDefault();
     const kid = {name, age, height, weight, gender, bmi, avatar};
     ctx.setKids([...ctx.kids, kid]);
-    console.log({name, age, height, weight, gender, bmi, avatar});
     navigate('/');
   }
 
@@ -67,8 +81,6 @@ function Profile() {
 
   return (
       <Box className="profile">
-          <p>
-              {params.name}</p>
         <form onSubmit={handleSubmit}>
         <Fab className="profile__avatar" component="label">
           <Avatar
@@ -148,6 +160,7 @@ function Profile() {
             endAdornment: <InputAdornment position="end">cm</InputAdornment>,
           }}
           variant="filled"
+          value={height}
         />
 
         <Typography
@@ -169,6 +182,7 @@ function Profile() {
             endAdornment: <InputAdornment position="end">kg</InputAdornment>,
           }}
           variant="filled"
+          value={weight}
         />
 
         <Typography
@@ -200,7 +214,7 @@ function Profile() {
             />
             <FormControlLabel
               sx={{ m: "1" }}
-              value="male"
+              value={gender}
               control={
                 <Radio
                   onChange={(e) => {

@@ -37,7 +37,7 @@ function App() {
               <Route path="/" element={<h3>Just checking if App works</h3>} />
               <Route path="/kidselect" element={<KidSelect />} />
               <Route path="/addkid" element={<Profile kids={TEMP_KIDS} />} />
-              <Route path="/edit/:name" element={<Profile kids={TEMP_KIDS} />} />
+              <Route path="/edit/:kidname" element={<Profile kids={TEMP_KIDS} />} />
               <Route
                   path="/history/:name"
                   element={<History kids={TEMP_KIDS} />}
