@@ -35,41 +35,22 @@ function Profile() {
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
   const {kidname} = useParams();
-  
+
   useEffect(()=>{
       if(kidname !== undefined) {
-          const editedKid = ctx.kids.find(kid => kid.name === kidname)
-          setName(editedKid.name);
-          setAge(editedKid.age);
-          setWeight(parseInt(editedKid.weight));
-          setHeight(editedKid.height);
-          setAvatar(editedKid.avatar);
-          setBmi(editedKid.bmi);
-          setGender(editedKid.gender);
-          setDob(editedKid.dob);
-          
+          populateKidData();
       }
   },[])
 
-  const handleSubmit =(e)=> {
+    const handleSubmit =(e)=> {
     e.preventDefault();
     let kid={};
 
     if(kidname !== undefined) {
-        kid = ctx.kids.filter(kid => kid.name === kidname);
-        kid.name = name;
-        kid.age = age;
-        kid.height = height;
-        kid.weight = weight;
-        kid.gender = gender;
-        kid.dob = dob;
-        const kidIndex = ctx.kids.findIndex(kid => kid.name === kidname);
-        ctx.kids.splice(kidIndex,1);
+        kid = updateKid(kidname);
 
     } else {
         kid = {name, age, height, weight, gender, bmi, avatar, dob};
-        console.log(kid.dob)
-        console.log(kid)
     }
 
     ctx.setKids([...ctx.kids, kid]);
@@ -97,8 +78,31 @@ function Profile() {
       setImage(img);
     }
   };
+    const populateKidData = () => {
+        const editedKid = ctx.kids.find(kid => kid.name === kidname)
+        setName(editedKid.name);
+        setAge(editedKid.age);
+        setWeight(parseInt(editedKid.weight));
+        setHeight(editedKid.height);
+        setAvatar(editedKid.avatar);
+        setBmi(editedKid.bmi);
+        setGender(editedKid.gender);
+        setDob(editedKid.dob);
+    }
+    const updateKid=(kidname)=> {
+        const editedKid = ctx.kids.filter(kid => kid.name === kidname);
+        editedKid.name = name;
+        editedKid.age = age;
+        editedKid.height = height;
+        editedKid.weight = weight;
+        editedKid.gender = gender;
+        editedKid.dob = dob;
+        const kidIndex = ctx.kids.findIndex(kid => kid.name === kidname);
+        ctx.kids.splice(kidIndex, 1);
+        return editedKid;
+    }
 
-  return (
+    return (
       <Box className="profile">
         <form onSubmit={handleSubmit}>
         <Fab className="profile__avatar" component="label">
