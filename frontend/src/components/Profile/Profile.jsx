@@ -17,10 +17,10 @@ import boy from "../../img/avatars/boy.png";
 import girl from "../../img/avatars/girl.png";
 // import '@fontsource/roboto/500.css';
 import "./Profile.scss";
-import { KidContext } from "../../context/KidConext";
+import { ChildContext } from "../../context/ChildContext";
 
 function Profile() {
-  const context = useContext(KidContext);
+  const context = useContext(ChildContext);
 
   const changeAvatar = () => {
     if (context.gender === "female") {

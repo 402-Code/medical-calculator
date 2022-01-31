@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { KidProvider } from "./context/KidConext";
+import { ChildProvider } from "./context/ChildContext";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import "normalize.css";
@@ -32,7 +32,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>      
       <RequireAgreement>
-      <KidProvider>
+      <ChildProvider>
         <BrowserRouter>
           <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
           <Routes>
@@ -40,13 +40,11 @@ function App() {
             <Route path="/kidselect" element={<KidSelect kids={TEMP_KIDS} />} />
             <Route path="/addkid" element={<Profile kids={TEMP_KIDS} />} />
             <Route path="/edit/:name" element={<Profile kids={TEMP_KIDS} />} />
-            <Route
-              path="/history/:name"
-              element={<History kids={TEMP_KIDS} />}
+            <Route path="/history/:kidname" element={<History />}
             />
           </Routes>
         </BrowserRouter>
-        </KidProvider>
+        </ChildProvider>
       </RequireAgreement>
     </ThemeProvider>
   );
