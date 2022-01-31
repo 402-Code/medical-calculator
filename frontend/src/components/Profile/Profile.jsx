@@ -23,14 +23,14 @@ import { ChildContext } from "../../context/ChildContext";
 
 function Profile() {
   const [name, setName]=useState('')
-  const [height, setHeight] = useState();
-  const [weight, setWeight] = useState();
-  const [bmi, setBmi] = useState();
-  const [age, setAge] = useState();
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [bmi, setBmi] = useState('');
+  const [age, setAge] = useState('');
   const [gender, setGender] = useState("female");
-  const [avatar, setAvatar] = useState();
-  const [image, setImage] = useState("");
-  const [dob, setDob] = useState("");
+  const [avatar, setAvatar] = useState('');
+  const [image, setImage] = useState('');
+  const [dob, setDob] = useState('');
 
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
@@ -39,7 +39,6 @@ function Profile() {
   useEffect(()=>{
       if(kidname !== undefined) {
           const editedKid = ctx.kids.find(kid => kid.name === kidname)
-         console.log(editedKid, parseInt(editedKid.weight))
           setName(editedKid.name);
           setAge(editedKid.age);
           setWeight(parseInt(editedKid.weight));
@@ -47,14 +46,32 @@ function Profile() {
           setAvatar(editedKid.avatar);
           setBmi(editedKid.bmi);
           setGender(editedKid.gender);
+          setDob(editedKid.dob);
           
       }
   },[])
 
   const handleSubmit =(e)=> {
     e.preventDefault();
-    console.log(dob)
-    const kid = {name, age, height, weight, gender, bmi, avatar, dob};
+    let kid={};
+
+    if(kidname !== undefined) {
+        kid = ctx.kids.filter(kid => kid.name === kidname);
+        kid.name = name;
+        kid.age = age;
+        kid.height = height;
+        kid.weight = weight;
+        kid.gender = gender;
+        kid.dob = dob;
+        const kidIndex = ctx.kids.findIndex(kid => kid.name === kidname);
+        ctx.kids.splice(kidIndex,1);
+
+    } else {
+        kid = {name, age, height, weight, gender, bmi, avatar, dob};
+        console.log(kid.dob)
+        console.log(kid)
+    }
+
     ctx.setKids([...ctx.kids, kid]);
     navigate('/');
   }
@@ -240,7 +257,7 @@ function Profile() {
           {!bmi ? "0" : bmi}
         </Typography>
 
-          <Button variant='contained' color='primary' type='submit'>Karyna dodaj bombelka</Button>
+          <Button variant='contained' color='primary' type='submit'>{kidname ? 'Karyna zapisz zmiany' : 'Karyna dodaj bombelka'}</Button>
         </form>
       </Box>
   );
