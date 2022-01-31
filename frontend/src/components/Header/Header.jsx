@@ -57,8 +57,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                     <NavLink className='link' to='/kidselect'>Kid Select</NavLink>
                     <NavLink className='link' to='/addkid'>Add kid</NavLink>
                 </Toolbar>
-                {listItems.map((anchor) => (
-                    <Fragment key={anchor.text}>
+                    <Fragment>
                         <SwipeableDrawer
                             onClose={toggleMenu}
                             onOpen={toggleMenu}
@@ -88,7 +87,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                             </List>
                         </SwipeableDrawer>
                     </Fragment>
-                ))}
+
             </AppBar>
             {/*{params}*/}
         </Box>

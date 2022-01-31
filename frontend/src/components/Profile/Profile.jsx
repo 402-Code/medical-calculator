@@ -23,14 +23,15 @@ import { ChildContext } from "../../context/ChildContext";
 
 function Profile() {
   const [name, setName]=useState('')
-  const [height, setHeight] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [bmi, setBmi] = useState(0);
-  const [age, setAge] = useState(0);
-  const [gender, setGender] = useState("");
+  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState();
+  const [bmi, setBmi] = useState();
+  const [age, setAge] = useState();
+  const [gender, setGender] = useState("female");
   const [avatar, setAvatar] = useState();
   const [image, setImage] = useState("");
-  
+  const [dob, setDob] = useState("");
+
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
   const {kidname} = useParams();
@@ -52,7 +53,8 @@ function Profile() {
 
   const handleSubmit =(e)=> {
     e.preventDefault();
-    const kid = {name, age, height, weight, gender, bmi, avatar};
+    console.log(dob)
+    const kid = {name, age, height, weight, gender, bmi, avatar, dob};
     ctx.setKids([...ctx.kids, kid]);
     navigate('/');
   }
@@ -111,7 +113,6 @@ function Profile() {
         <TextField
           id="date"
           type="date"
-          defaultValue="dd-MM-yyyy"
           sx={{ m: 1, width: 220, backgroundColor: "primary" }}
           InputLabelProps={{ shrink: true }}
           InputProps={{
@@ -121,6 +122,8 @@ function Profile() {
               </InputAdornment>
             ),
           }}
+          value={dob}
+          onChange={e=>setDob(e.target.value)}
         />
           <Typography
               className="profile__description"
@@ -198,30 +201,22 @@ function Profile() {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            value={gender}
+            onChange={e=>setGender(e.target.value)}
           >
             <FormControlLabel
               sx={{ m: "1" }}
               value="female"
               control={
-                <Radio
-                  onChange={(e) => {
-                    setGender(e.target.value);
-                    changeAvatar();
-                  }}
-                />
+                <Radio/>
               }
               label="Dziewczynka"
             />
             <FormControlLabel
               sx={{ m: "1" }}
-              value={gender}
+              value='male'
               control={
-                <Radio
-                  onChange={(e) => {
-                    setGender(e.target.value);
-                    changeAvatar();
-                  }}
-                />
+                <Radio/>
               }
               label="Chłopiec"
             />
