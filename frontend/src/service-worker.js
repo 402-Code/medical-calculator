@@ -1,0 +1,1 @@
+console.log('hi from serwice-worker');

@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     devServer: {
@@ -13,7 +15,14 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({ template: './src/index.html'}),
         new ESLintPlugin(),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
+        new WorkboxPlugin.GenerateSW(),
+        new CopyWebpackPlugin({
+            patterns: [
+            {
+               from: "./src/manifest.json",
+               to:   "./dist/manifest.json"
+            }]})
     ],
     resolve: {
         modules: [__dirname, "src", "node_modules"],
