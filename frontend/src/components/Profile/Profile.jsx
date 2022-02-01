@@ -42,6 +42,24 @@ function Profile() {
       }
   },[])
 
+    useEffect(() => {
+        if (gender === "male") {
+            setAvatar(boy);
+        } else if (gender === "female") {
+            setAvatar(girl);
+        }
+    }, [gender]);
+
+    useEffect(() => {
+        let result = Number((
+            ((weight) / (height ** 2 )
+            ) * 10000).toFixed(1))
+        if (!result || result < 0) {
+            result = 0
+        }
+        setBmi(result);
+    }, [weight, height])
+
     const handleSubmit =(e)=> {
     e.preventDefault();
     let kid={};
@@ -65,19 +83,12 @@ function Profile() {
     }
   };
 
-  const handleBmi = () => {
-    const result = Number(
-      ((weight / height ** 2) * 100000).toFixed(1)
-    );
-    setBmi(result);
-  };
-
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const img = URL.createObjectURL(event.target.files[0]);
-      setImage(img);
-    }
-  };
+    const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            const img = URL.createObjectURL(event.target.files[0]);
+            setImage(img);
+        }
+    };
     const populateKidData = () => {
         const editedKid = ctx.kids.find(kid => kid.name === kidname)
         setName(editedKid.name);
@@ -101,8 +112,9 @@ function Profile() {
     }
 
     return (
-      <Box className="profile">
         <form onSubmit={handleSubmit}>
+      <Box className="profile">
+
         <Fab className="profile__avatar" component="label">
           <Avatar
             src={!image ? avatar : image}
@@ -134,13 +146,7 @@ function Profile() {
           type="date"
           sx={{ m: 1, width: 220, backgroundColor: "primary" }}
           InputLabelProps={{ shrink: true }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <CalendarTodayIcon />
-              </InputAdornment>
-            ),
-          }}
+          InputLabelProps={{ shrink: true }}
           value={dob}
           onChange={e=>setDob(e.target.value)}
         />
@@ -172,7 +178,6 @@ function Profile() {
         </Typography>
 
         <TextField
-          onKeyDown={handleBmi}
           sx={{ fontSize: "30" }}
           onChange={(e) => setHeight(e.target.value)}
           id="filled-number"
@@ -195,7 +200,6 @@ function Profile() {
         </Typography>
 
         <TextField
-          onKeyDown={handleBmi}
           onChange={(e) => setWeight(e.target.value)}
           id="filled-number"
           type="number"
@@ -260,8 +264,9 @@ function Profile() {
         </Typography>
 
           <Button variant='contained' color='primary' type='submit'>{kidname ? 'Karyna zapisz zmiany' : 'Karyna dodaj bombelka'}</Button>
-        </form>
       </Box>
+
+        </form>
   );
 }
 
