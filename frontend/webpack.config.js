@@ -19,10 +19,10 @@ module.exports = {
         new WorkboxPlugin.GenerateSW(),
         new CopyWebpackPlugin({
             patterns: [
-            {
-               from: "./src/manifest.json",
-               to:   "./dist/manifest.json"
-            }]})
+            { from: "./src/manifest.json", to: "" },
+            { from: "./src/manifest-icon-192.maskable.png", to: "" },
+            { from: "./src/manifest-icon-512.maskable.png", to: "" }
+        ]})
     ],
     resolve: {
         modules: [__dirname, "src", "node_modules"],
