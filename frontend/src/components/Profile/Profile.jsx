@@ -20,13 +20,13 @@ import girl from "../../img/avatars/girl.png";
 // import '@fontsource/roboto/500.css';
 import "./Profile.scss";
 import { ChildContext } from "../../context/ChildContext";
+import calculateAge from '../../utils/utils';
 
 function Profile() {
   const [name, setName]=useState('')
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [bmi, setBmi] = useState('');
-  const [age, setAge] = useState('');
   const [gender, setGender] = useState("female");
   const [avatar, setAvatar] = useState('');
   const [image, setImage] = useState('');
@@ -50,7 +50,7 @@ function Profile() {
         kid = updateKid(kidname);
 
     } else {
-        kid = {name, age, height, weight, gender, bmi, avatar, dob};
+        kid = {name, height, weight, gender, bmi, avatar, dob};
     }
 
     ctx.setKids([...ctx.kids, kid]);
@@ -81,7 +81,6 @@ function Profile() {
     const populateKidData = () => {
         const editedKid = ctx.kids.find(kid => kid.name === kidname)
         setName(editedKid.name);
-        setAge(editedKid.age);
         setWeight(parseInt(editedKid.weight));
         setHeight(editedKid.height);
         setAvatar(editedKid.avatar);
@@ -92,7 +91,6 @@ function Profile() {
     const updateKid=(kidname)=> {
         const editedKid = ctx.kids.filter(kid => kid.name === kidname);
         editedKid.name = name;
-        editedKid.age = age;
         editedKid.height = height;
         editedKid.weight = weight;
         editedKid.gender = gender;
@@ -157,12 +155,12 @@ function Profile() {
 
           <TextField
               sx={{ fontSize: "30" }}
-              onChange={(e) => setAge(e.target.value)}
               id="filled-number"
               type="number"
               InputLabelProps={{ shrink: true }}
               variant="filled"
-              value={age}
+              value={calculateAge(dob) | 0}
+              disabled
           />
         <Typography
           className="profile__description"
