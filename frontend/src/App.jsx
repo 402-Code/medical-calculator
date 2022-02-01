@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChildProvider } from "./context/ChildContext";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
+import CssBaseline from '@mui/material/CssBaseline';
 import "normalize.css";
-import "./App.scss";
 import RequireAgreement from "./components/Agreement/RequireAgreement";
 import KidSelect from "./components/KidSelect/KidSelect";
 import Profile from "./components/Profile/Profile";
@@ -20,7 +20,7 @@ function App() {
     palette: {
       mode: paletteType,
       background: {
-        default: paletteType === "ligth" ? "#eaeaea" : "#121212",
+        default: paletteType === "light" ? "#eaeaea" : "#202020",
       },
       primary: {
         main: "#1976d2",
@@ -32,7 +32,8 @@ function App() {
     setDarkMode(!darkMode);
   };
   return (
-    <ThemeProvider theme={theme}>      
+    <ThemeProvider theme={theme}>     
+    <CssBaseline /> 
       <RequireAgreement>
       <ChildProvider>
         <BrowserRouter>
