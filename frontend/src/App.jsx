@@ -11,7 +11,7 @@ import Profile from "./components/Profile/Profile";
 import History from "./components/History/History";
 import Header from "./components/Header/Header";
 import TEMP_KIDS from "./components/mocks/tempKids";
-import Calendar from "./components/History/Calendar/Calendar";
+import TEMP_DRUG from "./components/mocks/tempDrug.json"
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -27,6 +27,7 @@ function App() {
       },
     },
   });
+  const drug = JSON.parse(JSON.stringify(TEMP_DRUG));
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
   };
@@ -40,7 +41,7 @@ function App() {
             <Route path="/" element={<KidSelect kids={TEMP_KIDS} />} />
             <Route path="/addkid" element={<Profile kids={TEMP_KIDS} />} />
             <Route path="/edit/:name" element={<Profile kids={TEMP_KIDS} />} />
-            <Route path="/history/:kidname" element={<History />}
+            <Route path="/history/:kidname" element={<History drug={drug} />}
             />
           </Routes>
         </BrowserRouter>
