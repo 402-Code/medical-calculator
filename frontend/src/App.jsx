@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { KidProvider } from "./context/KidConext";
+import { ChildProvider } from "./context/ChildContext";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import "normalize.css";
@@ -11,6 +11,7 @@ import Profile from "./components/Profile/Profile";
 import History from "./components/History/History";
 import Header from "./components/Header/Header";
 import TEMP_KIDS from "./components/mocks/tempKids";
+import TEMP_DRUG from "./components/mocks/tempDrug.json"
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -26,27 +27,25 @@ function App() {
       },
     },
   });
+  const drug = JSON.parse(JSON.stringify(TEMP_DRUG));
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
   };
   return (
     <ThemeProvider theme={theme}>      
       <RequireAgreement>
-      <KidProvider>
+      <ChildProvider>
         <BrowserRouter>
           <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
           <Routes>
-            <Route path="/" element={<h3>Just checking if App works</h3>} />
-            <Route path="/kidselect" element={<KidSelect kids={TEMP_KIDS} />} />
+            <Route path="/" element={<KidSelect kids={TEMP_KIDS} />} />
             <Route path="/addkid" element={<Profile kids={TEMP_KIDS} />} />
             <Route path="/edit/:name" element={<Profile kids={TEMP_KIDS} />} />
-            <Route
-              path="/history/:name"
-              element={<History kids={TEMP_KIDS} />}
+            <Route path="/history/:kidname" element={<History drug={drug} />}
             />
           </Routes>
         </BrowserRouter>
-        </KidProvider>
+        </ChildProvider>
       </RequireAgreement>
     </ThemeProvider>
   );
