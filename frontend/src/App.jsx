@@ -10,7 +10,6 @@ import History from "./components/History/History";
 import NewDragScreen from "./components/NewDragScreen/NewDragScreen";
 import RequireAgreement from "./components/Agreement/RequireAgreement";
 import Header from "./components/Header/Header";
-import TEMP_KIDS from "./components/mocks/tempKids";
 import TEMP_DRUG from "./components/mocks/tempDrug.json";
 
 function App() {

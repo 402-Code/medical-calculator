@@ -6,7 +6,7 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import TEMP_DRUG from "../mocks/tempDrug.json";
+import TEMP_DRUG from "../../mocks/tempDrug.json";
 
 //Wyświeltane dane są NIEPOPRAWNE!! trzeba zmienić wyświetlane elementy po dodaniu komponentu Drug Calculations
 

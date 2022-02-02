@@ -2,8 +2,9 @@ import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { ChildContext } from "../../context/ChildContext";
-import DrugSummary from "../DrugSummary/DrugSummary";
-import KidSelect from "../KidSelect/KidSelect";
+import DrugSummary from "./DrugSummary/DrugSummary";
+import KidSelect from "./KidSelect/KidSelect";
+import DrugFinder from "./DrugFinder/DrugFinder";
 
 const NewDragScreen = ({ drug }) => {
   const { kids } = useContext(ChildContext);
@@ -17,7 +18,7 @@ const NewDragScreen = ({ drug }) => {
   return (
     <>
       <KidSelect activeKid={activeKid} />
-      {/* There will be DrugFinder component here */}
+      <DrugFinder />
       <DrugSummary kids={kids} drug={drug} />
       <Button
         sx={{ mt: 4, mx: "auto", display: "table" }}

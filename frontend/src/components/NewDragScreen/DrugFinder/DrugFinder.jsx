@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./DrugFinder.scss";
 import { Link } from "react-router-dom";
 import SearchDrug from "./SearchDrug";
@@ -9,7 +9,7 @@ const DRUG = ["Ibum Forte", "Ibufen", "Ibuprom", "Nurofen", "Paracetamol DOZ", "
 
 const DrugFinder = () => {
     const [sunstance, setSubstance] = useState("Ibuprofen", "Paracetamol")
-    const [drug, setDrug] = useState("")
+    const [drug, setDrug] = useState(DRUG)
  
 return (
     <div className="drug-finder">
@@ -51,6 +51,6 @@ return (
     </form>
     </div>
     );
-}};
+};
 
 export default DrugFinder;

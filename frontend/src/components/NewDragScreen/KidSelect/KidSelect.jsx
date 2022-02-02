@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import Kid from "./Kid/Kid";
-import { ChildContext } from "../../context/ChildContext";
+import { ChildContext } from "../../../context/ChildContext";
 
 const thereIsOnlyOneKid = (arr) => {
   return arr.length === 1;
