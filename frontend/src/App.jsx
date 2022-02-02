@@ -6,6 +6,7 @@ import { ThemeProvider } from "@emotion/react";
 import "normalize.css";
 import "./App.scss";
 import RequireAgreement from "./components/Agreement/RequireAgreement";
+import DrugFinder from './components/DrugFinder/DrugFinder'
 import KidSelect from "./components/KidSelect/KidSelect";
 import Profile from "./components/Profile/Profile";
 import History from "./components/History/History";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/kidselect" element={<KidSelect kids={TEMP_KIDS} />} />
             <Route path="/addkid" element={<Profile kids={TEMP_KIDS} />} />
             <Route path="/edit/:name" element={<Profile kids={TEMP_KIDS} />} />
+            <Route path="/drugfinder" element={<DrugFinder />} />
             <Route
               path="/history/:name"
               element={<History kids={TEMP_KIDS} />}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./DrugFinder.scss";
 import { Link } from "react-router-dom";
 import SearchDrug from "./SearchDrug";
@@ -13,44 +13,43 @@ const DrugFinder = () => {
  
 return (
     <div className="drug-finder">
-    <form>
-        <label htmlFor="substance">
-            Substancja czynna
-            <select
-                id="substance"
-                value={sunstance}
-                onChange={(e) => {
-                    return setSubstance(e.target.value);
-                }}
-                onBlur={(e) => setSubstance(e.target.value)}
-            >
-            <option value=""></option>
-            {SUBSTANCE.map(substance => (
-                  <option value={substance} key={substance}>
-                      {substance}
-                  </option>
+        <form>
+            <label htmlFor="substance">
+                Substancja czynna
+                <select
+                    id="substance"
+                    value={sunstance}
+                    onChange={(e) => {
+                        return setSubstance(e.target.value);
+                    }}
+                    onBlur={(e) => setSubstance(e.target.value)}
+                >
+                <option value=""></option>
+                {SUBSTANCE.map(substance => (
+                      <option value={substance} key={substance}>
+                          {substance}
+                      </option>
                 ))}
-            </select>
-        </label>
-        <label htmlFor="drug">
-            Lekarstwo
-            <select
-                id="drug"
-                value={drug}
-                onChange={(e) => setDrug(e.target.value)}
-                onBlur={(e) => setDrug(e.target.value)}
-        >
-            <option value=""></option>
-            {drug.map(drug => (
-                  <option value={drug} key={drug}>
-                      {drug}
-                  </option>
-                ))}           
-            </select>
-        </label>
-    </form>
+                </select>
+            </label>
+            <label htmlFor="drug">
+                Lekarstwo
+                <select
+                    id="drug"
+                    value={drug}
+                    onChange={(e) => setDrug(e.target.value)}
+                    onBlur={(e) => setDrug(e.target.value)}>
+                <option value=""></option>
+                {DRUG.map(drug => (
+                      <option value={drug} key={drug}>
+                          {drug}
+                      </option>
+                    ))}
+                </select>
+            </label>
+        </form>
     </div>
     );
-}};
+}
 
 export default DrugFinder;
