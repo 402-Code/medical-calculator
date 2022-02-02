@@ -11,6 +11,7 @@ import Profile from "./components/Profile/Profile";
 import History from "./components/History/History";
 import Header from "./components/Header/Header";
 import TEMP_KIDS from "./components/mocks/tempKids";
+import TEMP_DRUG from "./components/mocks/tempDrug.json";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -23,31 +24,36 @@ function App() {
       },
     },
   });
+  const drug = JSON.parse(JSON.stringify(TEMP_DRUG));
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
   };
   return (
-    <ThemeProvider theme={theme}>   
-    <Paper style={{height: '100vh'}} >
-      <RequireAgreement>
-        <ChildProvider>
-          <BrowserRouter>
-            <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
-            <Routes>
-              <Route path="/" element={<h3>Just checking if App works</h3>} />
-              <Route path="/kidselect" element={<KidSelect />} />
-              <Route path="/addkid" element={<Profile />} />
-              <Route path="/edit/:kidname" element={<Profile/>} />
-              <Route
-                  path="/history/:name"
-                  element={<History kids={TEMP_KIDS} />}
+    <ThemeProvider theme={theme}>
+      <Paper style={{ height: "100vh" }}>
+        <RequireAgreement>
+          <ChildProvider>
+            <BrowserRouter>
+              <Header
+                darkMode={darkMode}
+                handleThemeChange={handleThemeChange}
               />
-            </Routes>
-          </BrowserRouter>
-        </ChildProvider>
-      </RequireAgreement>
-    </Paper>  
-      
+              <Routes>
+                <Route path="/kidselect" element={<KidSelect />} />
+                <Route path="/addkid" element={<Profile />} />
+                <Route
+                  path="/edit/:kidname"
+                  element={<Profile />}
+                />
+                <Route
+                  path="/history/:kidname"
+                  element={<History drug={drug} />}
+                />
+              </Routes>
+            </BrowserRouter>
+          </ChildProvider>
+        </RequireAgreement>
+      </Paper>
     </ThemeProvider>
   );
 }
