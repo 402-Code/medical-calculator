@@ -69,11 +69,14 @@ export default function Header({ darkMode, handleThemeChange }) {
                                     alignItems: "center",
                                     justifyContent: "center",
                                     color: "text.primary",
-                                    p: 3,
+                                    pt: 3,
+                                    pb: 1,
+                                    px: 2,
+
                                 }}
                             >
-                                <Typography variant="h5" mr={4} color="text.primary">
-                                    Motyw
+                                <Typography variant="h6" mr={1} color="text.primary">
+                                    Ciemny motyw
                                 </Typography>
                                 <Switch checked={darkMode} onChange={handleThemeChange} />
                             </Box>
