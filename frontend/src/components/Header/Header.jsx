@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, NavLink } from 'react-router-dom'
 import {
     AppBar,
     Toolbar,
@@ -12,11 +12,13 @@ import {
     SwipeableDrawer,
     Switch,
     IconButton,
+    Link
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import LoginIcon from "@mui/icons-material/Login";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import './Header.scss';
 
 export default function Header({ darkMode, handleThemeChange }) {
     const [showMenu, setShowMenu] = useState(false);
@@ -52,9 +54,10 @@ export default function Header({ darkMode, handleThemeChange }) {
                     >
                         {pathname === '/' ? <MenuIcon/> : <ArrowBackIcon />}
                     </IconButton>
+                    <NavLink className='link' to='/kidselect'>Kid Select</NavLink>
+                    <NavLink className='link' to='/addkid'>Add kid</NavLink>
                 </Toolbar>
-                {listItems.map((anchor) => (
-                    <Fragment key={anchor.text}>
+                    <Fragment>
                         <SwipeableDrawer
                             onClose={toggleMenu}
                             onOpen={toggleMenu}
@@ -87,7 +90,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                             </List>
                         </SwipeableDrawer>
                     </Fragment>
-                ))}
+
             </AppBar>
             {/*{params}*/}
         </Box>
