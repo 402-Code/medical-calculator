@@ -61,18 +61,18 @@ function Profile() {
     }, [weight, height])
 
     const handleSubmit =(e)=> {
-    e.preventDefault();
-    let kid={};
+        e.preventDefault();
+        let kid={};
 
-    if(kidname !== undefined) {
-        kid = updateKid(kidname);
+        if(kidname !== undefined) {
+            kid = updateKid(kidname);
 
-    } else {
-        kid = {name, height, weight, gender, bmi, avatar, dob};
-    }
+        } else {
+            kid = {name, height, weight, gender, bmi, avatar, dob};
+        }
 
-    ctx.setKids([...ctx.kids, kid]);
-    navigate('/');
+        ctx.setKids([...ctx.kids, kid]);
+        navigate('/');
   }
 
   const changeAvatar = () => {
@@ -145,7 +145,6 @@ function Profile() {
           id="date"
           type="date"
           sx={{ m: 1, width: 220, backgroundColor: "primary" }}
-          InputLabelProps={{ shrink: true }}
           InputLabelProps={{ shrink: true }}
           value={dob}
           onChange={e=>setDob(e.target.value)}
