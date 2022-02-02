@@ -1,0 +1,23 @@
+.doses {
+    display: grid;
+    grid-template-rows: 1fr;
+
+    #{&}__header {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        
+    }
+    #{&}__titles {
+        justify-self: center;
+    }
+
+    #{&}__items {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    #{&}__item {
+        justify-self: center;
+        align-self: center;
+    }
+}

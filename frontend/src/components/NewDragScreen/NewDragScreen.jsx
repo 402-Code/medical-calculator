@@ -1,10 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { ChildContext } from "../../context/ChildContext";
 import DrugSummary from "../DrugSummary/DrugSummary";
 import KidSelect from "../KidSelect/KidSelect";
 
-const NewDragScreen = ({ kids, drug }) => {
+const NewDragScreen = ({ drug }) => {
+  const { kids } = useContext(ChildContext);
   const activeKid = useRef(kids[0]);
   let navigate = useNavigate();
 
@@ -14,7 +16,7 @@ const NewDragScreen = ({ kids, drug }) => {
 
   return (
     <>
-      <KidSelect kids={kids} activeKid={activeKid} />
+      <KidSelect activeKid={activeKid} />
       {/* There will be DrugFinder component here */}
       <DrugSummary kids={kids} drug={drug} />
       <Button
