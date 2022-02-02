@@ -130,6 +130,7 @@ function Profile() {
               variant="filled"
               value={name}
               onChange={(e)=>setName(e.target.value)}
+              required
           />
 
           <Typography
@@ -148,6 +149,7 @@ function Profile() {
               InputLabelProps={{ shrink: true }}
               value={dob}
               onChange={e=>setDob(e.target.value)}
+              required
           />
           <Typography
               className="profile__description"
@@ -187,6 +189,7 @@ function Profile() {
               }}
               variant="filled"
               value={height}
+              required
           />
 
           <Typography
@@ -208,6 +211,7 @@ function Profile() {
               }}
               variant="filled"
               value={weight}
+              required
           />
 
           <Typography
