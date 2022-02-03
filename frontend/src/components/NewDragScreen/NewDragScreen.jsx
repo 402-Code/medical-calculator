@@ -1,12 +1,12 @@
 import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { ChildContext } from "../../context/ChildContext";
 import DrugSummary from "./DrugSummary/DrugSummary";
 import KidSelect from "./KidSelect/KidSelect";
 import DrugFinder from "./DrugFinder/DrugFinder";
 
-const NewDragScreen = ({ drug }) => {
+const NewDragScreen = ({ selectedDrug }) => {
   const { kids } = useContext(ChildContext);
   const activeKid = useRef(kids[0]);
   let navigate = useNavigate();
@@ -18,8 +18,8 @@ const NewDragScreen = ({ drug }) => {
   return (
     <>
       <KidSelect activeKid={activeKid} />
-      <DrugFinder />
-      <DrugSummary kids={kids} drug={drug} />
+      <DrugFinder selectedDrug={selectedDrug} activeKid={activeKid} />
+      <DrugSummary />
       <Button
         sx={{ mt: 4, mx: "auto", display: "table" }}
         variant="contained"

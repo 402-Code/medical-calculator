@@ -14,7 +14,7 @@ import TEMP_DRUG from "../../mocks/tempDrug.json";
 const DrugSummary = () => {
   return (
     <div className="drug-summary">
-      <Paper elevation={16} square sx={{mt: 4, pb: 4, px: 3}}>
+      <Paper elevation={8} square sx={{mt: 4, pb: 4, px: 3, boxShadow: "none" }}>
       <Typography variant="h5" component="h2" sx={{py: 2}}>
         Informacje o wybranym leku:
       </Typography>
