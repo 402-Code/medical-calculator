@@ -1,52 +1,214 @@
-{
-  "medication": "ibuprofen",
-  "min_access_age_in_months": 3,
-  "weight_based_calculations": {
-    "dose_per_1kg": {
-      "amount": 20,
-      "unit": "mg"
+[
+  {
+    "medication": "Ibuprom",
+    "active_substance": "ibuprofen",
+    "min_access_age_in_months": 3,
+    "weight_based_calculations": {
+      "dose_per_1kg": {
+        "amount": 20,
+        "unit": "mg"
+      },
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_1kg": 40,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_1kg": 50,
+          "unit": "mg"
+        }
+      ]
     },
-    "max_daily_dose": [
-      {
-        "age_form-to_in_month": [3, 12],
-        "max_per_1kg": 40,
-        "unit": "mg"
-      },
-      {
-        "age_form-to_in_month": [13, 24],
-        "max_per_1kg": 50,
-        "unit": "mg"
-      }
-    ]
+    "age_based_calculations": {
+      "dose_per_age": [
+        {
+          "age_form-to_in_month": [3, 6],
+          "amount": 11.5,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [7, 12],
+          "amount": 11.5,
+          "unit": "mg"
+        }
+      ],
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_age": 200,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_age": 300,
+          "unit": "mg"
+        }
+      ]
+    },
+    "dose_interval_in_hours": 6,
+    "max_application_days": 7,
+    "way_of_application": "Podawanie roztworu doustnie, za pomocą za pomocą zakraplacza dołączonego do opakowania",
+    "contraindications": "Przeciwwskazany w ospie wietrznej (zwiększa ryzyko nadkażeń bakteryjnych)"
   },
-  "age_based_calculations": {
-    "dose_per_age": [
-      {
-        "age_form-to_in_month": [3, 6],
-        "amount": 11.5,
+  {
+    "medication": "Ibufen",
+    "active_substance": "ibuprofen",
+    "min_access_age_in_months": 3,
+    "weight_based_calculations": {
+      "dose_per_1kg": {
+        "amount": 40,
         "unit": "mg"
       },
-      {
-        "age_form-to_in_month": [7, 12],
-        "amount": 11.5,
-        "unit": "mg"
-      }
-    ],
-    "max_daily_dose": [
-      {
-        "age_form-to_in_month": [3, 12],
-        "max_per_age": 200,
-        "unit": "mg"
-      },
-      {
-        "age_form-to_in_month": [13, 24],
-        "max_per_age": 300,
-        "unit": "mg"
-      }
-    ]
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_1kg": 35,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_1kg": 55,
+          "unit": "mg"
+        }
+      ]
+    },
+    "age_based_calculations": {
+      "dose_per_age": [
+        {
+          "age_form-to_in_month": [3, 6],
+          "amount": 12.5,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [7, 12],
+          "amount": 14.5,
+          "unit": "mg"
+        }
+      ],
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_age": 250,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_age": 360,
+          "unit": "mg"
+        }
+      ]
+    },
+    "dose_interval_in_hours": 5,
+    "max_application_days": 8,
+    "way_of_application": "Podawanie roztworu doustnie",
+    "contraindications": "Przeciwwskazany w ospie wietrznej (zwiększa ryzyko nadkażeń bakteryjnych)"
   },
-  "dose_interval_in_hours": 6,
-  "max_application_days": 7,
-  "way_of_application": "Podawanie roztworu doustnie, za pomocą za pomocą zakraplacza dołączonego do opakowania",
-  "contraindications": "Przeciwwskazany w ospie wietrznej (zwiększa ryzyko nadkażeń bakteryjnych)"
-}
+  {
+    "medication": "Apap Junior",
+    "active_substance": "paracetamol",
+    "min_access_age_in_months": 3,
+    "weight_based_calculations": {
+      "dose_per_1kg": {
+        "amount": 10,
+        "unit": "mg"
+      },
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_1kg": 30,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_1kg": 45,
+          "unit": "mg"
+        }
+      ]
+    },
+    "age_based_calculations": {
+      "dose_per_age": [
+        {
+          "age_form-to_in_month": [3, 6],
+          "amount": 10.5,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [7, 12],
+          "amount": 12,
+          "unit": "mg"
+        }
+      ],
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_age": 180,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_age": 350,
+          "unit": "mg"
+        }
+      ]
+    },
+    "dose_interval_in_hours": 5,
+    "max_application_days": 9,
+    "way_of_application": "Podanie doustne",
+    "contraindications": "Przeciwskazany przy niewydolności nerek"
+  },
+  {
+    "medication": "Pedicetamol",
+    "active_substance": "paracetamol",
+    "min_access_age_in_months": 3,
+    "weight_based_calculations": {
+      "dose_per_1kg": {
+        "amount": 31,
+        "unit": "mg"
+      },
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_1kg": 44,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_1kg": 56,
+          "unit": "mg"
+        }
+      ]
+    },
+    "age_based_calculations": {
+      "dose_per_age": [
+        {
+          "age_form-to_in_month": [3, 6],
+          "amount": 9.5,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [7, 12],
+          "amount": 13.5,
+          "unit": "mg"
+        }
+      ],
+      "max_daily_dose": [
+        {
+          "age_form-to_in_month": [3, 12],
+          "max_per_age": 250,
+          "unit": "mg"
+        },
+        {
+          "age_form-to_in_month": [13, 24],
+          "max_per_age": 333,
+          "unit": "mg"
+        }
+      ]
+    },
+    "dose_interval_in_hours": 4,
+    "max_application_days": 10,
+    "way_of_application": "Podanie doustne za pomocą zakraplacza",
+    "contraindications": "Przeciwskazany przy nadwrażliwości na paracetamol"
+  }
+]
