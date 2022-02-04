@@ -13,16 +13,7 @@ import TEMP_DRUG from "../../mocks/tempDrug.json";
 //Wyświeltane dane są NIEPOPRAWNE!! trzeba zmienić wyświetlane elementy po dodaniu komponentu Drug Calculations
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
-const DrugSummary = ({ activeKid, selectedDrug }) => {
-  const [selectedDrugObject, setSDO] = useState({});
-  
-  useEffect(() => {
-    medicationList.map((med) => {
-      if (med.medication === selectedDrug) {
-        setSDO(med);
-      }
-    });
-  }, [selectedDrug]);
+const DrugSummary = ({ activeKid, selectedMedicine, selectedDrug }) => {
   
   return (
     <div className="drug-summary">
@@ -31,9 +22,9 @@ const DrugSummary = ({ activeKid, selectedDrug }) => {
         square
         sx={{ mt: 4, pb: 4, px: 3, boxShadow: "none" }}
       >
-        { selectedDrug === ""
+        { selectedMedicine === ""
         ? <NoMedicationSelected />
-        : ageInMonths(activeKid) >= selectedDrugObject.min_access_age_in_months
+        : ageInMonths(activeKid) >= selectedDrug.min_access_age_in_months
           ? <MedicationInfo />
           : <MedicationCantBeServed />
         }

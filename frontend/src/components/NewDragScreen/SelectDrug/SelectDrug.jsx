@@ -15,9 +15,10 @@ import TEMP_DRUG from "../../mocks/tempDrug.json";
 
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
-const SelectDrug = ({ selectedDrug, activeKid }) => {
+const SelectDrug = ({ selectedDrugState, activeKid }) => {
+  const [selectedDrug, setSelectedDrug] = selectedDrugState;
   const [activeSubstance, setActiveSubstance] = useState("");
-  const [selectedDrugState, setSelectedDrugState] = useState("");
+  const [selectedMedicine, setSelectedMedicine] = useState("");
   const [requiredActivSubst, setRequiredActivSubst] = useState("");
   const [requiredMedicine, setRequiredMedicine] = useState("");
   let navigate = useNavigate();
@@ -29,16 +30,16 @@ const SelectDrug = ({ selectedDrug, activeKid }) => {
     setRequiredMedicine("");
   };
   const handleChangeSelect2 = (event) => {
-    setSelectedDrugState(event.target.value);
+    setSelectedMedicine(event.target.value);
   };
   useEffect(() => {
-    selectedDrug.current = selectedDrugState;
-  }, [selectedDrugState]);
+    medicationList.map((med) => med.medication === selectedMedicine ? setSelectedDrug(med) : null)
+  }, [selectedMedicine]);
 
   function handleStartNewDrug() {
-    if (selectedDrug.current === "" && activeSubstance === "") {
+    if (selectedMedicine === "" && activeSubstance === "") {
       setRequiredActivSubst("Najpierw wybierz substancję czynną");
-    } else if (selectedDrug.current === "") {
+    } else if (selectedMedicine === "") {
       setRequiredMedicine("Wybierz lekarstwo");
     } else {
       navigate("/history/" + activeKid.name);
@@ -86,7 +87,7 @@ const SelectDrug = ({ selectedDrug, activeKid }) => {
         <FormControl fullWidth error={!!requiredMedicine}>
           <InputLabel>Lekarstwo</InputLabel>
           <Select
-            value={selectedDrugState}
+            value={selectedMedicine}
             label="Lekarstwo"
             onChange={handleChangeSelect2}
             onFocus={handleErrorSelect2}
@@ -104,7 +105,7 @@ const SelectDrug = ({ selectedDrug, activeKid }) => {
           <FormHelperText>{requiredMedicine}</FormHelperText>
         </FormControl>
       </Paper>
-      <DrugSummary activeKid={activeKid} selectedDrug={selectedDrugState} />
+      <DrugSummary activeKid={activeKid} selectedMedicine={selectedMedicine} selectedDrug={selectedDrug} />
       <Button
         sx={{ my: 3, mx: "auto", display: "table" }}
         variant="contained"

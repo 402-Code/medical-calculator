@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useState } from "react";
-import { ChildContext } from "../../context/ChildContext";
 import KidSelect from "./KidSelect/KidSelect";
 import SelectDrug from "./SelectDrug/SelectDrug";
 
-const NewDragScreen = ({ selectedDrug }) => {
+const NewDragScreen = ({ selectedDrugState }) => {
   const activeKidState = useState({});
-  const { kids } = useContext(ChildContext);
 
   return (
     <>
       <KidSelect activeKidState={activeKidState} />
-      <SelectDrug selectedDrug={selectedDrug} activeKid={activeKidState[0]} />
+      <SelectDrug
+        selectedDrugState={selectedDrugState}
+        activeKid={activeKidState[0]}
+      />
     </>
   );
 };
