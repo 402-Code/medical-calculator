@@ -14,7 +14,7 @@ import {
 function Kid({ kid }) {
   return (
     <>
-      <Card variant="outlined">
+      <Card elevation={16}>
         <CardContent className="kid-select__kid__id" sx={{ p: 2 }}>
           <Avatar sx={{ width: 50, height: 50 }}>MM</Avatar>
           <Typography variant="h4">{kid.name}</Typography>
