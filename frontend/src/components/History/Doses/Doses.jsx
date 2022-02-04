@@ -1,6 +1,13 @@
-import React, {useEffect} from 'react';
-import  {Checkbox, Typography, Box, Button, TextField, InputAdornment }  from '@mui/material';
-import './Doses.scss'
+import React, { useEffect } from "react";
+import {
+  Checkbox,
+  Typography,
+  Box,
+  Button,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
+import "./Doses.scss";
 
 const Doses = ({ drug }) => {
 
