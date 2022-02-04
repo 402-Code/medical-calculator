@@ -104,9 +104,9 @@ const SelectDrug = ({ selectedDrug, activeKid }) => {
           <FormHelperText>{requiredMedicine}</FormHelperText>
         </FormControl>
       </Paper>
-      <DrugSummary />
+      <DrugSummary activeKid={activeKid} selectedDrug={selectedDrugState} />
       <Button
-        sx={{ mt: 3, mx: "auto", display: "table" }}
+        sx={{ my: 3, mx: "auto", display: "table" }}
         variant="contained"
         onClick={handleStartNewDrug}
       >
