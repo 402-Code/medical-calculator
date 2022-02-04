@@ -26,7 +26,8 @@ const addKidButton = () => {
   );
 };
 
-function KidSelect({ activeKid }) {
+function KidSelect({ activeKidState }) {
+  const [activeKid, setActiveKid] = activeKidState;
   const { kids } = useContext(ChildContext);
   if (thereIsOnlyOneKid(kids)) {
     return (
@@ -39,7 +40,9 @@ function KidSelect({ activeKid }) {
     return (
       <div className="kid-select">
         <Carousel
-          onChange={(active) => (activeKid.current = kids[active])}
+          index={kids.indexOf(activeKid)}
+          onChange={(active) => setActiveKid(kids[active])}
+          changeOnFirstRender={true}
           navButtonsAlwaysVisible={true}
           autoPlay={false}
           animation="slide"

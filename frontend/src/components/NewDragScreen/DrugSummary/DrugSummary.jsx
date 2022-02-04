@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import ageInMonths from "../../../utils/ageInMonths";
 import TEMP_DRUG from "../../mocks/tempDrug.json";
-import TEMP_KIDS from "../../mocks/tempKids";
 
 //Wyświeltane dane są NIEPOPRAWNE!! trzeba zmienić wyświetlane elementy po dodaniu komponentu Drug Calculations
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
@@ -34,7 +33,7 @@ const DrugSummary = ({ activeKid, selectedDrug }) => {
       >
         { selectedDrug === ""
         ? <NoMedicationSelected />
-        : ageInMonths(TEMP_KIDS[0]) >= selectedDrugObject.min_access_age_in_months
+        : ageInMonths(activeKid) >= selectedDrugObject.min_access_age_in_months
           ? <MedicationInfo />
           : <MedicationCantBeServed />
         }

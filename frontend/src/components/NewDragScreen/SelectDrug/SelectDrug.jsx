@@ -41,7 +41,7 @@ const SelectDrug = ({ selectedDrug, activeKid }) => {
     } else if (selectedDrug.current === "") {
       setRequiredMedicine("Wybierz lekarstwo");
     } else {
-      navigate("/history/" + activeKid.current.name);
+      navigate("/history/" + activeKid.name);
     }
   }
 
