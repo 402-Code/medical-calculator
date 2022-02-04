@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChildProvider } from "./context/ChildContext";
-import { createTheme } from "@mui/material";
+import { createTheme, Paper } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import "normalize.css";
 import "./App.scss";
@@ -32,7 +32,8 @@ function App() {
     setDarkMode(!darkMode);
   };
   return (
-    <ThemeProvider theme={theme}>      
+    <ThemeProvider theme={theme}>
+      <Paper style={{ height: "100vh" }}> 
       <RequireAgreement>
       <ChildProvider>
         <BrowserRouter>
@@ -48,6 +49,7 @@ function App() {
         </BrowserRouter>
         </ChildProvider>
       </RequireAgreement>
+      </Paper>
     </ThemeProvider>
   );
 }
