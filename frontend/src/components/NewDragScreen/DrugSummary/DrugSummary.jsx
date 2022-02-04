@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   List,
   ListItem,
@@ -14,19 +14,21 @@ import TEMP_DRUG from "../../mocks/tempDrug.json";
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
 const DrugSummary = ({ activeKid, selectedMedicine, selectedDrug }) => {
-  
   return (
     <div className="drug-summary">
       <Paper
-        elevation={8}
+        elevation={16}
         square
         sx={{ mt: 4, pb: 4, px: 3, boxShadow: "none" }}
       >
+      <Typography variant="h5" component="h2" sx={{ py: 2 }}>
+        Informacje o wybranym leku:
+      </Typography>
         { selectedMedicine === ""
         ? <NoMedicationSelected />
         : ageInMonths(activeKid) >= selectedDrug.min_access_age_in_months
           ? <MedicationInfo />
-          : <MedicationCantBeServed />
+          : <MedicationCantBeServed activeKid={activeKid}/>
         }
       </Paper>
     </div>
@@ -36,35 +38,34 @@ const DrugSummary = ({ activeKid, selectedMedicine, selectedDrug }) => {
 const NoMedicationSelected = () => {
   return (
     <Typography variant="body2" sx={{ py: 2 }}>
-      Wybierz lekarstwo z listy aby wyświetlić informacje o dawkowaniu
+      Wybierz lekarstwo z listy aby wyświetlić informacje na temat dawkowania
     </Typography>
   );
 };
 
-const MedicationCantBeServed = () => {
+const MedicationCantBeServed = ({ activeKid }) => {
+  const a = activeKid.gender === "female" ? "mała" : "mały";
   return (
-    <Typography variant="h5" component="h2" sx={{ py: 2 }}>
-      Nie można podać wybranego leku w tym wieku
-    </Typography>
+    <List sx={{ width: "100%", bgcolor: "transparent", p: 0 }}>
+      <Divider variant="middle" />
+      <ListItem sx={{ py: 0.5 }}>
+        <ListItemText
+          primary={
+            <Typography variant="body1" color="text.primary">
+              {activeKid.name} jest za {a} aby dostać ten lek
+            </Typography>
+          }
+        />
+      </ListItem>
+      <Divider variant="middle" />
+    </List>
   );
 };
 
 const MedicationInfo = () => {
   return (
     <>
-      <Typography variant="h5" component="h2" sx={{ py: 2 }}>
-        Informacje o wybranym leku:
-      </Typography>
       <List sx={{ width: "100%", bgcolor: "transparent", p: 0 }}>
-        <ListItem sx={{ py: 0.5 }}>
-          <ListItemText
-            primary={
-              <Typography variant="body1" color="text.primary">
-                Czy ten lek może być podany w tym wieku?
-              </Typography>
-            }
-          />
-        </ListItem>
         <Divider variant="middle" />
         <ListItem sx={{ py: 0.5 }}>
           <ListItemText
