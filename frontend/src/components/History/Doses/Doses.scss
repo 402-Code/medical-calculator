@@ -1,23 +1,35 @@
 .doses {
     display: grid;
     grid-template-rows: 1fr;
+    color: #FFFFFF;
 
     #{&}__header {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-        
+        grid-template-columns: repeat(6, 1fr);
+        margin: 10px 5px 10px 5px;
+        border-radius: 5px;
+        background-color: rgba(47,47,47, 0.6);
     }
+
     #{&}__titles {
-        justify-self: center;
+        justify-self: center;        
     }
 
     #{&}__items {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(6, 1fr);
+        margin: 5px 5px 5px 5px;
+        border-radius: 5px;
+        background-color: rgba(47,47,47, 0.6);
     }
 
     #{&}__item {
         justify-self: center;
-        align-self: center;
+        align-self: center;  
+        font-size: 10px;     
+    }
+
+    #{&}__dose {
+        justify-self: center;
     }
 }
