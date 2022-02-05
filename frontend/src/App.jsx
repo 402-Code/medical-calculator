@@ -48,7 +48,6 @@ function App() {
           </BrowserRouter>
         </ChildProvider>
       </RequireAgreement>
-      </Paper>
     </ThemeProvider>
   );
 }
