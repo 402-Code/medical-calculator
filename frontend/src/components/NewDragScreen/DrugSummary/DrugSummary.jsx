@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
   Typography,
   Paper,
 } from "@mui/material";
 import ageInMonths from "../../../utils/ageInMonths";
+import MedicationCantBeServed from "./MedicationCantBeServed"
+import MedicationInfo from "./MedicationInfo"
 import TEMP_DRUG from "../../mocks/tempDrug.json";
 
 //Wyświeltane dane są NIEPOPRAWNE!! trzeba zmienić wyświetlane elementy po dodaniu komponentu Drug Calculations
@@ -51,66 +49,4 @@ const NoMedicationSelected = () => {
   );
 };
 
-const MedicationCantBeServed = ({ activeKid }) => {
-  const a = activeKid.gender === "female" ? "mała" : "mały";
-  return (
-    <List sx={{ width: "100%", bgcolor: "transparent", p: 0 }}>
-      <Divider variant="middle" />
-      <ListItem sx={{ py: 0.5 }}>
-        <ListItemText
-          primary={
-            <Typography variant="body1" color="text.primary">
-              {activeKid.name} jest za {a} aby dostać ten lek
-            </Typography>
-          }
-        />
-      </ListItem>
-      <Divider variant="middle" />
-    </List>
-  );
-};
-
-const MedicationInfo = () => {
-  return (
-    <>
-      <List sx={{ width: "100%", bgcolor: "transparent", p: 0 }}>
-        <Divider variant="middle" />
-        <ListItem sx={{ py: 0.5 }}>
-          <ListItemText
-            primary={
-              <Typography variant="body1" color="text.primary">
-                Pojedyńcza dawka:{" "}
-                {/* {TEMP_DRUG.weight_based_calculations.dose_per_1kg.amount} */}
-                {/* {TEMP_DRUG.weight_based_calculations.dose_per_1kg.unit} */}
-              </Typography>
-            }
-          />
-        </ListItem>
-        <Divider variant="middle" />
-        <ListItem sx={{ py: 0.5 }}>
-          <ListItemText
-            primary={
-              <Typography variant="body1" color="text.primary">
-                Odstęp pomiędzy podaniem kolejnych dawek:{" "}
-                {/* {TEMP_DRUG.dose_interval_in_hours} godzin */}
-              </Typography>
-            }
-          />
-        </ListItem>
-        <Divider variant="middle" />
-        <ListItem sx={{ py: 0.5 }}>
-          <ListItemText
-            primary={
-              <Typography variant="body1" color="text.primary">
-                Maksymalna dawka dzienna:{" "}
-                {/* {TEMP_DRUG.weight_based_calculations.max_daily_dose[0].max_per_1kg} */}
-                {/* {TEMP_DRUG.weight_based_calculations.max_daily_dose[0].unit} */}
-              </Typography>
-            }
-          />
-        </ListItem>
-      </List>
-    </>
-  );
-};
 export default DrugSummary;

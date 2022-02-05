@@ -72,7 +72,7 @@ function Profile() {
     }
 
     ctx.setKids([...ctx.kids, kid]);
-    navigate('/kidselect');
+    navigate('/');
   }
 
   const changeAvatar = () => {
