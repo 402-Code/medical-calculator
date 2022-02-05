@@ -12,7 +12,7 @@ import NewDragScreen from "./components/NewDragScreen/NewDragScreen";
 import Header from "./components/Header/Header";
 
 function App() {
-  const selectedDrugState = useState({});
+  const [selectedDrug, setSelectedDrug] = useState({});
   const [darkMode, setDarkMode] = useState(true);
   const paletteType = darkMode ? "dark" : "light";
   const theme = createTheme({
@@ -37,12 +37,12 @@ function App() {
           <BrowserRouter>
             <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
             <Routes>
-              <Route path="/" element={<NewDragScreen selectedDrugState={selectedDrugState} />} />
+              <Route path="/" element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
               <Route path="/addkid" element={<Profile />} />
               <Route path="/edit/:kidname" element={<Profile />} />
               <Route
                 path="/history/:kidname"
-                element={<History selectedDrug={selectedDrugState[0]} />}
+                element={<History selectedDrug={selectedDrug} />}
               />
             </Routes>
           </BrowserRouter>

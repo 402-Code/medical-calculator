@@ -15,8 +15,7 @@ import TEMP_DRUG from "../../mocks/tempDrug.json";
 
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
-const SelectDrug = ({ selectedDrugState, activeKid }) => {
-  const [selectedDrug, setSelectedDrug] = selectedDrugState;
+const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   const [activeSubstance, setActiveSubstance] = useState("");
   const [selectedMedicine, setSelectedMedicine] = useState("");
   const [requiredActivSubst, setRequiredActivSubst] = useState("");
@@ -25,6 +24,10 @@ const SelectDrug = ({ selectedDrugState, activeKid }) => {
 
   let uniqueActiveSub = [];
 
+  useEffect(() => {
+    setSelectedDrug({});
+  }, []);
+
   const handleChangeSelect1 = (event) => {
     setActiveSubstance(event.target.value);
     setRequiredMedicine("");
@@ -32,9 +35,6 @@ const SelectDrug = ({ selectedDrugState, activeKid }) => {
   const handleChangeSelect2 = (event) => {
     setSelectedMedicine(event.target.value);
   };
-  useEffect(() => {
-    medicationList.map((med) => med.medication === selectedMedicine ? setSelectedDrug(med) : null)
-  }, [selectedMedicine]);
 
   function handleStartNewDrug() {
     if (selectedMedicine === "" && activeSubstance === "") {
@@ -42,6 +42,9 @@ const SelectDrug = ({ selectedDrugState, activeKid }) => {
     } else if (selectedMedicine === "") {
       setRequiredMedicine("Wybierz lekarstwo");
     } else {
+      medicationList.map((med) =>
+        med.medication === selectedMedicine ? setSelectedDrug(med) : null
+      );
       navigate("/history/" + activeKid.name);
     }
   }
@@ -105,7 +108,7 @@ const SelectDrug = ({ selectedDrugState, activeKid }) => {
           <FormHelperText>{requiredMedicine}</FormHelperText>
         </FormControl>
       </Paper>
-      <DrugSummary activeKid={activeKid} selectedMedicine={selectedMedicine} selectedDrug={selectedDrug} />
+      <DrugSummary activeKid={activeKid} selectedMedicine={selectedMedicine} />
       <Button
         sx={{ my: 3, mx: "auto", display: "table" }}
         variant="contained"

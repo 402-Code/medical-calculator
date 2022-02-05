@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -13,7 +13,15 @@ import TEMP_DRUG from "../../mocks/tempDrug.json";
 //Wyświeltane dane są NIEPOPRAWNE!! trzeba zmienić wyświetlane elementy po dodaniu komponentu Drug Calculations
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
-const DrugSummary = ({ activeKid, selectedMedicine, selectedDrug }) => {
+const DrugSummary = ({ activeKid, selectedMedicine }) => {
+  const [selectedDrug, setSelectedDrug] = useState({});
+
+  useEffect(() => {
+    medicationList.map((med) =>
+      med.medication === selectedMedicine ? setSelectedDrug(med) : null
+    );
+  }, [selectedMedicine]);
+
   return (
     <div className="drug-summary">
       <Paper
