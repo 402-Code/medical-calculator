@@ -42,7 +42,6 @@ function KidSelect({ activeKidState }) {
         <Carousel
           index={kids.indexOf(activeKid)}
           onChange={(active) => setActiveKid(kids[active])}
-          changeOnFirstRender={true}
           navButtonsAlwaysVisible={true}
           autoPlay={false}
           animation="slide"

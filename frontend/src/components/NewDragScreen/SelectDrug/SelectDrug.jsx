@@ -20,10 +20,12 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   const [selectedMedicine, setSelectedMedicine] = useState("");
   const [requiredActivSubst, setRequiredActivSubst] = useState("");
   const [requiredMedicine, setRequiredMedicine] = useState("");
+  const [canDrugBeServed, setCanDrugBeServed] = useState(false);
   let navigate = useNavigate();
 
   let uniqueActiveSub = [];
 
+  //Reset selected drug on component render
   useEffect(() => {
     setSelectedDrug({});
   }, []);
@@ -41,6 +43,7 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
       setRequiredActivSubst("Najpierw wybierz substancję czynną");
     } else if (selectedMedicine === "") {
       setRequiredMedicine("Wybierz lekarstwo");
+    } else if (!canDrugBeServed) {
     } else {
       medicationList.map((med) =>
         med.medication === selectedMedicine ? setSelectedDrug(med) : null
@@ -108,14 +111,21 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
           <FormHelperText>{requiredMedicine}</FormHelperText>
         </FormControl>
       </Paper>
-      <DrugSummary activeKid={activeKid} selectedMedicine={selectedMedicine} />
-      <Button
-        sx={{ my: 3, mx: "auto", display: "table" }}
-        variant="contained"
-        onClick={handleStartNewDrug}
-      >
-        Rozpocznij podawanie leku
-      </Button>
+      <DrugSummary
+        activeKid={activeKid}
+        selectedMedicine={selectedMedicine}
+        canDrugBeServed={canDrugBeServed}
+        setCanDrugBeServed={setCanDrugBeServed}
+      />
+      {canDrugBeServed ? (
+        <Button
+          sx={{ my: 3, mx: "auto", display: "table" }}
+          variant="contained"
+          onClick={handleStartNewDrug}
+        >
+          Rozpocznij podawanie leku
+        </Button>
+      ) : null}
     </>
   );
 };

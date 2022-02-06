@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Paper,
-} from "@mui/material";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import { Typography, Paper } from "@mui/material";
 import ageInMonths from "../../../utils/ageInMonths";
-import MedicationCantBeServed from "./MedicationCantBeServed"
-import MedicationInfo from "./MedicationInfo"
+import MedicationCantBeServed from "./MedicationCantBeServed";
+import MedicationInfo from "./MedicationInfo";
 import TEMP_DRUG from "../../mocks/tempDrug.json";
 
 //Wyświeltane dane są NIEPOPRAWNE!! trzeba zmienić wyświetlane elementy po dodaniu komponentu Drug Calculations
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
-const DrugSummary = ({ activeKid, selectedMedicine }) => {
+const DrugSummary = ({
+  activeKid,
+  selectedMedicine,
+  canDrugBeServed,
+  setCanDrugBeServed,
+}) => {
   const [selectedDrug, setSelectedDrug] = useState({});
 
   useEffect(() => {
@@ -19,6 +21,14 @@ const DrugSummary = ({ activeKid, selectedMedicine }) => {
       med.medication === selectedMedicine ? setSelectedDrug(med) : null
     );
   }, [selectedMedicine]);
+
+  useLayoutEffect(() => {
+    if (ageInMonths(activeKid) >= selectedDrug.min_access_age_in_months) {
+      setCanDrugBeServed(true);
+    } else {
+      setCanDrugBeServed(false);
+    }
+  }, [selectedDrug, activeKid]);
 
   return (
     <div className="drug-summary">
@@ -32,7 +42,7 @@ const DrugSummary = ({ activeKid, selectedMedicine }) => {
       </Typography>
         { selectedMedicine === ""
         ? <NoMedicationSelected />
-        : ageInMonths(activeKid) >= selectedDrug.min_access_age_in_months
+        : canDrugBeServed === true
           ? <MedicationInfo />
           : <MedicationCantBeServed activeKid={activeKid}/>
         }
