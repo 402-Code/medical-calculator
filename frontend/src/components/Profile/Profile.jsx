@@ -262,7 +262,7 @@ function Profile() {
             {!bmi ? "0" : bmi}
           </Typography>
 
-          <Button variant='contained' color='primary' type='submit'>{kidname ? 'Karyna zapisz zmiany' : 'Karyna dodaj bombelka'}</Button>
+          <Button variant='contained' color='primary' type='submit'>{kidname ? 'Zapisz zmiany' : 'Dodaj dziecko'}</Button>
         </Box>
 
       </form>

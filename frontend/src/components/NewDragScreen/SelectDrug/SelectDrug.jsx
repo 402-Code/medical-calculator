@@ -61,7 +61,7 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
 
   return (
     <>
-      <Paper elevation={16} square sx={{ pb: 4, px: 3, boxShadow: "none" }}>
+      <Paper elevation={16} square sx={{ pb: 2, px: 2, boxShadow: "none" }}>
         <Typography variant="h5" component="h2" sx={{ py: 2 }}>
           Wyszukaj lek:
         </Typography>

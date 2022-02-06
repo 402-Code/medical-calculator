@@ -9,7 +9,7 @@ const MedicationCantBeServed = ({ activeKid, selectedDrug }) => {
         {activeKid.name} jest za {a}
       </AlertTitle>
       Wybranego leku <strong>nie można</strong> podać dziecku poniżej{" "}
-      {selectedDrug.min_access_age_in_months}-go miesiąca życia .
+      {selectedDrug.min_access_age_in_months}-go miesiąca życia.
     </Alert>
   );
 };

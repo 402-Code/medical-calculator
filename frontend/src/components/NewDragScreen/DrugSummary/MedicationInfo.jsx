@@ -7,13 +7,15 @@ import {
   Typography,
 } from "@mui/material";
 import singleDose from "./toDisplay/singleDose";
+import doseInterval from "./toDisplay/doseInterval";
+import maxDailyDose from "./toDisplay/maxDailyDose";
 
 const MedicationInfo = ({ activeKid, selectedDrug }) => {
   return (
     <>
       <List sx={{ width: "100%", bgcolor: "transparent", p: 0 }}>
-        <Divider variant="middle" />
-        <ListItem sx={{ py: 0.5 }}>
+        <Divider />
+        <ListItem sx={{ p: 0.5 }}>
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
@@ -22,25 +24,24 @@ const MedicationInfo = ({ activeKid, selectedDrug }) => {
             }
           />
         </ListItem>
-        <Divider variant="middle" />
-        <ListItem sx={{ py: 0.5 }}>
+        <Divider />
+        <ListItem sx={{ p: 0.5 }}>
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
                 Odstęp pomiędzy podaniem kolejnych dawek:{" "}
-                {/* {TEMP_DRUG.dose_interval_in_hours} godzin */}
+                {doseInterval(selectedDrug)}
               </Typography>
             }
           />
         </ListItem>
-        <Divider variant="middle" />
-        <ListItem sx={{ py: 0.5 }}>
+        <Divider />
+        <ListItem sx={{ p: 0.5 }}>
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
                 Maksymalna dawka dzienna:{" "}
-                {/* {TEMP_DRUG.weight_based_calculations.max_daily_dose[0].max_per_1kg} */}
-                {/* {TEMP_DRUG.weight_based_calculations.max_daily_dose[0].unit} */}
+                {maxDailyDose(activeKid, selectedDrug)}
               </Typography>
             }
           />
