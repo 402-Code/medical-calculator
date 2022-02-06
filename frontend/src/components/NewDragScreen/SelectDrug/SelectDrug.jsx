@@ -10,7 +10,7 @@ import {
   FormHelperText,
   Button,
 } from "@mui/material";
-import DrugSummary from "../DrugSummary/DrugSummary";
+import DrugSummary from "./DrugSummary/DrugSummary";
 import TEMP_DRUG from "../../mocks/tempDrug.json";
 
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));

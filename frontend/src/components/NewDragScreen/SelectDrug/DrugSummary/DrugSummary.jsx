@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Typography, Paper } from "@mui/material";
-import ageInMonths from "../../../utils/ageInMonths";
+import ageInMonths from "../../../../utils/ageInMonths";
 import MedicationCantBeServed from "./MedicationCantBeServed";
 import MedicationInfo from "./MedicationInfo";
-import TEMP_DRUG from "../../mocks/tempDrug.json";
+import TEMP_DRUG from "../../../mocks/tempDrug.json";
 
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 

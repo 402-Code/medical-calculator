@@ -1,5 +1,5 @@
 import _ from "underscore";
-import ageInMonths from "../../../../utils/ageInMonths";
+import ageInMonths from "../../../../../utils/ageInMonths";
 
 const singleDose = (activeKid, selectedDrug) => {
   let txtToDisplay;
