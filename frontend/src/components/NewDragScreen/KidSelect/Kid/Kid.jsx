@@ -16,7 +16,7 @@ function Kid({ kid }) {
     <>
       <Card elevation={16}>
         <CardContent className="kid-select__kid__id" sx={{ p: 2 }}>
-          <Avatar sx={{ width: 50, height: 50 }}>MM</Avatar>
+          <Avatar sx={{ width: 50, height: 50 }}>{kid.name.slice(0, 2)}</Avatar>
           <Typography variant="h4">{kid.name}</Typography>
         </CardContent>
         <CardActions sx={{ pt: 0 }}>

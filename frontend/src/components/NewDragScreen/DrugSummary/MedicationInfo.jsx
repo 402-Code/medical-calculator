@@ -6,8 +6,9 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
+import singleDose from "./toDisplay/singleDose";
 
-const MedicationInfo = () => {
+const MedicationInfo = ({ activeKid, selectedDrug }) => {
   return (
     <>
       <List sx={{ width: "100%", bgcolor: "transparent", p: 0 }}>
@@ -16,9 +17,7 @@ const MedicationInfo = () => {
           <ListItemText
             primary={
               <Typography variant="body1" color="text.primary">
-                Pojedyńcza dawka:{" "}
-                {/* {TEMP_DRUG.weight_based_calculations.dose_per_1kg.amount} */}
-                {/* {TEMP_DRUG.weight_based_calculations.dose_per_1kg.unit} */}
+                Pojedyńcza dawka: {singleDose(activeKid, selectedDrug)}
               </Typography>
             }
           />

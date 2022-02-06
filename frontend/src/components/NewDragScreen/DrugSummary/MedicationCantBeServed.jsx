@@ -1,27 +1,16 @@
 import React from "react";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-  Typography,
-  Alert,
-} from "@mui/material";
+import { Alert, AlertTitle } from "@mui/material";
 
-const MedicationCantBeServed = ({ activeKid }) => {
+const MedicationCantBeServed = ({ activeKid, selectedDrug }) => {
   const a = activeKid.gender === "female" ? "mała" : "mały";
   return (
     <Alert severity="warning" variant="outlined" sx={{ fontSize: "large" }}>
-      {activeKid.name} jest za {a} aby dostać ten lek
+      <AlertTitle sx={{ fontSize: "large" }}>
+        {activeKid.name} jest za {a}
+      </AlertTitle>
+      Wybranego leku <strong>nie można</strong> podać dziecku poniżej{" "}
+      {selectedDrug.min_access_age_in_months}-go miesiąca życia .
     </Alert>
-    // <List sx={{ width: "100%", bgcolor: "transparent", p: 0 }}>
-    //   <ListItem sx={{ py: 0.5 }}>
-    //     <ListItemText
-    //       primary={
-    //       }
-    //     />
-    //   </ListItem>
-    // </List>
   );
 };
 

@@ -43,7 +43,6 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
       setRequiredActivSubst("Najpierw wybierz substancję czynną");
     } else if (selectedMedicine === "") {
       setRequiredMedicine("Wybierz lekarstwo");
-    } else if (!canDrugBeServed) {
     } else {
       medicationList.map((med) =>
         med.medication === selectedMedicine ? setSelectedDrug(med) : null

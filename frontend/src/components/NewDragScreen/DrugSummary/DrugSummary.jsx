@@ -43,8 +43,8 @@ const DrugSummary = ({
         { selectedMedicine === ""
         ? <NoMedicationSelected />
         : canDrugBeServed === true
-          ? <MedicationInfo />
-          : <MedicationCantBeServed activeKid={activeKid}/>
+          ? <MedicationInfo activeKid={activeKid} selectedDrug={selectedDrug} />
+          : <MedicationCantBeServed activeKid={activeKid} selectedDrug={selectedDrug} />
         }
       </Paper>
     </div>
@@ -55,6 +55,7 @@ const NoMedicationSelected = () => {
   return (
     <Typography variant="body2" sx={{ py: 2 }}>
       Wybierz lekarstwo z listy aby wyświetlić informacje na temat dawkowania
+      oraz rozpocząć podawanie leku.
     </Typography>
   );
 };
