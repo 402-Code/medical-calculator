@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { useLocation, useNavigate, NavLink } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
     AppBar,
     Toolbar,
@@ -42,7 +42,7 @@ export default function Header({ darkMode, handleThemeChange }) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="primary" enableColorOnDark={true}>
+            <AppBar position="static" color="primary" enableColorOnDark={true} sx={{ boxShadow: "none" }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -54,8 +54,6 @@ export default function Header({ darkMode, handleThemeChange }) {
                     >
                         {pathname === '/' ? <MenuIcon/> : <ArrowBackIcon />}
                     </IconButton>
-                    <NavLink className='link' to='/kidselect'>Kid Select</NavLink>
-                    <NavLink className='link' to='/addkid'>Add kid</NavLink>
                 </Toolbar>
                     <Fragment>
                         <SwipeableDrawer

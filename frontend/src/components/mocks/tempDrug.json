@@ -3,24 +3,7 @@
     "medication": "Ibuprom",
     "active_substance": "ibuprofen",
     "min_access_age_in_months": 3,
-    "weight_based_calculations": {
-      "dose_per_1kg": {
-        "amount": 20,
-        "unit": "mg"
-      },
-      "max_daily_dose": [
-        {
-          "age_form-to_in_month": [3, 12],
-          "max_per_1kg": 40,
-          "unit": "mg"
-        },
-        {
-          "age_form-to_in_month": [13, 24],
-          "max_per_1kg": 50,
-          "unit": "mg"
-        }
-      ]
-    },
+    "weight_based_calculations": {},
     "age_based_calculations": {
       "dose_per_age": [
         {
@@ -29,8 +12,8 @@
           "unit": "mg"
         },
         {
-          "age_form-to_in_month": [7, 12],
-          "amount": 11.5,
+          "age_form-to_in_month": [7, 36],
+          "amount": 14.5,
           "unit": "mg"
         }
       ],
@@ -74,32 +57,7 @@
         }
       ]
     },
-    "age_based_calculations": {
-      "dose_per_age": [
-        {
-          "age_form-to_in_month": [3, 6],
-          "amount": 12.5,
-          "unit": "mg"
-        },
-        {
-          "age_form-to_in_month": [7, 12],
-          "amount": 14.5,
-          "unit": "mg"
-        }
-      ],
-      "max_daily_dose": [
-        {
-          "age_form-to_in_month": [3, 12],
-          "max_per_age": 250,
-          "unit": "mg"
-        },
-        {
-          "age_form-to_in_month": [13, 24],
-          "max_per_age": 360,
-          "unit": "mg"
-        }
-      ]
-    },
+    "age_based_calculations": {},
     "dose_interval_in_hours": 5,
     "max_application_days": 8,
     "way_of_application": "Podawanie roztworu doustnie",
@@ -108,46 +66,29 @@
   {
     "medication": "Apap Junior",
     "active_substance": "paracetamol",
-    "min_access_age_in_months": 3,
-    "weight_based_calculations": {
-      "dose_per_1kg": {
-        "amount": 10,
-        "unit": "mg"
-      },
-      "max_daily_dose": [
-        {
-          "age_form-to_in_month": [3, 12],
-          "max_per_1kg": 30,
-          "unit": "mg"
-        },
-        {
-          "age_form-to_in_month": [13, 24],
-          "max_per_1kg": 45,
-          "unit": "mg"
-        }
-      ]
-    },
+    "min_access_age_in_months": 2,
+    "weight_based_calculations": {},
     "age_based_calculations": {
       "dose_per_age": [
         {
-          "age_form-to_in_month": [3, 6],
+          "age_form-to_in_month": [2, 6],
           "amount": 10.5,
           "unit": "mg"
         },
         {
-          "age_form-to_in_month": [7, 12],
+          "age_form-to_in_month": [7, 40],
           "amount": 12,
           "unit": "mg"
         }
       ],
       "max_daily_dose": [
         {
-          "age_form-to_in_month": [3, 12],
+          "age_form-to_in_month": [2, 12],
           "max_per_age": 180,
           "unit": "mg"
         },
         {
-          "age_form-to_in_month": [13, 24],
+          "age_form-to_in_month": [13, 54],
           "max_per_age": 350,
           "unit": "mg"
         }
@@ -161,7 +102,7 @@
   {
     "medication": "Pedicetamol",
     "active_substance": "paracetamol",
-    "min_access_age_in_months": 3,
+    "min_access_age_in_months": 0,
     "weight_based_calculations": {
       "dose_per_1kg": {
         "amount": 31,
@@ -169,7 +110,7 @@
       },
       "max_daily_dose": [
         {
-          "age_form-to_in_month": [3, 12],
+          "age_form-to_in_month": [0, 12],
           "max_per_1kg": 44,
           "unit": "mg"
         },
@@ -180,32 +121,7 @@
         }
       ]
     },
-    "age_based_calculations": {
-      "dose_per_age": [
-        {
-          "age_form-to_in_month": [3, 6],
-          "amount": 9.5,
-          "unit": "mg"
-        },
-        {
-          "age_form-to_in_month": [7, 12],
-          "amount": 13.5,
-          "unit": "mg"
-        }
-      ],
-      "max_daily_dose": [
-        {
-          "age_form-to_in_month": [3, 12],
-          "max_per_age": 250,
-          "unit": "mg"
-        },
-        {
-          "age_form-to_in_month": [13, 24],
-          "max_per_age": 333,
-          "unit": "mg"
-        }
-      ]
-    },
+    "age_based_calculations": {},
     "dose_interval_in_hours": 4,
     "max_application_days": 10,
     "way_of_application": "Podanie doustne za pomocą zakraplacza",

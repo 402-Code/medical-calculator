@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import "./KidSelect.scss";
 import Carousel from "react-material-ui-carousel";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import Kid from "./Kid/Kid";
 import { ChildContext } from "../../../context/ChildContext";
 
@@ -14,7 +13,7 @@ const thereIsOnlyOneKid = (arr) => {
 const addKidButton = () => {
   return (
     <Button
-      sx={{ float: "right" }}
+      sx={{ float: "right", mt: 0.5 }}
       variant="contained"
       size="small"
       startIcon={<AddIcon />}
@@ -31,18 +30,17 @@ function KidSelect({ activeKidState }) {
   const { kids } = useContext(ChildContext);
   if (thereIsOnlyOneKid(kids)) {
     return (
-      <div className="kid-select">
+      <Paper elevation={24} sx={{ m: 1, mb: 6, boxShadow: "none" }}>
         <Kid kid={kids[0]} />
         {addKidButton()}
-      </div>
+      </Paper>
     );
   } else {
     return (
-      <div className="kid-select">
+      <Paper elevation={24} sx={{ m: 1, mb: 6 }}>
         <Carousel
           index={kids.indexOf(activeKid)}
           onChange={(active) => setActiveKid(kids[active])}
-          changeOnFirstRender={true}
           navButtonsAlwaysVisible={true}
           autoPlay={false}
           animation="slide"
@@ -62,7 +60,7 @@ function KidSelect({ activeKidState }) {
           ))}
         </Carousel>
         {addKidButton()}
-      </div>
+      </Paper>
     );
   }
 }

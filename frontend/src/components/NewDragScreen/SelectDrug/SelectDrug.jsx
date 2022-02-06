@@ -10,7 +10,7 @@ import {
   FormHelperText,
   Button,
 } from "@mui/material";
-import DrugSummary from "../DrugSummary/DrugSummary";
+import DrugSummary from "./DrugSummary/DrugSummary";
 import TEMP_DRUG from "../../mocks/tempDrug.json";
 
 const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
@@ -20,10 +20,12 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   const [selectedMedicine, setSelectedMedicine] = useState("");
   const [requiredActivSubst, setRequiredActivSubst] = useState("");
   const [requiredMedicine, setRequiredMedicine] = useState("");
+  const [canDrugBeServed, setCanDrugBeServed] = useState(false);
   let navigate = useNavigate();
 
   let uniqueActiveSub = [];
 
+  //Reset selected drug on component render
   useEffect(() => {
     setSelectedDrug({});
   }, []);
@@ -59,7 +61,7 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
 
   return (
     <>
-      <Paper elevation={16} square sx={{ pb: 4, px: 3, boxShadow: "none" }}>
+      <Paper elevation={16} square sx={{ pb: 2, px: 2, boxShadow: "none" }}>
         <Typography variant="h5" component="h2" sx={{ py: 2 }}>
           Wyszukaj lek:
         </Typography>
@@ -108,14 +110,21 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
           <FormHelperText>{requiredMedicine}</FormHelperText>
         </FormControl>
       </Paper>
-      <DrugSummary activeKid={activeKid} selectedMedicine={selectedMedicine} />
-      <Button
-        sx={{ my: 3, mx: "auto", display: "table" }}
-        variant="contained"
-        onClick={handleStartNewDrug}
-      >
-        Rozpocznij podawanie leku
-      </Button>
+      <DrugSummary
+        activeKid={activeKid}
+        selectedMedicine={selectedMedicine}
+        canDrugBeServed={canDrugBeServed}
+        setCanDrugBeServed={setCanDrugBeServed}
+      />
+      {canDrugBeServed ? (
+        <Button
+          sx={{ my: 3, mx: "auto", display: "table" }}
+          variant="contained"
+          onClick={handleStartNewDrug}
+        >
+          Rozpocznij podawanie leku
+        </Button>
+      ) : null}
     </>
   );
 };
