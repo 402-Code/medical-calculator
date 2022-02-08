@@ -8,6 +8,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import "./Doses.scss";
+import SymScreen from "../Symptoms/SymScreen";
 
 const Doses = ({ drug }) => {
 
@@ -47,8 +48,8 @@ const Doses = ({ drug }) => {
                 {drug.medication}
                 </Typography> 
                 <Typography className='doses__item' variant="subtitle2" component="div">
-                {drug.weight_based_calculations.dose_per_1kg.amount}
-                {drug.weight_based_calculations.dose_per_1kg.unit}
+                {drug.weight_based_calculations?.dose_per_1kg?.amount}
+                {drug.weight_based_calculations?.dose_per_1kg?.unit}
                 </Typography>   
                 <TextField
                 className='doses__item'
@@ -62,7 +63,7 @@ const Doses = ({ drug }) => {
                 }}
                  aria-describedby="standard--helper-text"
                 />    
-                <Button sx={{color: '#2196F3'}} className='doses__item'>Dodaj</Button>
+                <SymScreen symptoms={[]} onChange={(a) => {console.log('selected symptoms', a)}} />
                 <Checkbox
                 style ={{
                     color: "#fff",
