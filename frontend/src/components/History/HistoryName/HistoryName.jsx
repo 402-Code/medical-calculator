@@ -13,9 +13,11 @@ const HistoryName = ({ kidName }) => {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", m: 1 }}>
-      <Avatar sx={{ width: 40, height: 40, mr: 1 }}>
-        {kidToDisplay.name.slice(0, 2)}
-      </Avatar>
+      <Avatar
+        alt={kidToDisplay.name.slice(0, 2)}
+        src={kidToDisplay.avatar}
+        sx={{ width: 40, height: 40, mr: 1 }}
+      />
       <Typography variant="h5">{kidToDisplay.name}</Typography>
     </Box>
   );
