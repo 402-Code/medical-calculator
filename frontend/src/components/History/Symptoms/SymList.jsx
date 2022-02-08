@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Symptom from "./Symptom";
 
-const symptomsList = ["Ból głowy", "Dreszcze", "Osłabienie", "Nudności"];
+const symptomsList = ["Ból głowy", "Dreszcze", "Osłabienie", "Nudności", "Ból gardła", "Katar", "Kaszel mokry", "Kaszel suchy", "Wymioty", "Ból w klatce piersiowej", "Ból mięśni"];
 
 
 const SymList = ({ symptoms, onChange }) => {
