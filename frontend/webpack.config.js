@@ -16,11 +16,9 @@ module.exports = {
         new HtmlWebpackPlugin({ template: './src/index.html'}),
         new ESLintPlugin(),
         new MiniCssExtractPlugin(),
-        // new WorkboxPlugin.GenerateSW(),
         new InjectManifest({
             swSrc: './src/service-worker.js',
             maximumFileSizeToCacheInBytes: 6000000
-            // swDest: 'sw.js'
           }),
         new CopyWebpackPlugin({
             patterns: [

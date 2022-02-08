@@ -1,16 +1,14 @@
 import { registerRoute } from "workbox-routing";
 import { CacheFirst } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
-// import { precacheAndRoute } from 'workbox-precaching';
+import { precacheAndRoute } from "workbox-precaching";
 
-// console.log("SW runs!");
-
-// Use with precache injection
-// precacheAndRoute(self.__WB_MANIFEST);
+/* eslint no-underscore-dangle: ["error", { "allow": ["__WB_MANIFEST"] }] */
+/* eslint-disable-next-line no-restricted-globals */
+precacheAndRoute(self.__WB_MANIFEST);
 
 registerRoute(
-  /\.(?:jsx|js|css|http)$/,
-  //   new RegExp('\\.jsx$'),
+  /\.(?:jsx|js|css)$/,
   new CacheFirst({
     cacheName: "jsx",
     plugins: [
@@ -40,9 +38,6 @@ registerRoute(
   new CacheFirst({
     cacheName: "google-fonts-webfonts",
     plugins: [
-      //   new CacheableResponsePlugin({
-      //     statuses: [0, 200],
-      //   }),
       new ExpirationPlugin({
         maxAgeSeconds: 60 * 60 * 24 * 365,
         maxEntries: 30,
