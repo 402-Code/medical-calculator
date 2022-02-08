@@ -42,7 +42,7 @@ function App() {
               <Route path="/edit/:kidname" element={<Profile />} />
               <Route
                 path="/history/:kidname"
-                element={<History selectedDrug={selectedDrug} />}
+                element={<History drug={selectedDrug} />}
               />
             </Routes>
           </BrowserRouter>
