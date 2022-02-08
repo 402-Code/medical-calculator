@@ -4,9 +4,8 @@
 }
 
 .profile {
-        padding: 20px 20px 0 20px;
+        padding: 30px 20px;
         display: grid;
-        grid-template: repeat(6, 1fr) / repeat(2, 1fr) ;
         grid-gap: 10px;
         min-height: 650px;
 
@@ -20,9 +19,7 @@
             align-self: center;
         }
 
-        #{&}__avatar {
-            padding: 30px 0 0 30px;
-        }
+
 
     }
 button {
