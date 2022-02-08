@@ -12,11 +12,13 @@ import {
     SwipeableDrawer,
     Switch,
     IconButton,
+    Link
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import LoginIcon from "@mui/icons-material/Login";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import './Header.scss';
 
 export default function Header({ darkMode, handleThemeChange }) {
     const [showMenu, setShowMenu] = useState(false);
@@ -40,7 +42,7 @@ export default function Header({ darkMode, handleThemeChange }) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="primary" enableColorOnDark={true}>
+            <AppBar position="static" color="primary" enableColorOnDark={true} sx={{ boxShadow: "none" }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -53,8 +55,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                         {pathname === '/' ? <MenuIcon/> : <ArrowBackIcon />}
                     </IconButton>
                 </Toolbar>
-                {listItems.map((anchor) => (
-                    <Fragment key={anchor.text}>
+                    <Fragment>
                         <SwipeableDrawer
                             onClose={toggleMenu}
                             onOpen={toggleMenu}
@@ -66,11 +67,14 @@ export default function Header({ darkMode, handleThemeChange }) {
                                     alignItems: "center",
                                     justifyContent: "center",
                                     color: "text.primary",
-                                    p: 3,
+                                    pt: 3,
+                                    pb: 1,
+                                    px: 2,
+
                                 }}
                             >
-                                <Typography variant="h5" mr={4} color="text.primary">
-                                    Motyw
+                                <Typography variant="h6" mr={1} color="text.primary">
+                                    Ciemny motyw
                                 </Typography>
                                 <Switch checked={darkMode} onChange={handleThemeChange} />
                             </Box>
@@ -84,7 +88,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                             </List>
                         </SwipeableDrawer>
                     </Fragment>
-                ))}
+
             </AppBar>
             {/*{params}*/}
         </Box>

@@ -1,5 +1,4 @@
 import React from "react";
-import "../KidSelect.scss";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -14,9 +13,17 @@ import {
 function Kid({ kid }) {
   return (
     <>
-      <Card variant="outlined">
-        <CardContent className="kid-select__kid__id" sx={{ p: 2 }}>
-          <Avatar sx={{ width: 50, height: 50 }}>MM</Avatar>
+      <Card elevation={16} sx={{ boxShadow: "none" }}>
+        <CardContent
+          sx={{
+            p: 2,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            gap: 1,
+          }}
+        >
+          <Avatar sx={{ width: 50, height: 50 }}>{kid.name.slice(0, 2)}</Avatar>
           <Typography variant="h4">{kid.name}</Typography>
         </CardContent>
         <CardActions sx={{ pt: 0 }}>
