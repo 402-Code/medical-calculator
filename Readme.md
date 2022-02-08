@@ -25,10 +25,10 @@ The medical calculator is a web application calculates the doses of medicines co
 ## Setup
 
 1. Clone this repository to your computer.
-2. Write `cd Frontend` to open file Frontend.
+2. Write `cd Frontend` to open folder Frontend.
 3. Run `npm install` to install all the dependencies.
 4. Once the dependencies are installed, you can run `npm run dev` to start the application.
-4. You will then be able to access it at `localhost:1234`.
+4. You will then be able to access it at `localhost:8080`.
 
 ## Usage
 
