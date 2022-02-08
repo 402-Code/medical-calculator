@@ -22,10 +22,12 @@ const DrugSummary = ({
   }, [selectedMedicine]);
 
   useLayoutEffect(() => {
-    if (ageInMonths(activeKid) >= selectedDrug.min_access_age_in_months) {
-      setCanDrugBeServed(true);
-    } else {
-      setCanDrugBeServed(false);
+    if (activeKid) {
+      if (ageInMonths(activeKid) >= selectedDrug.min_access_age_in_months) {
+        setCanDrugBeServed(true);
+      } else {
+        setCanDrugBeServed(false);
+      }
     }
   }, [selectedDrug, activeKid]);
 
