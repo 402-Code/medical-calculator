@@ -33,8 +33,12 @@
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-material-ui-carousel": "^3.1.1",
     "react-router-dom": "^6.2.1",
-    "react-material-ui-carousel": "^3.1.1"
+    "workbox-expiration": "^6.4.2",
+    "workbox-precaching": "^6.4.2",
+    "workbox-routing": "^6.4.2",
+    "workbox-strategies": "^6.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",

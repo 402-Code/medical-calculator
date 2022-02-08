@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const {InjectManifest} = require('workbox-webpack-plugin');
 
 module.exports = {
     devServer: {
@@ -16,7 +16,11 @@ module.exports = {
         new HtmlWebpackPlugin({ template: './src/index.html'}),
         new ESLintPlugin(),
         new MiniCssExtractPlugin(),
-        new WorkboxPlugin.GenerateSW(),
+        // new WorkboxPlugin.GenerateSW(),
+        new InjectManifest({
+            swSrc: './src/service-worker.js',
+            // swDest: 'sw.js'
+          }),
         new CopyWebpackPlugin({
             patterns: [
             { from: "./src/manifest.json", to: "" },
