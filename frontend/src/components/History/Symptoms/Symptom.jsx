@@ -8,7 +8,7 @@ const Symptom = ({ name, selected = false, onSelect }) => (
     <Button
       startIcon={selected ? <RemoveIcon /> : <AddIcon />}
       variant="contained"
-      size="small"
+      size="medium"
       color={selected ? "secondary" : "primary"}
       onClick={onSelect}
     >

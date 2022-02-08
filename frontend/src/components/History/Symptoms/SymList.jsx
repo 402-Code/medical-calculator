@@ -7,7 +7,7 @@ const symptomsList = ["Ból głowy", "Dreszcze", "Osłabienie", "Nudności", "B�
 
 const SymList = ({ symptoms, onChange }) => {
     return (
-      <Box sx={{ "& button": { m: 0.5 } }}>
+      <Box sx={{ "& button": { m: .5 } }}>
         <div>
           {symptomsList.map((symptom, index) => (
             <Symptom
