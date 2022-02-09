@@ -23,8 +23,9 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
             { from: "./src/manifest.json", to: "" },
-            { from: "./src/manifest-icon-192.maskable.png", to: "" },
-            { from: "./src/manifest-icon-512.maskable.png", to: "" }
+            { from: "./src/icons/192.png", to: "" },
+            { from: "./src/icons/512.png", to: "" },
+            { from: "./src/icons/favicon.ico", to: "" }
         ]})
     ],
     resolve: {

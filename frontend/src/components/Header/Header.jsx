@@ -36,7 +36,7 @@ export default function Header({ darkMode, handleThemeChange }) {
 
     const install = async () => {
         deferredPrompt.prompt();
-        setDeferredPrompt(null);
+        // setDeferredPrompt(null);
     }
 
     const installButton = () => {
