@@ -4,7 +4,7 @@ The medical calculator is a web application calculates the doses of medicines co
 
 ## Live Demo
 
-[Medical-calculator]
+[Medical-calculator]  https://medical-calculator.netlify.app/ 
 
 ## Technologies Used
 
