@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const {InjectManifest} = require('workbox-webpack-plugin');
 
 module.exports = {
     devServer: {
@@ -13,7 +15,18 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({ template: './src/index.html'}),
         new ESLintPlugin(),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
+        new InjectManifest({
+            swSrc: './src/service-worker.js',
+            maximumFileSizeToCacheInBytes: 6000000
+          }),
+        new CopyWebpackPlugin({
+            patterns: [
+            { from: "./src/manifest.json", to: "" },
+            { from: "./src/icons/192.png", to: "" },
+            { from: "./src/icons/512.png", to: "" },
+            { from: "./src/icons/favicon.ico", to: "" }
+        ]})
     ],
     resolve: {
         modules: [__dirname, "src", "node_modules"],

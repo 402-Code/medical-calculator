@@ -63,7 +63,7 @@ const Doses = ({ drug }) => {
                 }}
                  aria-describedby="standard--helper-text"
                 />    
-                <SymScreen symptoms={[]} onChange={(a) => {console.log('selected symptoms', a)}} />
+                <SymScreen symptoms={[]} onChange={() => {}} />
                 <Checkbox
                 style ={{
                     color: "#fff",

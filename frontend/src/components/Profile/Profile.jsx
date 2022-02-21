@@ -228,7 +228,7 @@ function Profile() {
             </RadioGroup>
           </FormControl>
 
-          <Typography
+          {/* <Typography
               className="profile__description"
               variant="subtitle1"
               gutterBottom
@@ -242,7 +242,7 @@ function Profile() {
               variant="subtitle1"
               gutterBottom
               component="div"
-          >{calculateAge(dob) * 12 | "" } mies</Typography>
+          >{calculateAge(dob) * 12 | "" } mies</Typography> */}
 
           <Typography
               className="profile__description"

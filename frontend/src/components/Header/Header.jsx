@@ -12,7 +12,8 @@ import {
     SwipeableDrawer,
     Switch,
     IconButton,
-    Link
+    Button,
+    Divider
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
@@ -20,10 +21,31 @@ import LoginIcon from "@mui/icons-material/Login";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './Header.scss';
 
+
+
 export default function Header({ darkMode, handleThemeChange }) {
     const [showMenu, setShowMenu] = useState(false);
     const {pathname} = useLocation();
     const navigate = useNavigate();
+    
+    const [deferredPrompt, setDeferredPrompt] = useState(null)
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        setDeferredPrompt(e);
+    });
+
+    const install = async () => {
+        deferredPrompt.prompt();
+        // setDeferredPrompt(null);
+    }
+
+    const installButton = () => {
+        return (
+            <Button variant="contained" sx={{mx: 4, my: 2}} onClick={install} >
+            Zainstaluj
+            </Button>
+        )
+    }
     
     const toggleMenu = (e) => {
         if(pathname === '/') setShowMenu((prev) => !prev);
@@ -67,9 +89,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                                     alignItems: "center",
                                     justifyContent: "center",
                                     color: "text.primary",
-                                    pt: 3,
-                                    pb: 1,
-                                    px: 2,
+                                    p: 2,
 
                                 }}
                             >
@@ -78,6 +98,7 @@ export default function Header({ darkMode, handleThemeChange }) {
                                 </Typography>
                                 <Switch checked={darkMode} onChange={handleThemeChange} />
                             </Box>
+                            <Divider />
                             <List>
                                 {listItems.map((item) => (
                                     <ListItem key={item.text}>
@@ -86,6 +107,8 @@ export default function Header({ darkMode, handleThemeChange }) {
                                     </ListItem>
                                 ))}
                             </List>
+                            <Divider />
+                            {deferredPrompt ? installButton() : null}
                         </SwipeableDrawer>
                     </Fragment>
 
