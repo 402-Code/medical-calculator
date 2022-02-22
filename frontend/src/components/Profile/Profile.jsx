@@ -13,14 +13,12 @@ import {
   Typography,
   Button
 } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import boy from "../../img/avatars/boy.png";
 import girl from "../../img/avatars/girl.png";
-// import '@fontsource/roboto/500.css';
 import "./Profile.scss";
 import { ChildContext } from "../../context/ChildContext";
 import calculateAge from '../../utils/utils';
+import today from '../../utils/today';
 
 function Profile() {
   const [name, setName]=useState('')
@@ -35,6 +33,8 @@ function Profile() {
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
   const {kidname} = useParams();
+  let kidNames = ctx.kids.map(item => item.name).join(' ').toLowerCase().split(' ').includes(name.toLowerCase())
+  const location = window.location.pathname
 
   useEffect(()=>{
     if(kidname !== undefined) {
@@ -64,24 +64,20 @@ function Profile() {
     e.preventDefault();
     let kid={};
 
+    
     if(kidname !== undefined) {
-      kid = updateKid(kidname);
-
+      kid = updateKid(kidname);  
     } else {
-      kid = {name, height, weight, gender, bmi, avatar, dob};
+      kid = {name, height, weight, gender, bmi, avatar, dob};      
+    }
+
+    if(kidNames && location==='/addkid') {
+      return
     }
 
     ctx.setKids([...ctx.kids, kid]);
-    navigate('/');
+    navigate('/');  
   }
-
-  const changeAvatar = () => {
-    if (gender === "female") {
-      setAvatar(boy);
-    } else if (gender === "male") {
-      setAvatar(girl);
-    }
-  };
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -124,12 +120,14 @@ function Profile() {
           </Fab>
 
           <TextField
+              error={kidNames && location ==='/addkid' ? true : false}
               className="profile__item"
               id="filled-basic"
-              label="Imię"
+              label={kidNames && location ==='/addkid' ? `Imię już istnieje` : `Imię` }
               variant="filled"
               value={name}
               onChange={(e)=>setName(e.target.value)}
+              required
           />
 
           <Typography
@@ -145,9 +143,11 @@ function Profile() {
               id="date"
               type="date"
               sx={{ m: 1, width: 220, backgroundColor: "primary" }}
+              InputProps={{inputProps: {max: today} }}
               InputLabelProps={{ shrink: true }}
               value={dob}
               onChange={e=>setDob(e.target.value)}
+              required
           />
           <Typography
               className="profile__description"
@@ -187,6 +187,7 @@ function Profile() {
               }}
               variant="filled"
               value={height}
+              required
           />
 
           <Typography
@@ -208,6 +209,7 @@ function Profile() {
               }}
               variant="filled"
               value={weight}
+              required
           />
 
           <Typography
@@ -242,6 +244,7 @@ function Profile() {
                   }
                   label="Chłopiec"
               />
+              
             </RadioGroup>
           </FormControl>
 
@@ -259,7 +262,7 @@ function Profile() {
               gutterBottom
               component="div"
           >
-            {!bmi ? "0" : bmi}
+            {bmi}
           </Typography>
 
           <Button variant='contained' color='primary' type='submit'>{kidname ? 'Zapisz zmiany' : 'Dodaj dziecko'}</Button>

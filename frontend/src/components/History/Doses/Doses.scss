@@ -26,7 +26,8 @@
     #{&}__item {
         justify-self: center;
         align-self: center;  
-        font-size: 10px;     
+        font-size: 10px;  
+        grid-column: span 1;   
     }
 
     #{&}__dose {

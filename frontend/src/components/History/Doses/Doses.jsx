@@ -44,11 +44,10 @@ const Doses = ({ drug }) => {
                 {time}
                 </Typography>
                 <Typography className='doses__item' variant="subtitle2" component="div">
-                {drug.medication}
+                    ibuprofen
                 </Typography> 
                 <Typography className='doses__item' variant="subtitle2" component="div">
-                {drug.weight_based_calculations.dose_per_1kg.amount}
-                {drug.weight_based_calculations.dose_per_1kg.unit}
+                    200mg
                 </Typography>   
                 <TextField
                 className='doses__item'
@@ -64,6 +63,7 @@ const Doses = ({ drug }) => {
                 />    
                 <Button sx={{color: '#2196F3'}} className='doses__item'>Dodaj</Button>
                 <Checkbox
+                className='doses__item'
                 style ={{
                     color: "#fff",
                 }}
