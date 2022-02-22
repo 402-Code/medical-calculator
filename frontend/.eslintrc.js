@@ -14,6 +14,14 @@ module.exports = {
   },
   plugins: ['react', 'jest'],
   rules: {
-    'react/prop-types': 0
+    'arrow-body-style': 0,
+    'no-shadow': 0,
+    'react/prop-types': 0,
+    'react/jsx-no-bind': 0,
+    'react/function-component-definition': 0,
+    'react/no-array-index-key': 0,
+    'react/jsx-no-duplicate-props': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/jsx-no-constructed-context-values': 1
   }
 };

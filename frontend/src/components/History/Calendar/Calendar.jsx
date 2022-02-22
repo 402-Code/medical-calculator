@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
-const ensureTwoDigits = (value) => (value ? ("0" + value).slice(-2) : "00");
+const ensureTwoDigits = (value) => (value ? `0${value}`.slice(-2) : '00');
 
-const dayOfTheWeek = ["ND", "PN", "WT", "ŚR", "CZW", "PT", "SB"];
+const dayOfTheWeek = ['ND', 'PN', 'WT', 'ŚR', 'CZW', 'PT', 'SB'];
 
-const formatDate = (date) =>
-  `${ensureTwoDigits(date.getDate())}.${ensureTwoDigits(date.getMonth() + 1)}`;
+const formatDate = (date) => `${ensureTwoDigits(date.getDate())}.${ensureTwoDigits(date.getMonth() + 1)}`;
 
 const getDays = () => {
   const tomorrow = new Date();
@@ -25,7 +24,7 @@ const getDays = () => {
   return [dayBefore, yesterday, today, tomorrow].map((date) => ({
     day: dayOfTheWeek[date.getDay()],
     date: formatDate(date),
-    dateObj: date,
+    dateObj: date
   }));
 };
 
@@ -39,15 +38,10 @@ export default function Calendar() {
   };
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "primary" }}>
+    <Box sx={{ width: '100%', bgcolor: 'primary' }}>
       <Tabs value={tab} onChange={handleChange} centered>
         {days.map(({ day, date }) => (
-          <Tab
-            icon={<div>{day}</div>}
-            label={date}
-            key={date}
-            iconPosition="bottom"
-          />
+          <Tab icon={<div>{day}</div>} label={date} key={date} iconPosition="bottom" />
         ))}
       </Tabs>
     </Box>

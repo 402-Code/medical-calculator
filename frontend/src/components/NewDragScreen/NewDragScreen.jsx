@@ -1,9 +1,9 @@
-import React from "react";
-import { useState, useContext, useEffect } from "react";
-import KidSelect from "./KidSelect/KidSelect";
-import SelectDrug from "./SelectDrug/SelectDrug";
-import Profile from "../Profile/Profile";
-import { ChildContext } from "../../context/ChildContext";
+import React, { useState, useContext, useEffect } from 'react';
+
+import KidSelect from './KidSelect/KidSelect';
+import SelectDrug from './SelectDrug/SelectDrug';
+import Profile from '../Profile/Profile';
+import { ChildContext } from '../../context/ChildContext';
 
 const NewDragScreen = ({ setSelectedDrug }) => {
   const { kids } = useContext(ChildContext);
@@ -20,9 +20,8 @@ const NewDragScreen = ({ setSelectedDrug }) => {
         <SelectDrug setSelectedDrug={setSelectedDrug} activeKid={activeKid} />
       </>
     );
-  } else {
-    return <Profile />;
   }
+  return <Profile />;
 };
 
 export default NewDragScreen;
