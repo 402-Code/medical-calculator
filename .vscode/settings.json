@@ -7,5 +7,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.validate": ["javascript", "javascriptreact"],
-  "eslint.workingDirectories": ["./frontend", "./backend"]
+  "eslint.workingDirectories": ["./frontend", "./server"]
 }
