@@ -4,7 +4,7 @@ import { ChildContext } from '../../../context/ChildContext';
 
 const HistoryName = ({ kidName }) => {
   const { kids } = useContext(ChildContext);
-  const kidToDisplay = kids.filter((kid) => kid.name === kidName);
+  const kidToDisplay = kids.find((kid) => kid.name === kidName);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', m: 1 }}>
