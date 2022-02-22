@@ -3,11 +3,12 @@ import {
   Checkbox,
   Typography,
   Box,
-  Button,
   TextField,
   InputAdornment,
+  Card,
 } from "@mui/material";
 import "./Doses.scss";
+import SymScreen from "../Symptoms/SymScreen";
 
 const Doses = ({ drug }) => {
 
@@ -39,7 +40,7 @@ const Doses = ({ drug }) => {
             }
         }, [checked]);
         
-        return (<Box key={key} value={item} className='doses__items' component="div" >
+        return (<Card elevation={16} key={key} value={item} className='doses__items' component="div" >
                 <Typography key={key} className='doses__item' variant="subtitle2" component="div">
                 {time}
                 </Typography>
@@ -61,21 +62,21 @@ const Doses = ({ drug }) => {
                 }}
                  aria-describedby="standard--helper-text"
                 />    
-                <Button sx={{color: '#2196F3'}} className='doses__item'>Dodaj</Button>
+                <SymScreen symptoms={[]} onChange={(a) => {console.log('selected symptoms', a)}} />
                 <Checkbox
                 className='doses__item'
                 style ={{
                     color: "#fff",
                 }}
                 onChange={e => setChecked(e.target.checked)} color="default" />
-                </Box>
+                </Card>
         )});
     
     return (
         <Box className='doses' component="div">
-            <Box sx={{p: '5px 0 5px 0'}} className='doses__header' component="div">
+            <Card elevation={16} sx={{p: '5px 0 5px 0'}} className='doses__header' component="div">
                 {titlesArray}           
-            </Box>
+            </Card>
             <Box>{dose}</Box>                        
         </Box>      
     )

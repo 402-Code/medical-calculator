@@ -111,10 +111,10 @@ function Profile() {
       <form onSubmit={handleSubmit}>
         <Box className="profile">
 
-          <Fab className="profile__avatar" component="label">
+          <Fab className="profile__avatar" component="label" sx={{ alignSelf: "center", pl: 0.5}}>
             <Avatar
                 src={!image ? avatar : image}
-                sx={{ width: 100, height: 100 }}
+                sx={{ width: 80, height: 80 }}
             />
             <input type="file" hidden onChange={onImageChange} />
           </Fab>
@@ -149,24 +149,7 @@ function Profile() {
               onChange={e=>setDob(e.target.value)}
               required
           />
-          <Typography
-              className="profile__description"
-              variant="subtitle1"
-              gutterBottom
-              component="div"
-          >
-            Wiek:
-          </Typography>
-
-          <TextField
-              sx={{ fontSize: "30" }}
-              id="filled-number"
-              type="number"
-              InputLabelProps={{ shrink: true }}
-              variant="filled"
-              value={calculateAge(dob) | 0}
-              disabled
-          />
+         
           <Typography
               className="profile__description"
               variant="subtitle1"
@@ -247,6 +230,22 @@ function Profile() {
               
             </RadioGroup>
           </FormControl>
+
+          <Typography
+              className="profile__description"
+              variant="subtitle1"
+              gutterBottom
+              component="div"
+          >
+            Wiek:
+          </Typography>
+
+          <Typography
+              className="profile__item"
+              variant="subtitle1"
+              gutterBottom
+              component="div"
+          >{calculateAge(dob) * 12 | "" } mies</Typography>
 
           <Typography
               className="profile__description"
