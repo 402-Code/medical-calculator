@@ -1,8 +1,7 @@
 {
   "env": {
-    "jest/globals": true,
     "node": true,
-    "es2021": true
+    "jest": true
   },
   "extends": ["airbnb", "eslint:recommended", "plugin:jest/recommended", "prettier"],
   "parserOptions": {
@@ -12,6 +11,7 @@
   "plugins": ["jest"],
   "rules": {
     "arrow-body-style": 0,
-    "no-shadow": 0
+    "no-shadow": 0,
+    "no-restricted-exports": 0
   }
 }
