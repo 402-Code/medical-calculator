@@ -1,10 +1,50 @@
+import bcrypt from 'bcryptjs';
+import Joi from '@hapi/joi';
+import User from '../../../models';
+
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
+
+const registerValidation = (data) => {
+  const schema = Joi.object({
+    username: Joi.string().required(),
+    email: Joi.string().required().email(),
+    password: Joi.string().min(5).required()
+  });
+
+  return schema.validate(data);
+};
+
 const signUp = async (req, res) => {
-  const { email } = req.body;
-  res.json({ email });
+  const { username, email, password } = req.body;
+
+  // validation
+  const { error } = registerValidation(req.body);
+  if (error) return res.status(400).send({ status: 'fail', message: error.details[0].message });
+
+  // checking if this email is already in db
+  const emailExist = await User.findOne({ email });
+  if (emailExist)
+    return res.status(400).send({ status: 'fail', message: `An account for email ${email} already exist` });
+
+  // hash the password
+  const salt = await bcrypt.genSalt(10);
+  const pswHash = await bcrypt.hash(password, salt);
+
+  // adding user to db
+  const user = new User({ username, email, password: pswHash });
+  try {
+    const newUser = await user.save();
+    const { username, email, date, id } = newUser;
+    res.status(201).send({
+      status: 'success',
+      user: { username, email, createdAt: date, id }
+    });
+  } catch (err) {
+    res.status(500).send({ status: 'fail', message: err });
+  }
 };
 
 export default signUp;

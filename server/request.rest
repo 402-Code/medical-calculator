@@ -1,0 +1,8 @@
+﻿POST http://localhost:3000/api/auth/sign-up
+content-type: application/json
+
+{
+    "username":"mateusz",
+    "email":"mateusz5ateusz.com",
+    "password":"12345"
+}
