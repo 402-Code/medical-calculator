@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import Joi from '@hapi/joi';
 import User from '../../../models';
 
 /**
@@ -7,22 +6,8 @@ import User from '../../../models';
  * @param {import('express').Response} res
  */
 
-const registerValidation = (data) => {
-  const schema = Joi.object({
-    username: Joi.string().required(),
-    email: Joi.string().required().email(),
-    password: Joi.string().min(5).required()
-  });
-
-  return schema.validate(data);
-};
-
 const signUp = async (req, res) => {
   const { username, email, password } = req.body;
-
-  // validation
-  const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send({ status: 'fail', message: error.details[0].message });
 
   // checking if this email is already in db
   const emailExist = await User.findOne({ email });
@@ -38,12 +23,12 @@ const signUp = async (req, res) => {
   try {
     const newUser = await user.save();
     const { username, email, date, id } = newUser;
-    res.status(201).send({
+    return res.status(201).send({
       status: 'success',
       user: { username, email, createdAt: date, id }
     });
   } catch (err) {
-    res.status(500).send({ status: 'fail', message: err });
+    return res.status(500).send({ status: 'fail', message: err });
   }
 };
 
