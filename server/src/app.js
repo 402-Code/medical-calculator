@@ -1,14 +1,11 @@
 import 'dotenv/config';
 import express from 'express';
-import mongoose from 'mongoose';
+import connectToDatabase from './configuration/index';
 import apiRouter from './routes';
 
 const app = express();
 
-mongoose.connect(process.env.DB_CONNECT, (err) => {
-  if (err) console.log(err);
-  else console.log('Connected to database');
-});
+await connectToDatabase();
 
 app.use('/api', express.json(), apiRouter);
 
