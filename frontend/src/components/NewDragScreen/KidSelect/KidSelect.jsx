@@ -25,8 +25,7 @@ const addKidButton = () => {
   );
 };
 
-function KidSelect({ activeKidState }) {
-  const [activeKid, setActiveKid] = activeKidState;
+function KidSelect({ activeKid, setActiveKid }) {
   const { kids } = useContext(ChildContext);
   if (thereIsOnlyOneKid(kids)) {
     return (

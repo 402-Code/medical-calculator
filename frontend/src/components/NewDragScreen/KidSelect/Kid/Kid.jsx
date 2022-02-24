@@ -23,7 +23,11 @@ function Kid({ kid }) {
             gap: 1,
           }}
         >
-          <Avatar sx={{ width: 50, height: 50 }}>{kid.name.slice(0, 2)}</Avatar>
+          <Avatar
+            alt={kid.name.slice(0, 2)}
+            src={kid.avatar}
+            sx={{ width: 50, height: 50 }}
+          />
           <Typography variant="h4">{kid.name}</Typography>
         </CardContent>
         <CardActions sx={{ pt: 0 }}>
