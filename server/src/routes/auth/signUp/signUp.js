@@ -13,7 +13,7 @@ const signUp = async (req, res) => {
 
   //validation
   const { error } = signupValidation(req.body);
-  if (error) return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
+  if (error) return res.status(StatusCodes.BAD_REQUEST).send({ error: error.details[0].message });
 
   // checking if this email is already in db
   const isEmailExists = await User.findOne({ email });
