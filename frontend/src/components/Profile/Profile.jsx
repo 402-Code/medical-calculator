@@ -33,7 +33,9 @@ function Profile() {
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
   const {kidname} = useParams();
-  let kidNames = ctx.kids.map(item => item.name).join(' ').toLowerCase().split(' ').includes(name.toLowerCase())
+  const isNameTaken = ctx.kids.some(
+    (item) => item.name.toLowerCase() === name.toLowerCase()
+  );
   const location = window.location.pathname
 
   useEffect(()=>{
@@ -71,7 +73,7 @@ function Profile() {
       kid = {name, height, weight, gender, bmi, avatar, dob};      
     }
 
-    if(kidNames && location==='/addkid') {
+    if(isNameTaken && location==='/addkid') {
       return
     }
 
@@ -120,10 +122,10 @@ function Profile() {
           </Fab>
 
           <TextField
-              error={kidNames && location ==='/addkid' ? true : false}
+              error={isNameTaken && location ==='/addkid' ? true : false}
               className="profile__item"
               id="filled-basic"
-              label={kidNames && location ==='/addkid' ? `Imię już istnieje` : `Imię` }
+              label={isNameTaken && location ==='/addkid' ? `Imię już istnieje` : `Imię` }
               variant="filled"
               value={name}
               onChange={(e)=>setName(e.target.value)}
