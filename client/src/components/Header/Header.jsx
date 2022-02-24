@@ -19,11 +19,15 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LoginIcon from '@mui/icons-material/Login';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './Header.scss';
+import SignUp from '../SignForms/SignUp';
+import SignIn from '../SignForms/SignIn';
 
 export default function Header({ darkMode, handleThemeChange }) {
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const [isSignInFormOpen, setSignInFormOpen] = useState(false);
+  const [isSignUpFormOpen, setSignUpFormOpen] = useState(false);
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   window.addEventListener('beforeinstallprompt', (e) => {
@@ -56,17 +60,23 @@ export default function Header({ darkMode, handleThemeChange }) {
     }
   };
 
-  const handleLogin = () => {};
+  const handleSignIn = () => {
+    setSignInFormOpen(true);
+  };
 
-  const handleRegister = () => {};
+  const handleSignUp = () => {
+    setSignUpFormOpen(true);
+  };
 
   const buttonList = [
-    { text: 'Zaloguj się', icon: <LoginIcon />, onClick: handleLogin },
-    { text: 'Utwórz konto', icon: <HowToRegIcon />, onClick: handleRegister }
+    { text: 'Zaloguj się', icon: <LoginIcon />, onClick: handleSignIn },
+    { text: 'Utwórz konto', icon: <HowToRegIcon />, onClick: handleSignUp }
   ];
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <SignIn isOpen={isSignInFormOpen} setOpen={setSignInFormOpen} />
+      <SignUp isOpen={isSignUpFormOpen} setOpen={setSignUpFormOpen} />
       <AppBar position="static" color="primary" enableColorOnDark sx={{ boxShadow: 'none' }}>
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} onClick={toggleMenu}>
