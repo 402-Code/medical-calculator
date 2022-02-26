@@ -10,8 +10,8 @@ const drugSchema = new mongoose.Schema({
     required: true
   },
   description: String,
-  applicationRequirement: String,
-  schedulingPolicy: String,
+  applicationRequirement: mongoose.SchemaTypes.ObjectId,
+  schedulingPolicy: mongoose.SchemaTypes.Array,
   contradictions: String,
   interval: {
     type: Number,
