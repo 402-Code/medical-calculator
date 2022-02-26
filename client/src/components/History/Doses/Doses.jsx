@@ -3,7 +3,7 @@ import { Checkbox, Typography, Box, TextField, InputAdornment, Card } from '@mui
 import './Doses.scss';
 import SymScreen from '../Symptoms/SymScreen';
 
-const Doses = ({ drug }) => {
+const Doses = () => {
   const titlesArray = ['Godzina', 'Nazwa leku', 'Dawka', 'Temperatura', 'Objawy'].map((item, key) => (
     <Typography key={key} className="doses__titles" sx={{ fontSize: '10px' }} variant="subtitle2" component="div">
       {item}
@@ -38,11 +38,10 @@ const Doses = ({ drug }) => {
           {time}
         </Typography>
         <Typography className="doses__item" variant="subtitle2" component="div">
-          {drug.medication}
+          ibuprofen
         </Typography>
         <Typography className="doses__item" variant="subtitle2" component="div">
-          {drug.weight_based_calculations?.dose_per_1kg?.amount}
-          {drug.weight_based_calculations?.dose_per_1kg?.unit}
+          200mg
         </Typography>
         <TextField
           className="doses__item"
@@ -67,6 +66,7 @@ const Doses = ({ drug }) => {
           }}
         />
         <Checkbox
+          className="doses__item"
           style={{
             color: '#fff'
           }}
