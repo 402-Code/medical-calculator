@@ -7,7 +7,7 @@ import {
   Typography,
   List,
   ListItem,
-  ListItemIcon,
+  SvgIcon,
   SwipeableDrawer,
   Switch,
   IconButton,
@@ -16,18 +16,14 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './Header.scss';
-import SignUp from '../SignForms/SignUp';
-import SignIn from '../SignForms/SignIn';
 
 export default function Header({ darkMode, handleThemeChange }) {
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [isSignInFormOpen, setSignInFormOpen] = useState(false);
-  const [isSignUpFormOpen, setSignUpFormOpen] = useState(false);
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   window.addEventListener('beforeinstallprompt', (e) => {
@@ -59,23 +55,21 @@ export default function Header({ darkMode, handleThemeChange }) {
     }
   };
 
-  const handleSignIn = () => {
-    setSignInFormOpen(true);
+  const handleLogOut = () => {
+    // TODO
   };
 
   const handleSignUp = () => {
-    setSignUpFormOpen(true);
+    // TODO
   };
 
   const buttonList = [
-    { text: 'Zaloguj się', icon: <LoginIcon />, onClick: handleSignIn },
-    { text: 'Utwórz konto', icon: <HowToRegIcon />, onClick: handleSignUp }
+    { text: 'Utwórz nowe konto', icon: <HowToRegIcon />, onClick: handleSignUp },
+    { text: 'Wyloguj się', icon: <LogoutIcon />, onClick: handleLogOut }
   ];
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <SignIn isOpen={isSignInFormOpen} setOpen={setSignInFormOpen} />
-      <SignUp isOpen={isSignUpFormOpen} setOpen={setSignUpFormOpen} />
       <AppBar position="static" color="primary" enableColorOnDark sx={{ boxShadow: 'none' }}>
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }} onClick={toggleMenu}>
@@ -87,7 +81,6 @@ export default function Header({ darkMode, handleThemeChange }) {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
               color: 'text.primary',
               p: 2
             }}
@@ -101,10 +94,10 @@ export default function Header({ darkMode, handleThemeChange }) {
           <List>
             {buttonList.map((btn) => (
               <ListItem key={btn.text}>
-                <Button onClick={btn.onClick}>
+                <Button onClick={btn.onClick} sx={{ px: 0 }}>
                   {btn.text}
-                  <ListItemIcon sx={{ ml: 2 }}>{btn.icon}</ListItemIcon>
                 </Button>
+                <SvgIcon sx={{ ml: 1 }}>{btn.icon}</SvgIcon>
               </ListItem>
             ))}
           </List>
