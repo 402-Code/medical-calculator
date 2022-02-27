@@ -13,11 +13,11 @@ const signUp = async (req, res) => {
 
   //validation
   const { error } = signupValidation(req.body);
-  if (error) return res.status(StatusCodes.BAD_REQUEST).send({ message: error.details[0].message });
+  if (error) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Invalid credentials' });
 
   // checking if this email is already in db
   const isEmailExists = await User.findOne({ email });
-  if (isEmailExists) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Wrong credentials' });
+  if (isEmailExists) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Invalid credentials' });
 
   // hash the password
   const salt = await bcrypt.genSalt(10);
@@ -32,7 +32,7 @@ const signUp = async (req, res) => {
       user: { username, email, createdAt, id }
     });
   } catch (err) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Cannot create account for user' });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Invalid credentials' });
   }
 };
 
