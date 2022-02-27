@@ -13,13 +13,12 @@ import {
   Typography,
   Button
 } from '@mui/material';
-
 import boy from '../../img/avatars/boy.png';
 import girl from '../../img/avatars/girl.png';
-// import '@fontsource/roboto/500.css';
 import './Profile.scss';
 import { ChildContext } from '../../context/ChildContext';
 import calculateAge from '../../utils/utils';
+import today from '../../utils/today';
 
 function Profile() {
   const [name, setName] = useState('');
@@ -34,6 +33,36 @@ function Profile() {
   const ctx = useContext(ChildContext);
   const navigate = useNavigate();
   const { kidname } = useParams();
+  const isNameTaken = ctx.kids.some((item) => item.name.toLowerCase() === name.toLowerCase());
+  const location = window.location.pathname;
+
+  const populateKidData = () => {
+    const editedKid = ctx.kids.find((kid) => kid.name === kidname);
+    setName(editedKid.name);
+    setWeight(parseInt(editedKid.weight, 10));
+    setHeight(editedKid.height);
+    setAvatar(editedKid.avatar);
+    setBmi(editedKid.bmi);
+    setGender(editedKid.gender);
+    setDob(editedKid.dob);
+  };
+  const updateKid = (kidname) => {
+    const editedKid = ctx.kids.filter((kid) => kid.name === kidname);
+    editedKid.name = name;
+    editedKid.height = height;
+    editedKid.weight = weight;
+    editedKid.gender = gender;
+    editedKid.dob = dob;
+    const kidIndex = ctx.kids.findIndex((kid) => kid.name === kidname);
+    ctx.kids.splice(kidIndex, 1);
+    return editedKid;
+  };
+
+  useEffect(() => {
+    if (kidname !== undefined) {
+      populateKidData();
+    }
+  }, []);
 
   useEffect(() => {
     if (gender === 'male') {
@@ -51,36 +80,6 @@ function Profile() {
     setBmi(result);
   }, [weight, height]);
 
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const img = URL.createObjectURL(event.target.files[0]);
-      setImage(img);
-    }
-  };
-
-  const populateKidData = () => {
-    const editedKid = ctx.kids.find((kid) => kid.name === kidname);
-    setName(editedKid.name);
-    setWeight(parseInt(editedKid.weight, 10));
-    setHeight(editedKid.height);
-    setAvatar(editedKid.avatar);
-    setBmi(editedKid.bmi);
-    setGender(editedKid.gender);
-    setDob(editedKid.dob);
-  };
-
-  const updateKid = (kidname) => {
-    const editedKid = ctx.kids.filter((kid) => kid.name === kidname);
-    editedKid.name = name;
-    editedKid.height = height;
-    editedKid.weight = weight;
-    editedKid.gender = gender;
-    editedKid.dob = dob;
-    const kidIndex = ctx.kids.findIndex((kid) => kid.name === kidname);
-    ctx.kids.splice(kidIndex, 1);
-    return editedKid;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let kid = {};
@@ -91,15 +90,20 @@ function Profile() {
       kid = { name, height, weight, gender, bmi, avatar, dob };
     }
 
+    if (isNameTaken && location === '/addkid') {
+      return;
+    }
+
     ctx.setKids([...ctx.kids, kid]);
     navigate('/');
   };
 
-  useEffect(() => {
-    if (kidname !== undefined) {
-      populateKidData();
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const img = URL.createObjectURL(event.target.files[0]);
+      setImage(img);
     }
-  }, []);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -110,12 +114,14 @@ function Profile() {
         </Fab>
 
         <TextField
+          error={!!(isNameTaken && location === '/addkid')}
           className="profile__item"
           id="filled-basic"
-          label="Imię"
+          label={isNameTaken && location === '/addkid' ? `Imię już istnieje` : `Imię`}
           variant="filled"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
 
         <Typography className="profile__description" variant="subtitle1" gutterBottom component="div">
@@ -126,9 +132,11 @@ function Profile() {
           id="date"
           type="date"
           sx={{ m: 1, width: 220, backgroundColor: 'primary' }}
+          InputProps={{ inputProps: { max: today } }}
           InputLabelProps={{ shrink: true }}
           value={dob}
           onChange={(e) => setDob(e.target.value)}
+          required
         />
 
         <Typography className="profile__description" variant="subtitle1" gutterBottom component="div">
@@ -146,6 +154,7 @@ function Profile() {
           }}
           variant="filled"
           value={height}
+          required
         />
 
         <Typography className="profile__description" variant="subtitle1" gutterBottom component="div">
@@ -162,6 +171,7 @@ function Profile() {
           }}
           variant="filled"
           value={weight}
+          required
         />
 
         <Typography className="profile__description" variant="subtitle1" gutterBottom component="div">
@@ -192,7 +202,7 @@ function Profile() {
           BMI:
         </Typography>
         <Typography className="profile__item" variant="subtitle1" gutterBottom component="div">
-          {!bmi ? '0' : bmi}
+          {bmi}
         </Typography>
 
         <Button variant="contained" color="primary" type="submit">
