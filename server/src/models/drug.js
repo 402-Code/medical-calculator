@@ -9,10 +9,16 @@ const drugSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: String,
+  description: {
+    type: String,
+    default: ''
+  },
   applicationRequirement: mongoose.SchemaTypes.ObjectId,
   schedulingPolicy: mongoose.SchemaTypes.Array,
-  contradictions: String,
+  contradictions: {
+    type: String,
+    default: ''
+  },
   interval: {
     type: Number,
     required: true
