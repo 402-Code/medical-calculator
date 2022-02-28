@@ -37,3 +37,7 @@ content-type: application/json
 ###
 GET http://localhost:3000/api/kids
 content-type: application/json
+
+###
+GET http://localhost:3000/api/kids/621cca04fa94f494fb90c678
+content-type: application/json
