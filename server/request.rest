@@ -21,3 +21,19 @@ content-type: application/json
 
 ###
 DELETE http://localhost:3000/api/kids/621cc84e0ae8c7a893e67e2b
+
+###
+PUT http://localhost:3000/api/kids/621cca04fa94f494fb90c678
+content-type: application/json
+
+{
+    "name":"mietek3",
+    "dateOfBirth":"01-01-2013",
+    "height":13,
+    "weight":132,
+    "gender":"male"
+}
+
+###
+GET http://localhost:3000/api/kids
+content-type: application/json
