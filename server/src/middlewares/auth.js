@@ -15,8 +15,8 @@ export function authMiddleware(req, res, next) {
         console.log(payload);
         req.user = { id: payload._id };
 
-        const { username, email, createdAt } = user;
-        req.json({ username, email, createdAt });
+        user.findById(payload._id)
+        req.user = user;
      
         return next();
     }
@@ -24,4 +24,5 @@ export function authMiddleware(req, res, next) {
         res.status(401).send({ message: 'Brak autoryzacji' })
     }
 };
+
 
