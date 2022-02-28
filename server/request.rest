@@ -6,3 +6,18 @@ content-type: application/json
     "email":"mateusz14@ateusz.com",
     "password":"12345"
 }
+###
+POST http://localhost:3000/api/kids/addkid
+content-type: application/json
+
+{
+    "name":"mateusz",
+    "dateOfBirth":"01-01-2012",
+    "height":120,
+    "weight":25,
+    "gender":"female",
+    "height":120
+}
+
+###
+DELETE http://localhost:3000/api/kids/621cc84e0ae8c7a893e67e2b
