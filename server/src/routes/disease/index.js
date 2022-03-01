@@ -1,4 +1,4 @@
-const { Router } = require('express');
+import { Router } from 'express';
 import postDisease from './postDisease';
 
 const diseaseRouter = Router();
