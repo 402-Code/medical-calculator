@@ -1,12 +1,18 @@
 import { StatusCodes } from 'http-status-codes';
-import User from '../../models/user';
-import diseaseSchema from '../../models/disease';
 
-const postDisease = (req, res) => {
-  const disease = new diseaseSchema({ eventLog: [], initialDrug: req.body.initialDrug });
+const postDisease = async (req, res) => {
+  //stwórz nową chorobę
+  const disease = { eventLog: [], initialDrug: req.body.initialDrug };
+  //złap wybrane (aktywne dziecko)
+  const kid;
+
   try {
-    // TODO dodaj disease do kid
-    User.findById();
+    //zapisz chorobę do dziecka
+    await kid.diseases.push(disease);
+    //zapisz zaktualizowanego usera do db
+
+    //wyślij odpowiedź
+    res.status(StatusCodes.CREATED).send(disease);
   } catch (err) {
     res.status(StatusCodes.BAD_REQUEST).send({ message: err.message });
   }
