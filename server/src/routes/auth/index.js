@@ -4,6 +4,7 @@ import signIn from './signIn';
 import signOut from './signIn/signOut';
 import User from './../../models/user';
 import { StatusCodes } from 'http-status-codes';
+import { authMiddleware } from '../../middlewares/auth';
 
 const authRouter = Router();
 
@@ -11,7 +12,7 @@ authRouter.post('/sign-up', signUp);
 authRouter.post('/sign-in', signIn);
 authRouter.post('/sign-out', signOut);
 
-authRouter.get('/me', async (req, res) => {
+authRouter.get('/me', authMiddleware, async (req, res) => {
     //const user = req.user
     const user = await User.findOne({ username: 'mateusz' }).exec();
     if (!user) { res.status(StatusCodes.UNAUTHORIZED).send('User not logged in') };
