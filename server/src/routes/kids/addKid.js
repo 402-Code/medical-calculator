@@ -1,19 +1,17 @@
 import { StatusCodes } from 'http-status-codes';
-import Kid from '../../models/kid';
+import User from '../../models/user';
 
 const addKid = async (req, res) => {
-    const { name, dateOfBirth, height, weight, gender, avatar, diseases } = req.body;
-    const kid = new Kid({ name, dateOfBirth, height, weight, gender, avatar, diseases })
-
-    const isNameExists = await Kid.findOne({ name });
-    if (isNameExists) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Name already exist' });
-
+    const { userId } = req.params;
     try {
-        const newKid = await kid.save()
-        res.status(StatusCodes.CREATED).send(newKid)
-    } catch (err) {
-        res.status(StatusCodes.BAD_REQUEST).send({ message: err.message })
-    }      
-}
+      const kid = { ...req.body };
+      const user = await User.findOne({ _id: userId });
+      user.kids.push(kid);
+      await user.save();
+      res.status(StatusCodes.CREATED).send(user);
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+    }
+  };
 
 export default addKid

@@ -1,12 +1,16 @@
 ﻿import { StatusCodes } from 'http-status-codes';
-import Kid from '../../models/kid';
+import User from '../../models/user';
 
 const deleteKid = async (req, res) => {
+  const { userId, kidId } = req.params;
   try {
-    await Kid.findByIdAndDelete(req.params.id);
-    res.status(StatusCodes.OK).send({ id: req.params.id });
-  } catch (err) {
-    res.status(StatusCodes.BAD_REQUEST).send({ message: 'kid not found' });
+    const user = await User.findOne({ _id: userId });
+    const kidIndex = user.kids.findIndex((kid) => kid._id.toString() === kidId);
+    user.kids.splice(kidIndex, 1);
+    await user.save();
+    res.send(user);
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
   }
 };
 
