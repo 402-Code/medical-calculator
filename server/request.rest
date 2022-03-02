@@ -20,6 +20,23 @@ content-type: application/json
 }
 
 ###
+GET http://localhost:3000/api/users
+Content-Type: application/json
+
+###
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44
+Content-Type: application/json
+
+###
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids
+Content-Type: application/json
+###
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621e914f1f46dbe4c841b4e2
+Content-Type: application/json
+
+
+
+###
 DELETE http://localhost:3000/api/kids/621cc84e0ae8c7a893e67e2b
 
 ###
