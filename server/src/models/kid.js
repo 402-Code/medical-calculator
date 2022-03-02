@@ -25,15 +25,12 @@ export const kidSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female'],   
+    enum: ['male', 'female'],
     default: 'male'
   },
-  avatar: String,
-  // diseases: [diseaseSchema]    
-  },
-);
-
-kidSchema.index({ user: 1, name: 1 }, {unique: true});
+  avatar: String
+  // diseases: [diseaseSchema]
+});
 
 const Kid = mongoose.model('Kid', kidSchema);
 export default Kid;
