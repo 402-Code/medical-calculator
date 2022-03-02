@@ -27,13 +27,41 @@ Content-Type: application/json
 GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44
 Content-Type: application/json
 
-###
+### all kids for a user 
 GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids
 Content-Type: application/json
-###
-GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621e914f1f46dbe4c841b4e2
+
+### get one kid 
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f8323f7fb4f5b3f340187
 Content-Type: application/json
 
+### delete kid for a user 
+DELETE http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f8323f7fb4f5b3f340187
+Content-Type: application/json
+
+### update kid for a user
+PUT http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f7825eff8eac9bfda2345
+Content-Type: application/json
+
+{
+    "name":"lolek***",
+    "dateOfBirth":"01-01-2013",
+    "height":1,
+    "weight":2,
+    "gender":"male"
+}
+
+### add kid for a user
+POST http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids
+content-type: application/json
+
+{
+    "name":"lolek",
+    "dateOfBirth":"01-01-2013",
+    "height":13,
+    "weight":132,
+    "gender":"male"
+}
 
 
 ###
