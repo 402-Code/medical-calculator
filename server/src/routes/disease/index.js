@@ -3,6 +3,6 @@ import postDisease from './postDisease';
 
 const diseaseRouter = Router();
 
-diseaseRouter.use('/', postDisease);
+diseaseRouter.post('/', postDisease);
 
 export default diseaseRouter;

@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 const postDisease = async (req, res) => {
-  const disease = { eventLog: [], initialDrug: req.body.initialDrug };
+  const disease = { eventLog: [req.body.event], initialDrug: req.body.initialDrug };
 
   try {
     const kid = await req.user.kids.id(req.body.kidId);
