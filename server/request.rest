@@ -32,11 +32,11 @@ GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids
 Content-Type: application/json
 
 ### get one kid 
-GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f8323f7fb4f5b3f340187
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f7825eff8eac9bfda2345
 Content-Type: application/json
 
 ### delete kid for a user 
-DELETE http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f8323f7fb4f5b3f340187
+DELETE http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f7825eff8eac9bfda2345
 Content-Type: application/json
 
 ### update kid for a user
@@ -44,7 +44,7 @@ PUT http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f7825eff8ea
 Content-Type: application/json
 
 {
-    "name":"lolek***",
+    "name":"lolek***33",
     "dateOfBirth":"01-01-2013",
     "height":1,
     "weight":2,
@@ -63,26 +63,3 @@ content-type: application/json
     "gender":"male"
 }
 
-
-###
-DELETE http://localhost:3000/api/kids/621cc84e0ae8c7a893e67e2b
-
-###
-PUT http://localhost:3000/api/kids/621cca04fa94f494fb90c678
-content-type: application/json
-
-{
-    "name":"mietek3",
-    "dateOfBirth":"01-01-2013",
-    "height":13,
-    "weight":132,
-    "gender":"male"
-}
-
-###
-GET http://localhost:3000/api/kids
-content-type: application/json
-
-###
-GET http://localhost:3000/api/kids/621cca04fa94f494fb90c678
-content-type: application/json

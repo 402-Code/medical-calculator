@@ -9,12 +9,9 @@ import addKid from '../kids/addKid';
 
 const userRouter = Router();
 
-userRouter.route('/').get(getAllUsers)
-userRouter.route('/:userId').get(getUser)
-userRouter.route('/:userId/kids').get(getAllKids)
-userRouter.route('/:userId/kids/:kidId').get(getKid)
-userRouter.route('/:userId/kids/:kidId').put(updateKid)
-userRouter.route('/:userId/kids/:kidId').delete(deleteKid)
-userRouter.route('/:userId/kids').post(addKid)
+userRouter.get('/', getAllUsers);
+userRouter.get('/:userId', getUser);
+userRouter.route('/:userId/kids').get(getAllKids).post(addKid);
+userRouter.route('/:userId/kids/:kidId').get(getKid).put(updateKid).delete(deleteKid);
 
 export default userRouter;
