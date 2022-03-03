@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 const postDisease = async (req, res) => {
   try {
     const disease = {
-      eventLog: [{ eventType: 'DrugApplication', drugId: req.body.initialDrug._id }],
+      drugApplications: [{ drugId: req.body.initialDrug._id }],
       initialDrug: req.body.initialDrug._id
     };
 

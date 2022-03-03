@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 
-const eventSchema = new mongoose.Schema({
+const drugApplicationSchema = new mongoose.Schema({
   eventType: {
     type: String,
-    enum: ['DrugApplication', 'SymptomSpotted'],
-    required: true
+    default: 'DrugApplication'
   },
   createdAt: {
     type: Date,
@@ -12,11 +11,9 @@ const eventSchema = new mongoose.Schema({
   },
   drugId: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: 'Drug'
-  },
-  symptoms: {
-    type: [String]
+    ref: 'Drug',
+    required: true
   }
 });
 
-export default eventSchema;
+export default drugApplicationSchema;
