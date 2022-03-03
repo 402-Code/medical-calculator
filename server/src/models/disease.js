@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
+import drugApplicationSchema from './drugApplication';
+import symptomSchema from './symptom';
 
 const diseaseSchema = new mongoose.Schema({
-  eventLog: {
-    type: mongoose.SchemaTypes.Array
-  },
+  eventLog: [drugApplicationSchema],
   initialDrug: {
     required: true,
     type: mongoose.SchemaTypes.ObjectId,
