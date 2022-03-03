@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import getDisease from './getDisease';
+import getDiseases from './getDiseases';
 
 const diseaseRouter = Router();
 
-diseaseRouter.get('/', getDisease);
+diseaseRouter.get('/', getDiseases);
 
 export default diseaseRouter;

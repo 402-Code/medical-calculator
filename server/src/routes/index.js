@@ -7,6 +7,6 @@ const apiRouter = Router();
 
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/drugs', drugRouter);
-apiRouter.use('/disease', diseaseRouter);
+apiRouter.use('/diseases', diseaseRouter);
 
 export default apiRouter;
