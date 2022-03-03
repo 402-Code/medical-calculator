@@ -7,7 +7,7 @@ const postDisease = async (req, res) => {
   const disease = {
     // eventLog: [{ drugId: req.body.initialDrug }],
     // initialDrug: req.body.initialDrug
-    eventLog: [{ drugId: drug._id, symptoms: ['one', 'two'] }],
+    eventLog: [{ eventType: 'SymptomSpotted', drugId: drug._id, symptoms: ['one', 'two'] }],
     initialDrug: drug._id
   };
 
