@@ -2,8 +2,10 @@ import 'dotenv/config';
 import express from 'express';
 import apiRouter from './routes';
 import { connectToDatabase } from './configuration/index';
+import cookieParser from 'cookie-parser';
 
 const app = express();
+app.use(cookieParser())
 
 await connectToDatabase();
 

@@ -1,4 +1,4 @@
-const { Router } = require('express');
+import { Router } from 'express';
 import postEvent from './postEvent';
 
 const eventRouter = Router();

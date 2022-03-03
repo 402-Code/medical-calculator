@@ -6,16 +6,14 @@ import User from '../models';
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-export function authMiddleware(req, res, next) {
+export async function authMiddleware(req, res, next) {
     try {
         const accessToken = req.cookies['access-token']
-        accessToken
-
+        
         const payload = jwt.verify(accessToken, process.env.SECRET_TOKEN)
-        console.log(payload);
 
+        await User.findById(payload._id)
         req.user = User;
-        User.findById(payload._id)
 
         return next();
     }
