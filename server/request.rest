@@ -32,7 +32,7 @@ PUT http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/622081dc9be2aa
 Content-Type: application/json
 
 {
-    "name":"",
+    "name":"chip",
     "dateOfBirth":"01-01-2013",
     "height":1,
     "weight":2,
