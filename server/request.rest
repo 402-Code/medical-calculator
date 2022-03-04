@@ -35,7 +35,7 @@ Content-Type: application/json
     "name":"chip",
     "dateOfBirth":"01-01-2013",
     "height":1,
-    "weight":2,
+    "weight": 1,
     "gender":"male"
 }
 

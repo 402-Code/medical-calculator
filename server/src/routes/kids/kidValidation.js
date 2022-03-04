@@ -3,8 +3,8 @@
 const schema = Joi.object({
   name: Joi.string().required(),
   dateOfBirth: Joi.string().required(),
-  height: Joi.number().required(),
-  weight: Joi.number().required(),
+  height: Joi.number().positive().required(),
+  weight: Joi.number().positive().required(),
   gender: Joi.string().required()
 });
 
