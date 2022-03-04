@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { kidSchema } from './kid';
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -17,7 +18,8 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now()
-  }
+  },
+  kids: [kidSchema]
 });
 
 const User = mongoose.model('User', userSchema);

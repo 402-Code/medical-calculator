@@ -8,8 +8,46 @@ content-type: application/json
 }
 
 ###
+GET http://localhost:3000/api/users
+Content-Type: application/json
 
-POST http://localhost:3000/api/disease
+###
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44
+Content-Type: application/json
+
+### all kids for a user 
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids
+Content-Type: application/json
+
+### get one kid 
+GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f7825eff8eac9bfda2345
+Content-Type: application/json
+
+### delete kid for a user 
+DELETE http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f7825eff8eac9bfda2345
+Content-Type: application/json
+
+### update kid for a user
+PUT http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/622081dc9be2aad3c782f628
+Content-Type: application/json
+
+{
+    "name":"chip",
+    "dateOfBirth":"01-01-2013",
+    "height":1,
+    "weight": 1,
+    "gender":"male"
+}
+
+### add kid for a user
+POST http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids
 content-type: application/json
 
-{}
+{
+    "name":"lolek",
+    "dateOfBirth":"01-01-2013",
+    "height":13,
+    "weight":132,
+    "gender":"male"
+}
+
