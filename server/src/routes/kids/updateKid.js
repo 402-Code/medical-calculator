@@ -4,18 +4,14 @@ import { updateKidValidation } from './kidValidation';
 
 const updateKid = async (req, res) => {
   const { userId, kidId } = req.params;
-  try {
-    const user = await User.findOne({ _id: userId });
-    const kid = user.kids.find((kid) => kid._id.toString() === kidId);
-    const error = propertyUpdate(kid, req.body);
+  const user = await User.findOne({ _id: userId });
+  const kid = user.kids.find((kid) => kid._id.toString() === kidId);
+  const error = propertyUpdate(kid, req.body);
 
-    if (error) throw new Error(error);
+  if (error) return res.status(StatusCodes.BAD_REQUEST).send({ message: error });
 
-    await user.save();
-    res.send(kid);
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: error.message });
-  }
+  await user.save();
+  res.send(kid);
 };
 
 function propertyUpdate(kid, data) {
