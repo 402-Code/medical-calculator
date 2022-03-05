@@ -13,6 +13,7 @@
     "lint": "eslint --ext js,jsx src",
     "lint:fix": "eslint --ext js,jsx src --fix"
   },
+  "proxy": "http://node-server:3000",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/402-Code/medical-calculator.git"
