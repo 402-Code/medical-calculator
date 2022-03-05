@@ -40,9 +40,9 @@ const SignUp = () => {
           <Typography variant="h4" component="div">
             Tworzenie konta
           </Typography>
-          <ControllerTextField name="userName" label="Imię" fieldType="text" control={control} />
-          <ControllerTextField name="mail" label="email" fieldType="text" control={control} />
-          <ControllerTextField name="password" label="hasło" fieldType="password" control={control} />
+          <ControllerTextField name="imię" label="Imię" fieldType="text" control={control} />
+          <ControllerTextField name="email" label="email" fieldType="text" control={control} />
+          <ControllerTextField name="hasło" label="hasło" fieldType="password" control={control} />
           <ControllerTextField name="confirmPassword" label="potwierdź hasło" fieldType="password" control={control} />
           <Button type="submit" onClick={handleSubmit(handleSignUp)} sx={{ alignSelf: 'end', mt: 1 }}>
             Utwórz konto
