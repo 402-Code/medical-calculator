@@ -17,7 +17,7 @@ const signUp = async (req, res) => {
 
   // checking if this email is already in db
   const isEmailExists = await User.findOne({ email });
-  if (isEmailExists) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Problem z rejestracją' });
+  if (isEmailExists) return res.send({ message: 'Podany email już istnieje. Zaloguj się' });
 
   // hash the password
   const salt = await bcrypt.genSalt(10);
@@ -28,7 +28,7 @@ const signUp = async (req, res) => {
   try {
     const newUser = await user.save();
     const { username, email, createdAt, id } = newUser;
-    return res.status(StatusCodes.BAD_REQUEST).send({
+    return res.send({
       user: { username, email, createdAt, id }
     });
   } catch (err) {

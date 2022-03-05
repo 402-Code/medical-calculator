@@ -10,5 +10,5 @@ export const signUpSchema = yup.object({
   imię: yup.string().required(),
   email: yup.string().email().required(),
   hasło: yup.string().min(MIN_PASSWORD_LENGTH).required(),
-  confirmPassword: yup.string().oneOf([yup.ref('password')], 'Hasła muszą się zgadzać')
+  confirmPassword: yup.string().oneOf([yup.ref('hasło')], 'Hasła muszą się zgadzać')
 });

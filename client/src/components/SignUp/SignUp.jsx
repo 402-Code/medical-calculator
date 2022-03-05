@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { Card, Box, Typography, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpSchema } from './SignUpSchema';
 import ControllerTextField from './ControllerTextField';
+import EmailExsistDialog from './EmailExsistDialog';
+
+const SERVER_ADDRESS = 'http://localhost:3000';
 
 const SignUp = () => {
+  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+  const [resMessage, setResMessage] = useState('');
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(signUpSchema)
   });
-  const handleSignUp = (data) => {
-    console.log(data);
-    // TODO register user
+
+  const handleSignUp = async (user) => {
+    let response;
+    try {
+      response = await axios.post(`${SERVER_ADDRESS}/api/auth/sign-up`, {
+        username: user.imię,
+        email: user.email,
+        password: user.confirmPassword
+      });
+      console.log(response);
+      // TODO login
+
+      // const res = JSON.parse(response);
+      if (response.data.message) {
+        setResMessage(response.message);
+        setEmailDialogOpen(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // TODO clean textFields
+
+  // TODO navigate to ADDKID or REGISTER again
 
   const navigateToSignIn = () => {
     // TODO
@@ -20,6 +47,7 @@ const SignUp = () => {
 
   return (
     <>
+      <EmailExsistDialog message={resMessage} open={emailDialogOpen} setOpen={setEmailDialogOpen} />
       <Box component="form" sx={{ display: 'flex', justifyContent: 'center' }}>
         <Card
           elevation={16}
