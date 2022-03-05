@@ -1,28 +1,17 @@
-import React, { useState } from 'react';
-import { Card, Box, Typography, TextField, Button } from '@mui/material';
-import { useForm, Controller } from 'react-hook-form';
+import React from 'react';
+import { Card, Box, Typography, Button } from '@mui/material';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { TextFieldsOutlined } from '@mui/icons-material';
 import { signUpSchema } from './SignUpSchema';
 import ControllerTextField from './ControllerTextField';
 
 const SignUp = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(signUpSchema)
   });
-  // const { control, handleSubmit } = useForm();
-
   const handleSignUp = (data) => {
     console.log(data);
     // TODO register user
-    setUserName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
   };
 
   const navigateToSignIn = () => {
@@ -52,51 +41,9 @@ const SignUp = () => {
             Tworzenie konta
           </Typography>
           <ControllerTextField name="userName" label="Imię" fieldType="text" control={control} />
-          {/* <Controller
-            name="userName"
-            control={control}
-            defaultValue=""
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                value={value}
-                onChange={onChange}
-                label="Imię"
-                type="text"
-                margin="dense"
-                fullWidth
-                variant="outlined"
-                error={!!error}
-                helperText={error ? error.message : null}
-              />
-            )}
-          /> */}
-          <TextField
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            label="email"
-            type="email"
-            margin="dense"
-            fullWidth
-            variant="outlined"
-          />
-          <TextField
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            label="hasło"
-            type="password"
-            margin="dense"
-            fullWidth
-            variant="outlined"
-          />
-          <TextField
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            label="potwierdź hasło"
-            type="password"
-            margin="dense"
-            fullWidth
-            variant="outlined"
-          />
+          <ControllerTextField name="mail" label="email" fieldType="text" control={control} />
+          <ControllerTextField name="password" label="hasło" fieldType="password" control={control} />
+          <ControllerTextField name="confirmPassword" label="potwierdź hasło" fieldType="password" control={control} />
           <Button type="submit" onClick={handleSubmit(handleSignUp)} sx={{ alignSelf: 'end', mt: 1 }}>
             Utwórz konto
           </Button>
