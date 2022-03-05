@@ -17,29 +17,22 @@ const SignUp = () => {
   });
 
   const handleSignUp = async (user) => {
-    let response;
     try {
-      response = await axios.post(`${SERVER_ADDRESS}/api/auth/sign-up`, {
+      const response = await axios.post(`${SERVER_ADDRESS}/api/auth/sign-up`, {
         username: user.imię,
         email: user.email,
         password: user.confirmPassword
       });
-      console.log(response);
-      // TODO login
-
-      // const res = JSON.parse(response);
-      if (response.data.message) {
-        setResMessage(response.message);
-        setEmailDialogOpen(true);
+      if (response.status === 200) {
+        // TODO navigate to Login
       }
     } catch (err) {
       console.log(err);
+      // TODO co tu zrobić
     }
   };
 
   // TODO clean textFields
-
-  // TODO navigate to ADDKID or REGISTER again
 
   const navigateToSignIn = () => {
     // TODO
