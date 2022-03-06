@@ -3,16 +3,17 @@ import axios from 'axios';
 import { Card, Box, Typography, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 import { signUpSchema } from './SignUpSchema';
 import ControllerTextField from './ControllerTextField';
-import EmailExsistDialog from './EmailExsistDialog';
+import SignUpError from './SignUpError';
 
 const SERVER_ADDRESS = 'http://localhost:3000';
 
 const SignUp = () => {
-  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
-  const [resMessage, setResMessage] = useState('');
-  const { control, handleSubmit } = useForm({
+  const navigate = useNavigate();
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+  const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(signUpSchema)
   });
 
@@ -25,22 +26,22 @@ const SignUp = () => {
       });
       if (response.status === 200) {
         // TODO navigate to Login
+        navigate('signin');
       }
     } catch (err) {
-      console.log(err);
-      // TODO co tu zrobić
+      setErrorDialogOpen(true);
+      reset();
     }
   };
 
-  // TODO clean textFields
-
   const navigateToSignIn = () => {
-    // TODO
+    // TODO navigate to login
+    navigate('signin');
   };
 
   return (
     <>
-      <EmailExsistDialog message={resMessage} open={emailDialogOpen} setOpen={setEmailDialogOpen} />
+      <SignUpError open={errorDialogOpen} setOpen={setErrorDialogOpen} />
       <Box component="form" sx={{ display: 'flex', justifyContent: 'center' }}>
         <Card
           elevation={16}
