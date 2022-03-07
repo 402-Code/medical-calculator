@@ -8,18 +8,18 @@ import { signUpSchema } from './SignUpSchema';
 import ControllerTextField from './ControllerTextField';
 import SignUpError from './SignUpError';
 
-const SERVER_ADDRESS = 'http://localhost:3000';
-
 const SignUp = () => {
   const navigate = useNavigate();
-  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+  const [errorDialogOpen, setErrorDialogOpen] = useState(true);
+  const [errorMessage, setErrorMessage] = useState();
   const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(signUpSchema)
   });
 
   const handleSignUp = async (user) => {
     try {
-      const response = await axios.post(`${SERVER_ADDRESS}/api/auth/sign-up`, {
+      // const response = await axios.post(`${SERVER_ADDRESS}/api/auth/sign-up`, {
+      const response = await axios.post('/api/auth/sign-up', {
         username: user.imię,
         email: user.email,
         password: user.confirmPassword
@@ -29,6 +29,8 @@ const SignUp = () => {
         navigate('signin');
       }
     } catch (err) {
+      // TODO sprawdzić czy error jest typu Axios
+      setErrorMessage(err.response.data.message);
       setErrorDialogOpen(true);
       reset();
     }
@@ -41,7 +43,6 @@ const SignUp = () => {
 
   return (
     <>
-      <SignUpError open={errorDialogOpen} setOpen={setErrorDialogOpen} />
       <Box component="form" sx={{ display: 'flex', justifyContent: 'center' }}>
         <Card
           elevation={16}
@@ -62,6 +63,7 @@ const SignUp = () => {
           <Typography variant="h4" component="div">
             Tworzenie konta
           </Typography>
+          <SignUpError message={errorMessage} open={errorDialogOpen} setOpen={setErrorDialogOpen} />
           <ControllerTextField name="imię" label="Imię" fieldType="text" control={control} />
           <ControllerTextField name="email" label="email" fieldType="text" control={control} />
           <ControllerTextField name="hasło" label="hasło" fieldType="password" control={control} />

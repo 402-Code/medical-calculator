@@ -25,24 +25,6 @@ export default function Header({ darkMode, handleThemeChange }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    setDeferredPrompt(e);
-  });
-
-  const install = async () => {
-    deferredPrompt.prompt();
-  };
-
-  const installButton = () => {
-    return (
-      <Button variant="contained" sx={{ mx: 4, my: 2 }} onClick={install}>
-        Zainstaluj
-      </Button>
-    );
-  };
-
   const handlePreviousPage = (e) => {
     e.preventDefault();
     navigate('/');
@@ -102,7 +84,6 @@ export default function Header({ darkMode, handleThemeChange }) {
             ))}
           </List>
           <Divider />
-          {deferredPrompt ? installButton() : null}
         </SwipeableDrawer>
       </AppBar>
       {/* {params} */}
