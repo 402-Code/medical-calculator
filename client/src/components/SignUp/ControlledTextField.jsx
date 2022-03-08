@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
-const ControllerTextField = ({ name, label, fieldType, control }) => {
+const ControlledTextField = ({ name, label, fieldType, control }) => {
   return (
     <Controller
       name={name}
@@ -25,4 +25,4 @@ const ControllerTextField = ({ name, label, fieldType, control }) => {
   );
 };
 
-export default ControllerTextField;
+export default ControlledTextField;

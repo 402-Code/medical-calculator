@@ -4,8 +4,10 @@ import { Card, Box, Typography, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes';
 import { signUpSchema } from './SignUpSchema';
-import ControllerTextField from './ControllerTextField';
+import icon from '../../icons/180.png';
+import ControlledTextField from './ControlledTextField';
 import SignUpError from './SignUpError';
 
 const SignUp = () => {
@@ -18,16 +20,12 @@ const SignUp = () => {
 
   const handleSignUp = async (user) => {
     try {
-      // const response = await axios.post(`${SERVER_ADDRESS}/api/auth/sign-up`, {
-      const response = await axios.post('/api/auth/sign-up', {
+      await axios.post('/api/auth/sign-up', {
         username: user.imię,
         email: user.email,
         password: user.confirmPassword
       });
-      if (response.status === 200) {
-        // TODO navigate to Login
-        navigate('signin');
-      }
+      navigate(routes.signIn);
     } catch (err) {
       // TODO sprawdzić czy error jest typu Axios
       setErrorMessage(err.response.data.message);
@@ -57,17 +55,17 @@ const SignUp = () => {
           }}
         >
           <Box sx={{ alignSelf: 'start', display: 'flex', alignItems: 'end', mb: 3 }}>
-            <img src="/180.png" alt="icon" height="35px" loading="lazy" />
+            <img src={icon} alt="icon" height="35px" loading="lazy" />
             <Typography>Medical Calculator</Typography>
           </Box>
           <Typography variant="h4" component="div">
             Tworzenie konta
           </Typography>
           <SignUpError message={errorMessage} open={errorDialogOpen} setOpen={setErrorDialogOpen} />
-          <ControllerTextField name="imię" label="Imię" fieldType="text" control={control} />
-          <ControllerTextField name="email" label="email" fieldType="text" control={control} />
-          <ControllerTextField name="hasło" label="hasło" fieldType="password" control={control} />
-          <ControllerTextField name="confirmPassword" label="potwierdź hasło" fieldType="password" control={control} />
+          <ControlledTextField name="imię" label="Imię" fieldType="text" control={control} />
+          <ControlledTextField name="email" label="email" fieldType="text" control={control} />
+          <ControlledTextField name="hasło" label="hasło" fieldType="password" control={control} />
+          <ControlledTextField name="confirmPassword" label="potwierdź hasło" fieldType="password" control={control} />
           <Button type="submit" onClick={handleSubmit(handleSignUp)} sx={{ alignSelf: 'end', mt: 1 }}>
             Utwórz konto
           </Button>

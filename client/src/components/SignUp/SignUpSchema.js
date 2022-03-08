@@ -5,7 +5,6 @@ yup.setLocale(yupLocalePL);
 
 const MIN_PASSWORD_LENGTH = 5;
 
-// eslint-disable-next-line import/prefer-default-export
 export const signUpSchema = yup.object({
   imię: yup.string().required(),
   email: yup.string().email().required(),
