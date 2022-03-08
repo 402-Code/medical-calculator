@@ -12,7 +12,7 @@ import SignUpError from './SignUpError';
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [errorDialogOpen, setErrorDialogOpen] = useState(true);
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(signUpSchema)
@@ -21,22 +21,23 @@ const SignUp = () => {
   const handleSignUp = async (user) => {
     try {
       await axios.post('/api/auth/sign-up', {
-        username: user.imię,
+        username: user.username,
         email: user.email,
         password: user.confirmPassword
       });
       navigate(routes.signIn);
     } catch (err) {
-      // TODO sprawdzić czy error jest typu Axios
-      setErrorMessage(err.response.data.message);
+      if (err.response) setErrorMessage(err.response.data.message);
       setErrorDialogOpen(true);
-      reset();
+      reset({
+        username: user.username,
+        email: user.email
+      });
     }
   };
 
   const navigateToSignIn = () => {
-    // TODO navigate to login
-    navigate('signin');
+    navigate(routes.signIn);
   };
 
   return (
@@ -62,9 +63,9 @@ const SignUp = () => {
             Tworzenie konta
           </Typography>
           <SignUpError message={errorMessage} open={errorDialogOpen} setOpen={setErrorDialogOpen} />
-          <ControlledTextField name="imię" label="Imię" fieldType="text" control={control} />
+          <ControlledTextField name="username" label="Imię" fieldType="text" control={control} />
           <ControlledTextField name="email" label="email" fieldType="text" control={control} />
-          <ControlledTextField name="hasło" label="hasło" fieldType="password" control={control} />
+          <ControlledTextField name="password" label="hasło" fieldType="password" control={control} />
           <ControlledTextField name="confirmPassword" label="potwierdź hasło" fieldType="password" control={control} />
           <Button type="submit" onClick={handleSubmit(handleSignUp)} sx={{ alignSelf: 'end', mt: 1 }}>
             Utwórz konto
