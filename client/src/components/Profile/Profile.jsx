@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import {
   Fab,
   TextField,
@@ -93,6 +94,18 @@ function Profile() {
     if (isNameTaken && location === '/addkid') {
       return;
     }
+
+    axios.post('http://localhost:3000/api/kids/', {
+      name,
+      dateOfBirth: dob,
+      height,
+      weight,
+      gender,
+      avatar,
+      bmi
+    }).then(() => {
+      console.log('heloooł')
+    }).catch((err) => console.error(err))
 
     ctx.setKids([...ctx.kids, kid]);
     navigate('/');
