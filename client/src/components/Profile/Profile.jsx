@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import {
   Fab,
   TextField,
@@ -94,8 +95,18 @@ function Profile() {
       return;
     }
 
-    ctx.setKids([...ctx.kids, kid]);
-    navigate('/');
+    axios.post('/api/users/621d326e6a4b8a876da83c61/kids', {
+      name,
+      dateOfBirth: dob,
+      height,
+      weight,
+      gender,
+      avatar,
+    }).then(() => {
+      ctx.setKids([...ctx.kids, kid]);
+      navigate('/');
+    }).catch((err) => console.error(err))
+
   };
 
   const onImageChange = (event) => {
