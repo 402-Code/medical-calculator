@@ -95,14 +95,13 @@ function Profile() {
       return;
     }
 
-    axios.post('http://localhost:3000/api/users/621d326e6a4b8a876da83c61/kids', {
+    axios.post('/api/users/621d326e6a4b8a876da83c61/kids', {
       name,
       dateOfBirth: dob,
       height,
       weight,
       gender,
       avatar,
-      bmi
     }).then(() => {
       ctx.setKids([...ctx.kids, kid]);
       navigate('/');
