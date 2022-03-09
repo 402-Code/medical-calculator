@@ -28,7 +28,7 @@ const signUp = async (req, res) => {
   try {
     const newUser = await user.save();
     const { username, email, createdAt, id } = newUser;
-    return res.status(StatusCodes.BAD_REQUEST).send({
+    return res.send({
       user: { username, email, createdAt, id }
     });
   } catch (err) {

@@ -7,17 +7,19 @@ import {
   Typography,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
+  SvgIcon,
   SwipeableDrawer,
   Switch,
-  IconButton
+  IconButton,
+  Button,
+  Divider
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './Header.scss';
+import { routes } from '../../routes';
 
 export default function Header({ darkMode, handleThemeChange }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -36,9 +38,18 @@ export default function Header({ darkMode, handleThemeChange }) {
     }
   };
 
-  const listItems = [
-    { text: 'Zaloguj sie', icon: <LoginIcon /> },
-    { text: 'Zarejestruj sie', icon: <HowToRegIcon /> }
+  const handleLogOut = () => {
+    // TODO
+  };
+
+  const handleSignUp = () => {
+    setShowMenu(false);
+    navigate(routes.signUp);
+  };
+
+  const buttonList = [
+    { text: 'Utwórz nowe konto', icon: <HowToRegIcon />, onClick: handleSignUp },
+    { text: 'Wyloguj się', icon: <LogoutIcon />, onClick: handleLogOut }
   ];
 
   return (
@@ -54,11 +65,8 @@ export default function Header({ darkMode, handleThemeChange }) {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
               color: 'text.primary',
-              pt: 3,
-              pb: 1,
-              px: 2
+              p: 2
             }}
           >
             <Typography variant="h6" mr={1} color="text.primary">
@@ -66,14 +74,18 @@ export default function Header({ darkMode, handleThemeChange }) {
             </Typography>
             <Switch checked={darkMode} onChange={handleThemeChange} />
           </Box>
+          <Divider />
           <List>
-            {listItems.map((item) => (
-              <ListItem key={item.text}>
-                <ListItemText primary={item.text} />
-                <ListItemIcon>{item.icon}</ListItemIcon>
+            {buttonList.map((btn) => (
+              <ListItem key={btn.text}>
+                <Button onClick={btn.onClick} sx={{ px: 0 }}>
+                  {btn.text}
+                </Button>
+                <SvgIcon sx={{ ml: 1 }}>{btn.icon}</SvgIcon>
               </ListItem>
             ))}
           </List>
+          <Divider />
         </SwipeableDrawer>
       </AppBar>
       {/* {params} */}

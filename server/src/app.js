@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import cors from 'cors';
 import apiRouter from './routes';
 import cookieParser from 'cookie-parser';
 import { connectToDatabase } from './configuration/index';
@@ -8,6 +9,7 @@ const app = express();
 
 await connectToDatabase();
 
+app.use(cors());
 app.use(cookieParser());
 app.use('/api', express.json(), apiRouter);
 
