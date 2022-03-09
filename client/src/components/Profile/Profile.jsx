@@ -95,7 +95,7 @@ function Profile() {
       return;
     }
 
-    axios.post('http://localhost:3000/api/kids/', {
+    axios.post('http://localhost:3000/api/users/621d326e6a4b8a876da83c61/kids', {
       name,
       dateOfBirth: dob,
       height,
@@ -104,11 +104,10 @@ function Profile() {
       avatar,
       bmi
     }).then(() => {
-      console.log('heloooł')
+      ctx.setKids([...ctx.kids, kid]);
+      navigate('/');
     }).catch((err) => console.error(err))
 
-    ctx.setKids([...ctx.kids, kid]);
-    navigate('/');
   };
 
   const onImageChange = (event) => {
