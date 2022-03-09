@@ -18,20 +18,20 @@ const SignUp = () => {
     resolver: yupResolver(signUpSchema)
   });
 
-  const handleSignUp = async (user) => {
+  const handleSignUp = async ({ username, email, password }) => {
     try {
       await axios.post('/api/auth/sign-up', {
-        username: user.username,
-        email: user.email,
-        password: user.confirmPassword
+        username,
+        email,
+        password
       });
       navigate(routes.signIn);
     } catch (err) {
       if (err.response) setErrorMessage(err.response.data.message);
       setErrorDialogOpen(true);
       reset({
-        username: user.username,
-        email: user.email
+        username,
+        email
       });
     }
   };
