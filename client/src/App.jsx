@@ -5,7 +5,7 @@ import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ChildProvider } from './context/ChildContext';
-import { routes } from './routes';
+import routes from './routes';
 import RequireAgreement from './components/Agreement/RequireAgreement';
 import Profile from './components/Profile/Profile';
 import History from './components/History/History';
@@ -43,7 +43,7 @@ function App() {
             <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
             <Routes>
               <Route path={routes.signUp} element={<SignUp />} />
-              <Route path="{routes.signIn}" element={<SignIn />} />
+              <Route path={routes.signIn} element={<SignIn />} />
               <Route path={routes.findDrug} element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
               <Route path={routes.addKid} element={<Profile />} />
               <Route path={routes.editKid} element={<Profile />} />
