@@ -16,9 +16,10 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './Header.scss';
+import { routes } from '../../routes';
 
 export default function Header({ darkMode, handleThemeChange }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -57,11 +58,16 @@ export default function Header({ darkMode, handleThemeChange }) {
 
   const handleSignIn = () => {
     toggleMenu()
-    navigate('/sign-in');
+    navigate(routes.signIn);
+  };
+
+  const handleLogOut = () => {
+    // TODO
   };
 
   const handleSignUp = () => {
-    // TODO
+    setShowMenu(false);
+    navigate(routes.signUp);
   };
 
   const buttonList = [

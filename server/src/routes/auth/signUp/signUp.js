@@ -13,11 +13,11 @@ const signUp = async (req, res) => {
 
   //validation
   const { error } = signupValidation(req.body);
-  if (error) return res.status(StatusCodes.BAD_REQUEST).send({ message: error.details[0].message });
+  if (error) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Błędne dane do rejestracji' });
 
   // checking if this email is already in db
   const isEmailExists = await User.findOne({ email });
-  if (isEmailExists) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Wrong credentials' });
+  if (isEmailExists) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Problem z rejestracją' });
 
   // hash the password
   const salt = await bcrypt.genSalt(10);
@@ -28,11 +28,11 @@ const signUp = async (req, res) => {
   try {
     const newUser = await user.save();
     const { username, email, createdAt, id } = newUser;
-    return res.status(StatusCodes.BAD_REQUEST).send({
+    return res.send({
       user: { username, email, createdAt, id }
     });
   } catch (err) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Cannot create account for user' });
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Nie można utworzyć tego konta' });
   }
 };
 
