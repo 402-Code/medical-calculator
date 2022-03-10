@@ -11,6 +11,8 @@ import Profile from './components/Profile/Profile';
 import History from './components/History/History';
 import NewDragScreen from './components/NewDragScreen/NewDragScreen';
 import Header from './components/Header/Header';
+import SignIn from './components/SignIn/SignIn';
+
 
 function App() {
   const [selectedDrug, setSelectedDrug] = useState({});
@@ -41,6 +43,7 @@ function App() {
             <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
             <Routes>
               <Route path="/" element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
+              <Route path="/sign-in" element={<SignIn />} />
               <Route path="/addkid" element={<Profile />} />
               <Route path="/edit/:kidname" element={<Profile />} />
               <Route path="/history/:kidname" element={<History drug={selectedDrug} />} />

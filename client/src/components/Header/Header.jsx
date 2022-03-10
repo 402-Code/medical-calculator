@@ -7,11 +7,12 @@ import {
   Typography,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
+  SvgIcon,
   SwipeableDrawer,
   Switch,
-  IconButton
+  IconButton,
+  Button,
+  Divider
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
@@ -23,6 +24,24 @@ export default function Header({ darkMode, handleThemeChange }) {
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    setDeferredPrompt(e);
+  });
+
+  const install = async () => {
+    deferredPrompt.prompt();
+  };
+
+  const installButton = () => {
+    return (
+      <Button variant="contained" sx={{ mx: 4, my: 2 }} onClick={install}>
+        Zainstaluj
+      </Button>
+    );
+  };
 
   const handlePreviousPage = (e) => {
     e.preventDefault();
@@ -36,9 +55,18 @@ export default function Header({ darkMode, handleThemeChange }) {
     }
   };
 
-  const listItems = [
-    { text: 'Zaloguj sie', icon: <LoginIcon /> },
-    { text: 'Zarejestruj sie', icon: <HowToRegIcon /> }
+  const handleSignIn = () => {
+    toggleMenu()
+    navigate('/sign-in');
+  };
+
+  const handleSignUp = () => {
+    // TODO
+  };
+
+  const buttonList = [
+    { text: 'Utwórz nowe konto', icon: <HowToRegIcon />, onClick: handleSignUp },
+    { text: 'Zaloguj się', icon: <LoginIcon />, onClick: handleSignIn },
   ];
 
   return (
@@ -54,11 +82,8 @@ export default function Header({ darkMode, handleThemeChange }) {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
               color: 'text.primary',
-              pt: 3,
-              pb: 1,
-              px: 2
+              p: 2
             }}
           >
             <Typography variant="h6" mr={1} color="text.primary">
@@ -66,14 +91,19 @@ export default function Header({ darkMode, handleThemeChange }) {
             </Typography>
             <Switch checked={darkMode} onChange={handleThemeChange} />
           </Box>
+          <Divider />
           <List>
-            {listItems.map((item) => (
-              <ListItem key={item.text}>
-                <ListItemText primary={item.text} />
-                <ListItemIcon>{item.icon}</ListItemIcon>
+            {buttonList.map((btn) => (
+              <ListItem key={btn.text}>
+                <Button onClick={btn.onClick} sx={{ px: 0 }}>
+                  {btn.text}
+                </Button>
+                <SvgIcon sx={{ ml: 1 }}>{btn.icon}</SvgIcon>
               </ListItem>
             ))}
           </List>
+          <Divider />
+          {deferredPrompt ? installButton() : null}
         </SwipeableDrawer>
       </AppBar>
       {/* {params} */}
