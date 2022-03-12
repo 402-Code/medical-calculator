@@ -4,7 +4,6 @@ import cors from 'cors';
 import apiRouter from './routes';
 import cookieParser from 'cookie-parser';
 import { connectToDatabase } from './configuration/index';
-import cors from 'cors';
 
 const app = express();
 
