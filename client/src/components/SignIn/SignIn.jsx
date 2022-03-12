@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Box, Typography, TextField, Button, Alert } from '@mui/material';
 import axios from 'axios';
+import icon from '../../icons/180.png';
 import routes from '../../routes';
-
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -22,16 +22,20 @@ const SignIn = () => {
       await axios.post('/api/auth/sign-in', userData, {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
-      })
-      navigate(routes.findDrug)
-
+      });
+      navigate(routes.findDrug);
     } catch (err) {
-      if (err?.response) setErrorMessage(<Alert variant="outlined" severity="error">{err?.response?.data?.message}</Alert>)
+      if (err?.response)
+        setErrorMessage(
+          <Alert variant="outlined" severity="error">
+            {err?.response?.data?.message}
+          </Alert>
+        );
     }
-  }
+  };
 
   const navigateToSignUp = () => {
-    navigate(routes.signUp)
+    navigate(routes.signUp);
   };
 
   return (
@@ -50,15 +54,13 @@ const SignIn = () => {
           }}
         >
           <Box sx={{ alignSelf: 'start', display: 'flex', alignItems: 'end', mb: 3 }}>
-            <img src="/180.png" alt="icon" height="35px" loading="lazy" />
+            <img src={icon} alt="icon" height="35px" loading="lazy" />
             <Typography>Medical Calculator</Typography>
           </Box>
           <Typography variant="h4" component="div">
             Logowanie
           </Typography>
-          <Box>
-            {errorMessage}
-          </Box>
+          <Box>{errorMessage}</Box>
           <form onSubmit={handleSignIn}>
             <TextField
               value={email}
@@ -81,7 +83,7 @@ const SignIn = () => {
               variant="outlined"
               required
             />
-            <Button type='submit' sx={{ alignSelf: 'end', mt: 1 }}>
+            <Button type="submit" sx={{ alignSelf: 'end', mt: 1 }}>
               Zaloguj się
             </Button>
           </form>
