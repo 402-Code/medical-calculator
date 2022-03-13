@@ -7,6 +7,6 @@ const diseaseRouter = Router();
 
 diseaseRouter.get('/', getDiseases);
 diseaseRouter.post('/', postDisease);
-diseaseRouter.post('/drug-application', postDrugApplication);
+diseaseRouter.post('/:diseaseId/drug-application', postDrugApplication);
 
 export default diseaseRouter;
