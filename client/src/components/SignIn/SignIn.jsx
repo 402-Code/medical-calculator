@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Box, Typography, TextField, Button } from '@mui/material';
 import axios from 'axios';
+import icon from '../../icons/180.png';
 import routes from '../../routes';
 import SignUpError from '../SignUp/SignUpError';
-import icon from '../../icons/180.png';
-
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = async (e) => {
     e.preventDefault()
@@ -29,10 +28,10 @@ const SignIn = () => {
       if (err?.response) setErrorMessage(err?.response?.data?.message)
       setErrorDialogOpen(true);
     }
-  }
+  };
 
   const navigateToSignUp = () => {
-    navigate(routes.signUp)
+    navigate(routes.signUp);
   };
 
   return (
@@ -80,7 +79,7 @@ const SignIn = () => {
               variant="outlined"
               required
             />
-            <Button type='submit' sx={{ alignSelf: 'end', mt: 1 }}>
+            <Button type="submit" sx={{ alignSelf: 'end', mt: 1 }}>
               Zaloguj się
             </Button>
           </form>
