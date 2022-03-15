@@ -12,6 +12,7 @@ import History from './components/History/History';
 import NewDragScreen from './components/NewDragScreen/NewDragScreen';
 import Header from './components/Header/Header';
 import SignUp from './components/SignUp/SignUp';
+import Error404 from './components/Error404/Error404';
 
 function App() {
   const [selectedDrug, setSelectedDrug] = useState({});
@@ -46,6 +47,7 @@ function App() {
               <Route path={routes.addKid} element={<Profile />} />
               <Route path={routes.editKid} element={<Profile />} />
               <Route path={routes.history} element={<History drug={selectedDrug} />} />
+              <Route path="*" element={<Error404 />} />
             </Routes>
           </BrowserRouter>
         </ChildProvider>
