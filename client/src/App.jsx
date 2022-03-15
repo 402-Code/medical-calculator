@@ -13,6 +13,7 @@ import NewDragScreen from './components/NewDragScreen/NewDragScreen';
 import Header from './components/Header/Header';
 import SignUp from './components/SignUp/SignUp';
 import Error404 from './components/Error404/Error404';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 
 function App() {
   const [selectedDrug, setSelectedDrug] = useState({});
@@ -43,10 +44,12 @@ function App() {
             <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
             <Routes>
               <Route path={routes.signUp} element={<SignUp />} />
-              <Route path={routes.findDrug} element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
-              <Route path={routes.addKid} element={<Profile />} />
-              <Route path={routes.editKid} element={<Profile />} />
-              <Route path={routes.history} element={<History drug={selectedDrug} />} />
+              <Route element={<RequireAuth />}>
+                <Route path={routes.findDrug} element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
+                <Route path={routes.addKid} element={<Profile />} />
+                <Route path={routes.editKid} element={<Profile />} />
+                <Route path={routes.history} element={<History drug={selectedDrug} />} />
+              </Route>
               <Route path="*" element={<Error404 />} />
             </Routes>
           </BrowserRouter>
