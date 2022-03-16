@@ -3,8 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 const postDisease = async (req, res) => {
   try {
     const disease = {
-      drugApplications: [{ drugId: req.body.initialDrug._id }],
-      initialDrug: req.body.initialDrug._id
+      drugApplications: [{ drugId: req.body.initialDrugId }],
+      initialDrug: req.body.initialDrugId
     };
 
     const kid = await req.user.kids.id(req.body.kidId);
@@ -13,7 +13,7 @@ const postDisease = async (req, res) => {
     await req.user.save();
     res.status(StatusCodes.CREATED).send(kid);
   } catch (err) {
-    res.status(StatusCodes.BAD_REQUEST).send({ message: err.message });
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Nie udało się utworzyć choroby.' });
   }
 };
 

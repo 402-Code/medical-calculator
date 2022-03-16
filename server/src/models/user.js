@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { kidSchema } from './kid';
+import kidSchema from './kid';
 
 const userSchema = new mongoose.Schema({
   username: {
