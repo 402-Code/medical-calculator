@@ -17,7 +17,7 @@ const updateKid = async (req, res) => {
 function propertyUpdate(kid, data) {
   const { error } = updateKidValidation(data);
   if (error) {
-    return 'Błędne dane';
+    return error;
   } else {
     kid.name = data.name;
     kid.dateOfBirth = data.dateOfBirth;
