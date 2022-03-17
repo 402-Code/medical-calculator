@@ -7,7 +7,8 @@ const schema = Joi.object({
   weight: Joi.number().positive().required(),
   gender: Joi.string().required(),
   avatar: Joi.string(),
-  _id: Joi.string()
+  _id: Joi.string(),
+  diseases: Joi.any()
 });
 
 export const updateKidValidation = (data) => {
