@@ -6,6 +6,8 @@ import App from './App';
 import { ChildProvider } from './context/ChildContext';
 
 axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.withCredentials = true;
+
 
 ReactDOM.render(
   <React.StrictMode>

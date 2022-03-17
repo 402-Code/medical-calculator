@@ -38,9 +38,8 @@ function App() {
   useEffect(() => {
     axios
       .get('http://localhost:3000/api/auth/me', { withCredentials: true })
-      .then((res) => res.json())
-      .then((user) => {
-        setUser(user);
+      .then((response) => {
+        setUser(response.data);
         navigate('/addkid');
       })
       .catch((err) => console.log(err));

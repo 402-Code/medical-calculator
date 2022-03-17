@@ -17,6 +17,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './Header.scss';
 import routes from '../../routes';
@@ -25,24 +26,6 @@ export default function Header({ darkMode, handleThemeChange }) {
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    setDeferredPrompt(e);
-  });
-
-  const install = async () => {
-    deferredPrompt.prompt();
-  };
-
-  const installButton = () => {
-    return (
-      <Button variant="contained" sx={{ mx: 4, my: 2 }} onClick={install}>
-        Zainstaluj
-      </Button>
-    );
-  };
 
   const handlePreviousPage = (e) => {
     e.preventDefault();
@@ -61,6 +44,10 @@ export default function Header({ darkMode, handleThemeChange }) {
     navigate(routes.signIn);
   };
 
+  const handleLogOut = () => {
+
+  };
+
   const handleSignUp = () => {
     setShowMenu(false);
     navigate(routes.signUp);
@@ -68,6 +55,7 @@ export default function Header({ darkMode, handleThemeChange }) {
 
   const buttonList = [
     { text: 'Utwórz nowe konto', icon: <HowToRegIcon />, onClick: handleSignUp },
+    { text: 'Wyloguj się', icon: <LogoutIcon />, onClick: handleLogOut },
     { text: 'Zaloguj się', icon: <LoginIcon />, onClick: handleSignIn },
   ];
 
@@ -105,7 +93,6 @@ export default function Header({ darkMode, handleThemeChange }) {
             ))}
           </List>
           <Divider />
-          {deferredPrompt ? installButton() : null}
         </SwipeableDrawer>
       </AppBar>
       {/* {params} */}
