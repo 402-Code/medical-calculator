@@ -15,7 +15,6 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   const navigate = useNavigate();
 
   const uniqueActiveSub = [];
-
   // Reset selected drug on component render
   useEffect(() => {
     setSelectedDrug({});

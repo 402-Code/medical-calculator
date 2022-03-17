@@ -4,7 +4,7 @@ import { Card, Box, Typography, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { routes } from '../../routes';
+import routes from '../../routes';
 import { signUpSchema } from './SignUpSchema';
 import icon from '../../icons/180.png';
 import ControlledTextField from './ControlledTextField';

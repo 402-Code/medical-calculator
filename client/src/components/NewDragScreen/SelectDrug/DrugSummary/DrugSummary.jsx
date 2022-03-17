@@ -9,7 +9,6 @@ const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
 const DrugSummary = ({ activeKid, selectedMedicine, canDrugBeServed, setCanDrugBeServed }) => {
   const [selectedDrug, setSelectedDrug] = useState({});
-
   useEffect(() => {
     medicationList.map((med) => (med.medication === selectedMedicine ? setSelectedDrug(med) : null));
   }, [selectedMedicine]);
