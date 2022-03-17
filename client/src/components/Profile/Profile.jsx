@@ -20,6 +20,7 @@ import './Profile.scss';
 import { ChildContext } from '../../context/ChildContext';
 import calculateAge from '../../utils/utils';
 import today from '../../utils/today';
+import routes from './../../routes';
 
 function Profile() {
   const [name, setName] = useState('');
@@ -83,7 +84,7 @@ function Profile() {
     }
 
     ctx.setKids([...ctx.kids.filter(kid => kid.name !== kidname), kid]);
-    navigate('/findDrug');
+    navigate(routes.findDrug);
   };
 
   const onImageChange = (event) => {
