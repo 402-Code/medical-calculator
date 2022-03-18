@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import 'normalize.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ChildContext } from './context/ChildContext';
 import routes from './routes';
 import RequireAgreement from './components/Agreement/RequireAgreement';
 import Profile from './components/Profile/Profile';
@@ -19,7 +18,6 @@ import Error404 from './components/Error404/Error404';
 function App() {
   const [selectedDrug, setSelectedDrug] = useState({});
   const [darkMode, setDarkMode] = useState(true);
-  // const { setUser } = useContext(ChildContext);
 
   const paletteType = darkMode ? 'dark' : 'light';
   const theme = createTheme({

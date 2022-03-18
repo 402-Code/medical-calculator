@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { ChildProvider } from './context/ChildContext';
+import { ChildProvider } from './context/UserContext';
 
 axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true;

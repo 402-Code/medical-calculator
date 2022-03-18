@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const ChildContext = createContext();
+export const UserContext = createContext();
 
 export const ChildProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
@@ -17,6 +17,5 @@ export const ChildProvider = ({ children }) => {
       .finally(() => setLoading(false));
   }, [isLoading]);
 
-  console.log('user in ctx', user);
-  return <ChildContext.Provider value={{ user, isLoading, setLoading }}>{children}</ChildContext.Provider>;
+  return <UserContext.Provider value={{ user, isLoading, setLoading }}>{children}</UserContext.Provider>;
 };

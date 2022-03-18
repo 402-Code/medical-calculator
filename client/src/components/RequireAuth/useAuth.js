@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { ChildContext } from '../../context/ChildContext';
+import { UserContext } from '../../context/UserContext';
 
 const useAuth = () => {
-  return useContext(ChildContext);
+  return useContext(UserContext);
 };
 
 export default useAuth;

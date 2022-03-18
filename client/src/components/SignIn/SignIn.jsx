@@ -38,7 +38,7 @@ const SignIn = () => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box component="form" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Card
           elevation={16}
           sx={{
@@ -59,32 +59,30 @@ const SignIn = () => {
             Logowanie
           </Typography>
           <SignUpError message={errorMessage} open={errorDialogOpen} setOpen={setErrorDialogOpen} />
-          <form onSubmit={handleSignIn}>
-            <TextField
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              label="email"
-              type="email"
-              margin="dense"
-              fullWidth
-              variant="outlined"
-              required
-              autoComplete="on"
-            />
-            <TextField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              label="hasło"
-              type="password"
-              margin="dense"
-              fullWidth
-              variant="outlined"
-              required
-            />
-            <Button type="submit" sx={{ alignSelf: 'end', mt: 1 }}>
-              Zaloguj się
-            </Button>
-          </form>
+          <TextField
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="email"
+            type="email"
+            margin="dense"
+            fullWidth
+            variant="outlined"
+            required
+            autoComplete="on"
+          />
+          <TextField
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label="hasło"
+            type="password"
+            margin="dense"
+            fullWidth
+            variant="outlined"
+            required
+          />
+          <Button type="submit" onClick={handleSignIn} sx={{ alignSelf: 'end', mt: 1 }}>
+            Zaloguj się
+          </Button>
         </Card>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
