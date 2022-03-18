@@ -26,12 +26,12 @@ const addKidButton = () => {
 };
 
 function KidSelect({ activeKid, setActiveKid }) {
-  const { kids } = useContext(ChildContext);
+  const { user } = useContext(ChildContext);
 
-  if (thereIsOnlyOneKid(kids)) {
+  if (thereIsOnlyOneKid(user.kids)) {
     return (
       <Paper elevation={24} sx={{ m: 1, mb: 6, boxShadow: 'none' }}>
-        <Kid kid={kids[0]} />
+        <Kid kid={user.kids[0]} />
         {addKidButton()}
       </Paper>
     );
@@ -40,8 +40,8 @@ function KidSelect({ activeKid, setActiveKid }) {
   return (
     <Paper elevation={24} sx={{ m: 1, mb: 6 }}>
       <Carousel
-        index={kids.indexOf(activeKid)}
-        onChange={(active) => setActiveKid(kids[active])}
+        index={user.kids.indexOf(activeKid)}
+        onChange={(active) => setActiveKid(user.kids[active])}
         navButtonsAlwaysVisible
         autoPlay={false}
         animation="slide"
@@ -56,7 +56,7 @@ function KidSelect({ activeKid, setActiveKid }) {
           }
         }}
       >
-        {kids.map((kid, i) => (
+        {user.kids.map((kid, i) => (
           <Kid kid={kid} key={i} />
         ))}
       </Carousel>

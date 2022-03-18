@@ -6,18 +6,21 @@ import Profile from '../Profile/Profile';
 import { ChildContext } from '../../context/ChildContext';
 
 const NewDragScreen = ({ setSelectedDrug }) => {
-  const { kids } = useContext(ChildContext);
-  const [activeKid, setActiveKid] = useState();
+  const [activeKid, setActiveKid] = useState({});
+  const ctx = useContext(ChildContext);
 
   useEffect(() => {
-    setActiveKid(kids[0]);
-  }, [kids]);
+    const firstKid = ctx.user.kids[0];
+    setActiveKid(firstKid);
+  }, []);
 
-  if (kids.length > 0) {
+  console.log('activekid2', activeKid);
+
+  if (ctx.user.kids !== null) {
     return (
       <>
-        <KidSelect activeKid={activeKid} setActiveKid={setActiveKid} />
-        <SelectDrug setSelectedDrug={setSelectedDrug} activeKid={activeKid} />
+        <KidSelect activeKid={ctx.user.kids[0]} setActiveKid={setActiveKid} />
+        <SelectDrug setSelectedDrug={setSelectedDrug} activeKid={ctx.user.kids[0]} />
       </>
     );
   }
