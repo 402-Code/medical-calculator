@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import 'normalize.css';
 import { createTheme } from '@mui/material';
@@ -20,9 +19,7 @@ import Error404 from './components/Error404/Error404';
 function App() {
   const [selectedDrug, setSelectedDrug] = useState({});
   const [darkMode, setDarkMode] = useState(true);
-  const { setUser } = useContext(ChildContext);
-
-  const navigate = useNavigate();
+  // const { setUser } = useContext(ChildContext);
 
   const paletteType = darkMode ? 'dark' : 'light';
   const theme = createTheme({
@@ -36,16 +33,6 @@ function App() {
       }
     }
   });
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:3000/api/auth/me', { withCredentials: true })
-      .then((response) => {
-        setUser(response.data);
-        navigate('/addkid');
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   const handleThemeChange = () => {
     setDarkMode(!darkMode);

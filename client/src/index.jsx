@@ -10,11 +10,11 @@ axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChildProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ChildProvider>
         <App />
-      </BrowserRouter>
-    </ChildProvider>
+      </ChildProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
