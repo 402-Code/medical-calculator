@@ -1,4 +1,4 @@
-﻿import { Router } from 'express';
+import { Router } from 'express';
 import getAllUsers from './getAllUsers';
 import getUser from './getUser';
 import getAllKids from '../kids/getAllKids';

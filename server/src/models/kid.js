@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import diseaseSchema from './disease';
 
-export const kidSchema = new mongoose.Schema({
+const kidSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -28,9 +29,8 @@ export const kidSchema = new mongoose.Schema({
     enum: ['male', 'female'],
     default: 'male'
   },
-  avatar: String
-  // diseases: [diseaseSchema]
+  avatar: String,
+  diseases: [diseaseSchema]
 });
 
-const Kid = mongoose.model('Kid', kidSchema);
-export default Kid;
+export default kidSchema;
