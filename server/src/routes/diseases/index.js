@@ -9,5 +9,4 @@ diseaseRouter.get('/', getDiseases);
 diseaseRouter.post('/', postDisease);
 diseaseRouter.post('/:diseaseId/drug-application', postDrugApplication);
 
-
 export default diseaseRouter;
