@@ -1,4 +1,4 @@
-export const routes = {
+const routes = {
   signUp: '/',
   signIn: '/sing-in',
   findDrug: '/findDrug',
@@ -6,3 +6,5 @@ export const routes = {
   editKid: '/edit/:kidname',
   history: '/history/:kidname'
 };
+
+export default routes;

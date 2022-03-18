@@ -5,12 +5,13 @@ import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ChildProvider } from './context/ChildContext';
-import { routes } from './routes';
+import routes from './routes';
 import RequireAgreement from './components/Agreement/RequireAgreement';
 import Profile from './components/Profile/Profile';
 import History from './components/History/History';
 import NewDragScreen from './components/NewDragScreen/NewDragScreen';
 import Header from './components/Header/Header';
+import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Error404 from './components/Error404/Error404';
 import RequireAuth from './components/RequireAuth/RequireAuth';
@@ -44,6 +45,7 @@ function App() {
             <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
             <Routes>
               <Route path={routes.signUp} element={<SignUp />} />
+<<<<<<< HEAD
               <Route element={<RequireAuth />}>
                 <Route path={routes.findDrug} element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
                 <Route path={routes.addKid} element={<Profile />} />
@@ -51,6 +53,13 @@ function App() {
                 <Route path={routes.history} element={<History drug={selectedDrug} />} />
               </Route>
               <Route path="*" element={<Error404 />} />
+=======
+              <Route path={routes.signIn} element={<SignIn />} />
+              <Route path={routes.findDrug} element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
+              <Route path={routes.addKid} element={<Profile />} />
+              <Route path={routes.editKid} element={<Profile />} />
+              <Route path={routes.history} element={<History drug={selectedDrug} />} />
+>>>>>>> master
             </Routes>
           </BrowserRouter>
         </ChildProvider>
