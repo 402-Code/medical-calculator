@@ -1,18 +1,23 @@
 import { StatusCodes } from 'http-status-codes';
 
 const postSymptom = async (req, res) => {
-  try {
-    const symptom = { symptom: req.body.symptomSchema};
+  
+    const symptomsSpotted = { symptoms: req.body.appliedSymptoms};
 
-    const kid = await req.user.kids.id(req.body.kidId);
-    const diseases = await kid.diseases.id(req.body.diseaseId);
+    let foundedDisease;
+    req.user.kids.forEaach((kid) => {
+      kid.diseases.forEaach((diseases) => {
+        if (diseases._id.toString() === req.params.diseasesId) {
+          foundedDisease = diseases;
+        }
+      });
+    });
 
-     diseases.postSymptom.push(symptom);
-     await req.user.save();
+    if (!foundedDisease) return res.status(StatusCodes.NOT_FOUND).send({message: 'Nie udało się znaleźć zdarzenia w historii'});
+    foundedDisease.symptoms.push(symptomsSpotted);
+    await req.user.save();
+    res.status(StatusCodes.CREATED).send(foundedDisease);
+  };
 
-     res.status(StatusCodes.CREATED).send(diseases);
-   } catch (err) {
-     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Nie udało się zapisać do bazy danych.' });
-   }
- };
  export default postSymptom;
+ 
