@@ -10,7 +10,7 @@ const app = express();
 await connectToDatabase();
 
 const corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: process.env.CLIENT_BASE_URL ?? 'http://localhost:8080',
   credentials: true,
   optionSuccessStatus: 200
 };

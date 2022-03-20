@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: server/Dockerfile.prod
+run:
+  web: npm run start:prod

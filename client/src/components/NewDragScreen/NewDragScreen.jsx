@@ -1,26 +1,28 @@
 import React, { useState, useContext, useEffect } from 'react';
-
+import axios from 'axios';
 import KidSelect from './KidSelect/KidSelect';
 import SelectDrug from './SelectDrug/SelectDrug';
 import Profile from '../Profile/Profile';
-import { ChildContext } from '../../context/ChildContext';
+import { UserContext } from '../../context/UserContext';
 
 const NewDragScreen = ({ setSelectedDrug }) => {
-  const [activeKid, setActiveKid] = useState({});
-  const ctx = useContext(ChildContext);
+  const { user } = useContext(UserContext);
+  const [kids, setKids] = useState([]);
+  const [activeKid, setActiveKid] = useState();
 
   useEffect(() => {
-    const firstKid = ctx.user.kids[0];
-    setActiveKid(firstKid);
-  }, []);
+    (async () => {
+      const { data } = await axios.get('/api/kids');
+      if (data?.length) setActiveKid(data[0]);
+      setKids(data);
+    })();
+  }, [user]);
 
-  console.log('activekid2', activeKid);
-
-  if (ctx.user.kids !== null) {
+  if (kids?.length > 0 && activeKid) {
     return (
       <>
-        <KidSelect activeKid={ctx.user.kids[0]} setActiveKid={setActiveKid} />
-        <SelectDrug setSelectedDrug={setSelectedDrug} activeKid={ctx.user.kids[0]} />
+        <KidSelect activeKid={activeKid} setActiveKid={setActiveKid} kids={kids} />
+        <SelectDrug setSelectedDrug={setSelectedDrug} activeKid={activeKid} />
       </>
     );
   }

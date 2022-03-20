@@ -17,9 +17,10 @@ import {
 import boy from '../../img/avatars/boy.png';
 import girl from '../../img/avatars/girl.png';
 import './Profile.scss';
-import { ChildContext } from '../../context/ChildContext';
+import { UserContext } from '../../context/UserContext';
 import calculateAge from '../../utils/utils';
 import today from '../../utils/today';
+import routes from '../../routes';
 
 function Profile() {
   const [name, setName] = useState('');
@@ -31,7 +32,7 @@ function Profile() {
   const [image, setImage] = useState('');
   const [dob, setDob] = useState('');
 
-  const ctx = useContext(ChildContext);
+  const ctx = useContext(UserContext);
   const navigate = useNavigate();
 
   const { kidname } = useParams();
@@ -100,7 +101,7 @@ function Profile() {
       return;
     }
     axios
-      .post(`/api/users/${ctx.user.id}/kids`, {
+      .post(`/api/kids`, {
         name,
         dateOfBirth: dob,
         height,
@@ -109,7 +110,7 @@ function Profile() {
         avatar
       })
       .then(() => {
-        navigate('/findDrug');
+        navigate(routes.findDrug);
       })
       .catch((err) => console.error(err));
   };

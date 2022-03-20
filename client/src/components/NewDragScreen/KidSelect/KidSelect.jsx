@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Paper } from '@mui/material';
 import Kid from './Kid/Kid';
-import { ChildContext } from '../../../context/ChildContext';
 
 const thereIsOnlyOneKid = (arr) => {
   return arr.length === 1;
@@ -25,13 +24,11 @@ const addKidButton = () => {
   );
 };
 
-function KidSelect({ activeKid, setActiveKid }) {
-  const { user } = useContext(ChildContext);
-
-  if (thereIsOnlyOneKid(user.kids)) {
+function KidSelect({ activeKid, setActiveKid, kids }) {
+  if (thereIsOnlyOneKid(kids)) {
     return (
       <Paper elevation={24} sx={{ m: 1, mb: 6, boxShadow: 'none' }}>
-        <Kid kid={user.kids[0]} />
+        <Kid kid={kids[0]} />
         {addKidButton()}
       </Paper>
     );
@@ -40,8 +37,8 @@ function KidSelect({ activeKid, setActiveKid }) {
   return (
     <Paper elevation={24} sx={{ m: 1, mb: 6 }}>
       <Carousel
-        index={user.kids.indexOf(activeKid)}
-        onChange={(active) => setActiveKid(user.kids[active])}
+        index={kids.indexOf(activeKid)}
+        onChange={(active) => setActiveKid(kids[active])}
         navButtonsAlwaysVisible
         autoPlay={false}
         animation="slide"
@@ -56,7 +53,7 @@ function KidSelect({ activeKid, setActiveKid }) {
           }
         }}
       >
-        {user.kids.map((kid, i) => (
+        {kids.map((kid, i) => (
           <Kid kid={kid} key={i} />
         ))}
       </Carousel>

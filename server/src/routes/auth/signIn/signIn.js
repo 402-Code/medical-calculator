@@ -11,10 +11,8 @@ import jwt from 'jsonwebtoken';
 
 const signIn = async (req, res) => {
   const { error } = signInValidation(req.body);
-  console.log('error', error);
-
   if (error) return res.status(StatusCodes.BAD_REQUEST).send(error.details[0].message);
-  console.log('error', error);
+
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Dane są nieprawidłowe' });
 
@@ -23,7 +21,9 @@ const signIn = async (req, res) => {
 
   const accessToken = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
   res.cookie('access-token', accessToken, {
-    httpOnly: true
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true
   });
   res.status(StatusCodes.OK).end();
 };
