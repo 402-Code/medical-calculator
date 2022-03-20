@@ -89,7 +89,7 @@ function Profile() {
       await axios.put(`/api/users/${userId}/kids/${kidId}`, kid);
     }
 
-    ctx.setUser({ ...ctx.user, kids: [...ctx.user.kids.filter((kid) => kid.name !== kidname), kid] });
+    await ctx.refresh();
     navigate(routes.findDrug);
   };
 

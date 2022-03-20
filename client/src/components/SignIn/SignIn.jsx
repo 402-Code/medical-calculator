@@ -8,7 +8,7 @@ import SignUpError from '../SignUp/SignUpError';
 import useAuth from '../RequireAuth/useAuth';
 
 const SignIn = () => {
-  const { setLoading } = useAuth();
+  const { refresh } = useAuth();
   const navigate = useNavigate();
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [password, setPassword] = useState('');
@@ -24,7 +24,7 @@ const SignIn = () => {
 
     try {
       await axios.post('/api/auth/sign-in', userData);
-      setLoading(true);
+      await refresh();
       navigate(routes.findDrug);
     } catch (err) {
       if (err?.response) setErrorMessage(err?.response?.data?.message);
