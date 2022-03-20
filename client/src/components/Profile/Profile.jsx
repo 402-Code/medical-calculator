@@ -30,7 +30,7 @@ function Profile() {
   const [gender, setGender] = useState('female');
   const [avatar, setAvatar] = useState('');
   const [image, setImage] = useState('');
-  const [dob, setDob] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
 
   const ctx = useContext(UserContext);
   const navigate = useNavigate();
@@ -47,21 +47,12 @@ function Profile() {
   const populateKidData = () => {
     const editedKid = ctx.user.kids.find((kid) => kid.name === kidname);
     setName(editedKid.name);
-    setWeight(parseInt(editedKid.weight, 10));
+    setWeight(editedKid.weight);
     setHeight(editedKid.height);
     setAvatar(editedKid.avatar);
     setBmi(editedKid.bmi);
     setGender(editedKid.gender);
-    setDob(editedKid.dateOfBirth);
-  };
-  const updateKid = (kidname) => {
-    const editedKid = ctx.user.kids.find((kid) => kid.name === kidname);
-    editedKid.name = name;
-    editedKid.height = height;
-    editedKid.weight = weight;
-    editedKid.gender = gender;
-    editedKid.dateOfBirth = dob;
-    return editedKid;
+    setDateOfBirth(editedKid.dateOfBirth);
   };
 
   useEffect(() => {
@@ -86,33 +77,20 @@ function Profile() {
     setBmi(result);
   }, [weight, height]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let kid = {};
+    const userId = ctx.user.id;
+    const kidId = ctx.user.kids.find((kid) => kid.name === kidname)._id;
+    const kid = { name, height, weight, gender, avatar, dateOfBirth };
 
-    if (kidname !== undefined) {
-      kid = updateKid(kidname);
-      // eslint-disable-next-line no-underscore-dangle
-      axios.put(`/api/users/${ctx.user.id}/kids/${kid._id}`, { ...kid }, { withCredentials: true });
-      return;
+    if (kidname === undefined) {
+      await axios.post(`/api/users/${userId}/kids`, kid);
+    } else {
+      await axios.put(`/api/users/${userId}/kids/${kidId}`, kid);
     }
 
-    if (isNameTaken && location === '/addkid') {
-      return;
-    }
-    axios
-      .post(`/api/kids`, {
-        name,
-        dateOfBirth: dob,
-        height,
-        weight,
-        gender,
-        avatar
-      })
-      .then(() => {
-        navigate(routes.findDrug);
-      })
-      .catch((err) => console.error(err));
+    await ctx.refresh();
+    navigate(routes.findDrug);
   };
 
   const onImageChange = (event) => {
@@ -151,8 +129,8 @@ function Profile() {
           sx={{ m: 1, width: 220, backgroundColor: 'primary' }}
           InputProps={{ inputProps: { max: today } }}
           InputLabelProps={{ shrink: true }}
-          value={dob}
-          onChange={(e) => setDob(e.target.value)}
+          value={dateOfBirth}
+          onChange={(e) => setDateOfBirth(e.target.value)}
           required
         />
 
@@ -212,7 +190,7 @@ function Profile() {
         </Typography>
 
         <Typography className="profile__item" variant="subtitle1" gutterBottom component="div">
-          {calculateAge(dob) * 12 || ''} mies
+          {calculateAge(dateOfBirth) * 12 || ''} mies
         </Typography>
 
         <Typography className="profile__description" variant="subtitle1" gutterBottom component="div">
