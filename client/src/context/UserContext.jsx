@@ -17,5 +17,5 @@ export const ChildProvider = ({ children }) => {
       .finally(() => setLoading(false));
   }, [isLoading]);
 
-  return <UserContext.Provider value={{ user, isLoading, setLoading }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ user, isLoading, setLoading, setUser }}>{children}</UserContext.Provider>;
 };

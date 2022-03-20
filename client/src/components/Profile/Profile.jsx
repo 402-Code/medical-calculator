@@ -79,8 +79,8 @@ function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userId = '621d326e6a4b8a876da83c61';
-    const kidId = '6228be694079df8a9718c503';
+    const userId = ctx.user.id;
+    const kidId = ctx.user.kids.find((kid) => kid.name === kidname)._id;
     const kid = { name, height, weight, gender, avatar, dateOfBirth };
 
     if (kidname === undefined) {
@@ -89,7 +89,7 @@ function Profile() {
       await axios.put(`/api/users/${userId}/kids/${kidId}`, kid);
     }
 
-    ctx.setKids([...ctx.kids.filter((kid) => kid.name !== kidname), kid]);
+    ctx.setUser({ ...ctx.user, kids: [...ctx.user.kids.filter((kid) => kid.name !== kidname), kid] });
     navigate(routes.findDrug);
   };
 

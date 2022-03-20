@@ -6,6 +6,7 @@ import useAuth from './useAuth';
 
 const RequireAuth = () => {
   const { user, isLoading } = useAuth();
+  console.log('🚀 ~ file: RequireAuth.jsx ~ line 9 ~ RequireAuth ~ user', user);
   const location = useLocation();
 
   if (isLoading)
