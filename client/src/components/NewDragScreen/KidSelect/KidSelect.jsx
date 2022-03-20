@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Paper } from '@mui/material';
 import Kid from './Kid/Kid';
-import { ChildContext } from '../../../context/ChildContext';
 
 const thereIsOnlyOneKid = (arr) => {
   return arr.length === 1;
@@ -25,9 +24,7 @@ const addKidButton = () => {
   );
 };
 
-function KidSelect({ activeKid, setActiveKid }) {
-  const { kids } = useContext(ChildContext);
-
+function KidSelect({ activeKid, setActiveKid, kids }) {
   if (thereIsOnlyOneKid(kids)) {
     return (
       <Paper elevation={24} sx={{ m: 1, mb: 6, boxShadow: 'none' }}>

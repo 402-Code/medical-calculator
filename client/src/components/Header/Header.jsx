@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import axios from 'axios';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -29,7 +30,7 @@ export default function Header({ darkMode, handleThemeChange }) {
 
   const handlePreviousPage = (e) => {
     e.preventDefault();
-    navigate('/');
+    navigate(-1);
   };
 
   const toggleMenu = (e) => {
@@ -40,12 +41,14 @@ export default function Header({ darkMode, handleThemeChange }) {
   };
 
   const handleSignIn = () => {
-    toggleMenu()
+    toggleMenu();
     navigate(routes.signIn);
   };
 
-  const handleLogOut = () => {
-
+  const handleLogOut = async () => {
+    await axios.post('/api/auth/sign-out');
+    navigate(routes.signIn);
+    toggleMenu();
   };
 
   const handleSignUp = () => {
@@ -56,7 +59,7 @@ export default function Header({ darkMode, handleThemeChange }) {
   const buttonList = [
     { text: 'Utwórz nowe konto', icon: <HowToRegIcon />, onClick: handleSignUp },
     { text: 'Wyloguj się', icon: <LogoutIcon />, onClick: handleLogOut },
-    { text: 'Zaloguj się', icon: <LoginIcon />, onClick: handleSignIn },
+    { text: 'Zaloguj się', icon: <LoginIcon />, onClick: handleSignIn }
   ];
 
   return (

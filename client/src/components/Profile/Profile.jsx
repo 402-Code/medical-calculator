@@ -17,10 +17,10 @@ import {
 import boy from '../../img/avatars/boy.png';
 import girl from '../../img/avatars/girl.png';
 import './Profile.scss';
-import { ChildContext } from '../../context/ChildContext';
+import { UserContext } from '../../context/UserContext';
 import calculateAge from '../../utils/utils';
 import today from '../../utils/today';
-import routes from './../../routes';
+import routes from '../../routes';
 
 function Profile() {
   const [name, setName] = useState('');
@@ -32,14 +32,20 @@ function Profile() {
   const [image, setImage] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
 
-  const ctx = useContext(ChildContext);
+  const ctx = useContext(UserContext);
   const navigate = useNavigate();
+
   const { kidname } = useParams();
-  const isNameTaken = ctx.kids.some((item) => item.name.toLowerCase() === name.toLowerCase());
+
+  let isNameTaken;
+  if (ctx.user.kids) {
+    isNameTaken = ctx.user.kids?.some((item) => item.name.toLowerCase() === name.toLowerCase());
+  }
+
   const location = window.location.pathname;
 
   const populateKidData = () => {
-    const editedKid = ctx.kids.find((kid) => kid.name === kidname);
+    const editedKid = ctx.user.kids.find((kid) => kid.name === kidname);
     setName(editedKid.name);
     setWeight(editedKid.weight);
     setHeight(editedKid.height);
@@ -83,7 +89,7 @@ function Profile() {
       await axios.put(`/api/users/${userId}/kids/${kidId}`, kid);
     }
 
-    ctx.setKids([...ctx.kids.filter(kid => kid.name !== kidname), kid]);
+    ctx.setKids([...ctx.kids.filter((kid) => kid.name !== kidname), kid]);
     navigate(routes.findDrug);
   };
 

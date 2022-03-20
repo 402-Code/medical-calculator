@@ -23,6 +23,7 @@ module.exports = {
     'react/jsx-no-duplicate-props': 0,
     'react/jsx-props-no-spreading': 0,
     'react/jsx-no-constructed-context-values': 1,
-    'import/prefer-default-export': 0
+    'import/prefer-default-export': 0,
+    'no-console': 0
   }
 };

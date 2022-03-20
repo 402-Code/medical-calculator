@@ -5,8 +5,10 @@ import axios from 'axios';
 import icon from '../../icons/180.png';
 import routes from '../../routes';
 import SignUpError from '../SignUp/SignUpError';
+import useAuth from '../RequireAuth/useAuth';
 
 const SignIn = () => {
+  const { setLoading } = useAuth();
   const navigate = useNavigate();
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [password, setPassword] = useState('');
@@ -14,18 +16,18 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const userData = {
       email,
       password
     };
 
     try {
-      await axios.post('/api/auth/sign-in', userData)
-      navigate(routes.findDrug)
-
+      await axios.post('/api/auth/sign-in', userData);
+      setLoading(true);
+      navigate(routes.findDrug);
     } catch (err) {
-      if (err?.response) setErrorMessage(err?.response?.data?.message)
+      if (err?.response) setErrorMessage(err?.response?.data?.message);
       setErrorDialogOpen(true);
     }
   };
@@ -36,7 +38,7 @@ const SignIn = () => {
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box component="form" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Card
           elevation={16}
           sx={{
@@ -57,32 +59,30 @@ const SignIn = () => {
             Logowanie
           </Typography>
           <SignUpError message={errorMessage} open={errorDialogOpen} setOpen={setErrorDialogOpen} />
-          <form onSubmit={handleSignIn}>
-            <TextField
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              label="email"
-              type="email"
-              margin="dense"
-              fullWidth
-              variant="outlined"
-              required
-              autoComplete="on"
-            />
-            <TextField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              label="hasło"
-              type="password"
-              margin="dense"
-              fullWidth
-              variant="outlined"
-              required
-            />
-            <Button type="submit" sx={{ alignSelf: 'end', mt: 1 }}>
-              Zaloguj się
-            </Button>
-          </form>
+          <TextField
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="email"
+            type="email"
+            margin="dense"
+            fullWidth
+            variant="outlined"
+            required
+            autoComplete="on"
+          />
+          <TextField
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label="hasło"
+            type="password"
+            margin="dense"
+            fullWidth
+            variant="outlined"
+            required
+          />
+          <Button type="submit" onClick={handleSignIn} sx={{ alignSelf: 'end', mt: 1 }}>
+            Zaloguj się
+          </Button>
         </Card>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
