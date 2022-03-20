@@ -48,7 +48,7 @@ function App() {
             <Route path={routes.findDrug} element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
             <Route path={routes.addKid} element={<Profile />} />
             <Route path={routes.editKid} element={<Profile />} />
-            <Route path={routes.history} element={<History drug={selectedDrug} />} />
+            <Route path={routes.history} element={<History />} />
           </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>

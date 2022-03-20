@@ -1,89 +1,45 @@
-import React, { useEffect } from 'react';
-import { Checkbox, Typography, Box, TextField, InputAdornment, Card } from '@mui/material';
-import './Doses.scss';
-import SymScreen from '../Symptoms/SymScreen';
+import React, { useContext, useEffect, useState } from 'react';
+import { Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import axios from 'axios';
+import { UserContext } from '../../../context/UserContext';
 
-const Doses = () => {
-  const titlesArray = ['Godzina', 'Nazwa leku', 'Dawka', 'Temperatura', 'Objawy'].map((item, key) => (
-    <Typography key={key} className="doses__titles" sx={{ fontSize: '10px' }} variant="subtitle2" component="div">
-      {item}
-    </Typography>
-  ));
+const Doses = ({ kidName }) => {
+  const [disease, setDisease] = useState([]);
+  const [drug, setDrug] = useState('');
+  const { user } = useContext(UserContext);
 
-  const now = new Date();
-  const hour = now.getHours();
-  let minutes = now.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-
-  const currentTime = `${hour}:${minutes}`;
-  const defaultTime = ['8:00', '14:00', '20:00', '02:00'];
-
-  const dose = defaultTime.map((item, key) => {
-    const [checked, setChecked] = React.useState(false);
-    const [time, setTime] = React.useState(0);
-
-    useEffect(() => {
-      if (!checked) {
-        setTime(item);
-      } else {
-        setTime(currentTime);
-      }
-    }, [checked]);
-
-    return (
-      <Card elevation={16} key={key} value={item} className="doses__items" component="div">
-        <Typography key={key} className="doses__item" variant="subtitle2" component="div">
-          {time}
-        </Typography>
-        <Typography className="doses__item" variant="subtitle2" component="div">
-          ibuprofen
-        </Typography>
-        <Typography className="doses__item" variant="subtitle2" component="div">
-          200mg
-        </Typography>
-        <TextField
-          className="doses__item"
-          sx={{ width: '50px', '& .MuiInput-underline:before': { borderBottomColor: 'white' } }}
-          inputProps={{ style: { fontSize: 11, color: 'white' } }}
-          id="standard-number"
-          type="number"
-          variant="standard"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment className="doses__icon" position="end">
-                <Typography sx={{ color: 'white' }}>°C</Typography>
-              </InputAdornment>
-            )
-          }}
-          aria-describedby="standard--helper-text"
-        />
-        <SymScreen
-          symptoms={[]}
-          onChange={(a) => {
-            console.log('selected symptoms', a);
-          }}
-        />
-        <Checkbox
-          className="doses__item"
-          style={{
-            color: '#fff'
-          }}
-          onChange={(e) => setChecked(e.target.checked)}
-          color="default"
-        />
-      </Card>
-    );
-  });
+  useEffect(() => {
+    (async () => {
+      const kid = user.kids.find((kid) => kid.name === kidName);
+      console.log(kid.diseases[0].drugApplications);
+      setDisease(kid.diseases[0].drugApplications);
+      const { data } = await axios.get('/api/drugs');
+      const drug = data.find((drug) => drug._id === kid.diseases[0].initialDrug).name;
+      setDrug(drug);
+    })();
+  }, []);
 
   return (
-    <Box className="doses" component="div">
-      <Card elevation={16} sx={{ p: '5px 0 5px 0' }} className="doses__header" component="div">
-        {titlesArray}
-      </Card>
-      <Box>{dose}</Box>
-    </Box>
+    <Paper elevation={16} square sx={{ pb: 2, px: 2, boxShadow: 'none' }}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Godzina</TableCell>
+            <TableCell>Lek</TableCell>
+            <TableCell>Dawka</TableCell>
+            <TableCell>Objawy</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {disease.map((row) => (
+            <TableRow key={row._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell>{row.createdAt.slice(11, 16)}</TableCell>
+              <TableCell>{drug}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
   );
 };
 
