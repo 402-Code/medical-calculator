@@ -1,5 +1,5 @@
 const doseInterval = (selectedDrug) => {
-  const interval = selectedDrug.dose_interval_in_hours;
+  const { interval } = selectedDrug;
 
   let h;
   switch (interval) {

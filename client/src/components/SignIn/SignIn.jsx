@@ -5,8 +5,10 @@ import axios from 'axios';
 import icon from '../../icons/180.png';
 import routes from '../../routes';
 import SignUpError from '../SignUp/SignUpError';
+import useAuth from '../RequireAuth/useAuth';
 
 const SignIn = () => {
+  const { setLoading } = useAuth();
   const navigate = useNavigate();
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [password, setPassword] = useState('');
@@ -22,6 +24,7 @@ const SignIn = () => {
 
     try {
       await axios.post('/api/auth/sign-in', userData)
+      setLoading(true)
       navigate(routes.findDrug)
 
     } catch (err) {

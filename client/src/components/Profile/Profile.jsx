@@ -17,9 +17,10 @@ import {
 import boy from '../../img/avatars/boy.png';
 import girl from '../../img/avatars/girl.png';
 import './Profile.scss';
-import { ChildContext } from '../../context/ChildContext';
+import { UserContext } from '../../context/UserContext';
 import calculateAge from '../../utils/utils';
 import today from '../../utils/today';
+import routes from '../../routes';
 
 function Profile() {
   const [name, setName] = useState('');
@@ -31,31 +32,35 @@ function Profile() {
   const [image, setImage] = useState('');
   const [dob, setDob] = useState('');
 
-  const ctx = useContext(ChildContext);
+  const ctx = useContext(UserContext);
   const navigate = useNavigate();
+
   const { kidname } = useParams();
-  const isNameTaken = ctx.kids.some((item) => item.name.toLowerCase() === name.toLowerCase());
+
+  let isNameTaken;
+  if (ctx.user.kids) {
+    isNameTaken = ctx.user.kids?.some((item) => item.name.toLowerCase() === name.toLowerCase());
+  }
+
   const location = window.location.pathname;
 
   const populateKidData = () => {
-    const editedKid = ctx.kids.find((kid) => kid.name === kidname);
+    const editedKid = ctx.user.kids.find((kid) => kid.name === kidname);
     setName(editedKid.name);
     setWeight(parseInt(editedKid.weight, 10));
     setHeight(editedKid.height);
     setAvatar(editedKid.avatar);
     setBmi(editedKid.bmi);
     setGender(editedKid.gender);
-    setDob(editedKid.dob);
+    setDob(editedKid.dateOfBirth);
   };
   const updateKid = (kidname) => {
-    const editedKid = ctx.kids.filter((kid) => kid.name === kidname);
+    const editedKid = ctx.user.kids.find((kid) => kid.name === kidname);
     editedKid.name = name;
     editedKid.height = height;
     editedKid.weight = weight;
     editedKid.gender = gender;
-    editedKid.dob = dob;
-    const kidIndex = ctx.kids.findIndex((kid) => kid.name === kidname);
-    ctx.kids.splice(kidIndex, 1);
+    editedKid.dateOfBirth = dob;
     return editedKid;
   };
 
@@ -87,26 +92,27 @@ function Profile() {
 
     if (kidname !== undefined) {
       kid = updateKid(kidname);
-    } else {
-      kid = { name, height, weight, gender, bmi, avatar, dob };
+      // eslint-disable-next-line no-underscore-dangle
+      axios.put(`/api/users/${ctx.user.id}/kids/${kid._id}`, { ...kid }, { withCredentials: true });
+      return;
     }
 
     if (isNameTaken && location === '/addkid') {
       return;
     }
-
-    axios.post('/api/users/621d326e6a4b8a876da83c61/kids', {
-      name,
-      dateOfBirth: dob,
-      height,
-      weight,
-      gender,
-      avatar,
-    }).then(() => {
-      ctx.setKids([...ctx.kids, kid]);
-      navigate('/');
-    }).catch((err) => console.error(err))
-
+    axios
+      .post(`/api/kids`, {
+        name,
+        dateOfBirth: dob,
+        height,
+        weight,
+        gender,
+        avatar
+      })
+      .then(() => {
+        navigate(routes.findDrug);
+      })
+      .catch((err) => console.error(err));
   };
 
   const onImageChange = (event) => {

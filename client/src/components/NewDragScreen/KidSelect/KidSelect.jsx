@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Paper } from '@mui/material';
 import Kid from './Kid/Kid';
-import { ChildContext } from '../../../context/ChildContext';
+// import { ChildContext } from '../../../context/ChildContext';
 
 const thereIsOnlyOneKid = (arr) => {
   return arr.length === 1;
@@ -25,8 +25,8 @@ const addKidButton = () => {
   );
 };
 
-function KidSelect({ activeKid, setActiveKid }) {
-  const { kids } = useContext(ChildContext);
+function KidSelect({ activeKid, setActiveKid, kids }) {
+  // const { kids } = useContext(ChildContext);
 
   if (thereIsOnlyOneKid(kids)) {
     return (

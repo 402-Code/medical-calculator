@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 import { Box, Avatar, Typography } from '@mui/material';
-import { ChildContext } from '../../../context/ChildContext';
+// import { ChildContext } from '../../../context/ChildContext';
+import { UserContext } from '../../../context/UserContext';
 
 const HistoryName = ({ kidName }) => {
-  const { kids } = useContext(ChildContext);
+  // const { kids } = useContext(ChildContext);
+  // const kidToDisplay = kids.find((kid) => kid.name === kidName);
+
+  const { kids } = useContext(UserContext);
   const kidToDisplay = kids.find((kid) => kid.name === kidName);
 
   return (

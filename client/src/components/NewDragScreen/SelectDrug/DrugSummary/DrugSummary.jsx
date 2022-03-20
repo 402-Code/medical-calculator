@@ -1,28 +1,32 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Typography, Paper } from '@mui/material';
-import ageInMonths from '../../../../utils/ageInMonths';
+
 import MedicationCantBeServed from './MedicationCantBeServed';
 import MedicationInfo from './MedicationInfo';
-import TEMP_DRUG from '../../../mocks/tempDrug.json';
+// import TEMP_DRUG from '../../../mocks/tempDrug.json';
 
-const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
+// const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
-const DrugSummary = ({ activeKid, selectedMedicine, canDrugBeServed, setCanDrugBeServed }) => {
+const DrugSummary = ({ activeKid, selectedMedicine, canDrugBeServed, setCanDrugBeServed, drugs }) => {
   const [selectedDrug, setSelectedDrug] = useState({});
+  // const { applicationRequirement } = selectedDrug;
 
   useEffect(() => {
-    medicationList.map((med) => (med.medication === selectedMedicine ? setSelectedDrug(med) : null));
+    drugs.map((med) => (med.name === selectedMedicine ? setSelectedDrug(med) : null));
   }, [selectedMedicine]);
+
+  const applicableDrugs = drugs.map((drug) => drug.isApplicable);
 
   useLayoutEffect(() => {
     if (activeKid) {
-      if (ageInMonths(activeKid) >= selectedDrug.min_access_age_in_months) {
+      if (selectedDrug.isApplicable) {
         setCanDrugBeServed(true);
       } else {
         setCanDrugBeServed(false);
       }
     }
-  }, [selectedDrug, activeKid]);
+  }, [selectedDrug, activeKid, applicableDrugs]);
 
   return (
     <Paper elevation={16} square sx={{ my: 2, pb: 2, px: 2, boxShadow: 'none' }}>

@@ -17,7 +17,8 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   const uniqueActiveSub = [];
 
   const getDrugFromDataBase = async () => {
-    const response = await axios.get('/api/drugs')
+    // eslint-disable-next-line no-underscore-dangle
+    const response = await axios.get(`/api/drugs/${activeKid._id}`)
     setDrugs(response.data)
   }
 
@@ -25,7 +26,7 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   useEffect(() => {
     setSelectedDrug({});
     getDrugFromDataBase()
-  }, []);
+  }, [activeKid._id]);
 
   const handleChangeSelect1 = (event) => {
     setActiveSubstance(event.target.value);

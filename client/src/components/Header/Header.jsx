@@ -20,7 +20,9 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './Header.scss';
+import axios from 'axios';
 import routes from '../../routes';
+
 
 export default function Header({ darkMode, handleThemeChange }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -44,8 +46,10 @@ export default function Header({ darkMode, handleThemeChange }) {
     navigate(routes.signIn);
   };
 
-  const handleLogOut = () => {
-
+  const handleLogOut = async () => {
+    await axios.post('/api/auth/sign-out');
+    navigate(routes.signIn);
+    toggleMenu();
   };
 
   const handleSignUp = () => {
