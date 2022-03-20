@@ -13,6 +13,7 @@ const postDisease = async (req, res) => {
     await req.user.save();
     res.status(StatusCodes.CREATED).send(kid);
   } catch (err) {
+    console.log(err)
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Nie udało się utworzyć choroby.' });
   }
 };
