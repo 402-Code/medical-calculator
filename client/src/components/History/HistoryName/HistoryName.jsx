@@ -3,7 +3,7 @@ import { Box, Avatar, Typography } from '@mui/material';
 import { UserContext } from '../../../context/UserContext';
 
 const HistoryName = ({ kidName }) => {
-  const { kids } = useContext(UserContext);
+  const { kids } = useContext(UserContext).user;
   const kidToDisplay = kids.find((kid) => kid.name === kidName);
 
   return (
