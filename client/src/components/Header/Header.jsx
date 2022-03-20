@@ -30,7 +30,7 @@ export default function Header({ darkMode, handleThemeChange }) {
 
   const handlePreviousPage = (e) => {
     e.preventDefault();
-    navigate('/');
+    navigate(-1);
   };
 
   const toggleMenu = (e) => {
