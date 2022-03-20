@@ -22,7 +22,8 @@ const signIn = async (req, res) => {
   const accessToken = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
   res.cookie('access-token', accessToken, {
     httpOnly: true,
-    sameSite: 'none'
+    sameSite: 'none',
+    secure: true
   });
   res.status(StatusCodes.OK).end();
 };
