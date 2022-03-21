@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InputLabel, Select, MenuItem, FormControl, Typography, Paper, FormHelperText, Button } from '@mui/material';
+import axios from 'axios';
 import DrugSummary from './DrugSummary/DrugSummary';
-import TEMP_DRUG from '../../mocks/tempDrug.json';
-
-const medicationList = JSON.parse(JSON.stringify(TEMP_DRUG));
 
 const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   const [activeSubstance, setActiveSubstance] = useState('');
   const [selectedMedicine, setSelectedMedicine] = useState('');
   const [requiredActivSubst, setRequiredActivSubst] = useState('');
   const [requiredMedicine, setRequiredMedicine] = useState('');
-  const [canDrugBeServed, setCanDrugBeServed] = useState(false);
+  const [activeDrug, setActiveDrug] = useState();
+  const [drugs, setDrugs] = useState([]);
   const navigate = useNavigate();
 
   const uniqueActiveSub = [];
-  // Reset selected drug on component render
+
+  const getDrugFromDataBase = async () => {
+    const response = await axios.get(`/api/drugs/${activeKid._id}`);
+    setDrugs(response.data);
+  };
+
   useEffect(() => {
     setSelectedDrug({});
-  }, []);
+    getDrugFromDataBase();
+    setSelectedMedicine('');
+    setActiveSubstance('');
+  }, [activeKid._id]);
 
-  const handleChangeSelect1 = (event) => {
+  const handleActiveSubstanceChange = (event) => {
     setActiveSubstance(event.target.value);
     setRequiredMedicine('');
   };
-  const handleChangeSelect2 = (event) => {
-    setSelectedMedicine(event.target.value);
+
+  const handleMedicationSelectChange = (event) => {
+    const selectedMedicine = event.target.value
+    if (selectedMedicine) {
+      const drug = drugs.find(({ name }) => name === selectedMedicine);
+      setActiveDrug(drug);
+    }
+    setSelectedMedicine(selectedMedicine);
   };
 
   function handleStartNewDrug() {
@@ -34,7 +47,7 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
     } else if (selectedMedicine === '') {
       setRequiredMedicine('Wybierz lekarstwo');
     } else {
-      medicationList.map((med) => (med.medication === selectedMedicine ? setSelectedDrug(med) : null));
+      drugs.map((med) => (med.name === selectedMedicine ? setSelectedDrug(med) : null));
       navigate(`/history/${activeKid.name}`);
     }
   }
@@ -47,6 +60,8 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
     }
   };
 
+  const canDrugBeServed = activeDrug?.isApplicable;
+
   return (
     <>
       <Paper elevation={16} square sx={{ pb: 2, px: 2, boxShadow: 'none' }}>
@@ -58,15 +73,16 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
           <Select
             value={activeSubstance}
             label="Substancja czynna"
-            onChange={handleChangeSelect1}
+            onChange={handleActiveSubstanceChange}
             onFocus={() => setRequiredActivSubst('')}
+            defaultValue=""
           >
-            {medicationList.map((med) => {
-              if (!uniqueActiveSub.includes(med.active_substance)) {
-                uniqueActiveSub.push(med.active_substance);
+            {drugs.map((med) => {
+              if (!uniqueActiveSub.includes(med.activeIngredient)) {
+                uniqueActiveSub.push(med.activeIngredient);
                 return (
-                  <MenuItem value={med.active_substance} key={med.active_substance}>
-                    {med.active_substance}
+                  <MenuItem value={med.activeIngredient} key={med.activeIngredient}>
+                    {med.activeIngredient}
                   </MenuItem>
                 );
               }
@@ -80,14 +96,15 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
           <Select
             value={selectedMedicine}
             label="Lekarstwo"
-            onChange={handleChangeSelect2}
+            onChange={handleMedicationSelectChange}
             onFocus={handleErrorSelect2}
+            defaultValue=""
           >
-            {medicationList.map((med) => {
-              if (med.active_substance === activeSubstance) {
+            {drugs.map((med) => {
+              if (med.activeIngredient === activeSubstance) {
                 return (
-                  <MenuItem value={med.medication} key={med.medication}>
-                    {med.medication}
+                  <MenuItem value={med.name} key={med.name}>
+                    {med.name}
                   </MenuItem>
                 );
               }
@@ -101,7 +118,7 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
         activeKid={activeKid}
         selectedMedicine={selectedMedicine}
         canDrugBeServed={canDrugBeServed}
-        setCanDrugBeServed={setCanDrugBeServed}
+        activeDrug={activeDrug}
       />
       {canDrugBeServed ? (
         <Button sx={{ my: 3, mx: 'auto', display: 'table' }} variant="contained" onClick={handleStartNewDrug}>

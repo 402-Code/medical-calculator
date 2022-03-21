@@ -3,6 +3,6 @@ import getDrugs from './getDrugs';
 
 const drugRouter = Router();
 
-drugRouter.get('/', getDrugs);
+drugRouter.get('/:kidId', getDrugs);
 
 export default drugRouter;
