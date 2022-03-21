@@ -7,6 +7,7 @@ const scheduleApplicationsArray = (noOfPlannedApplications, lastApplicationDate,
   const nextDose = {
     minutes: lastApplicationDate.getMinutes(),
     drugName: drug.name,
+    drugId: drug._id,
     dose: 333
   };
   // eslint-disable-next-line no-plusplus

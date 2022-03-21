@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 const postDrugApplication = async (req, res) => {
-  const drugApplication = { drugId: req.body.appliedDrugId };
+  const drugApplication = { drugId: req.body.drugId };
 
   let foundedDisease;
   req.user.kids.forEach((kid) => {
