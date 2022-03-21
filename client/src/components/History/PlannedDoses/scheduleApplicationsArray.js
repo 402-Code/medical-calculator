@@ -3,18 +3,18 @@
 const scheduleApplicationsArray = (noOfPlannedApplications, lastApplicationDate, drug) => {
   const plannedArray = [];
 
-  let hour = lastApplicationDate.getHours();
+  const date = lastApplicationDate;
   const nextDose = {
-    minutes: lastApplicationDate.getMinutes(),
     drugName: drug.name,
     drugId: drug._id,
     dose: 333
   };
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < noOfPlannedApplications; i++) {
-    hour += parseInt(drug.interval, 10);
-    if (hour > 24) hour -= 24;
-    plannedArray.push({ hour, ...nextDose });
+    date.setHours(date.getHours() + drug.interval);
+    const hourAndMinutes = date.toTimeString().slice(0, 5);
+    plannedArray.push({ hourAndMinutes, ...nextDose });
+    console.log(plannedArray);
   }
   return plannedArray;
 };

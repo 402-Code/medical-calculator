@@ -77,9 +77,7 @@ const PlannedDoses = ({ kidName }) => {
           <TableBody>
             {plannedApplications.map((row, index) => (
               <TableRow key={index}>
-                <TableCell>
-                  {row.hour}:{row.minutes}
-                </TableCell>
+                <TableCell>{row.hourAndMinutes}</TableCell>
                 <TableCell>{row.drugName}</TableCell>
                 <TableCell>{row.dose}</TableCell>
               </TableRow>
