@@ -1,6 +1,6 @@
 const routes = {
   signUp: '/',
-  signIn: '/sing-in',
+  signIn: '/sign-in',
   findDrug: '/findDrug',
   addKid: '/addkid',
   editKid: '/edit/:kidname',

@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import './applicationRequirement';
+import './schedulingPolicy';
 
 const drugSchema = new mongoose.Schema({
   activeIngredient: {
@@ -13,8 +15,16 @@ const drugSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-  applicationRequirement: mongoose.SchemaTypes.ObjectId,
-  schedulingPolicy: mongoose.SchemaTypes.Array,
+  applicationRequirement: {
+    required: true,
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'applicationrequirements'
+  },
+  schedulingPolicy: {
+    required: true,
+    type: mongoose.SchemaTypes.Array,
+    ref: 'schedulingpolicies'
+  },
   contradictions: {
     type: String,
     default: ''
