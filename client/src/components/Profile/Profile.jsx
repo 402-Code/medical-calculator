@@ -80,13 +80,13 @@ function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = ctx.user.id;
-    const kidId = ctx.user.kids.find((kid) => kid.name === kidname)._id;
     const kid = { name, height, weight, gender, avatar, dateOfBirth };
 
-    if (kidname === undefined) {
-      await axios.post(`/api/users/${userId}/kids`, kid);
-    } else {
+    if (kidname) {
+      const kidId = ctx.user.kids.find((kid) => kid.name === kidname)._id;
       await axios.put(`/api/users/${userId}/kids/${kidId}`, kid);
+    } else {
+      await axios.post(`/api/users/${userId}/kids`, kid);
     }
 
     await ctx.refresh();
@@ -129,7 +129,7 @@ function Profile() {
           sx={{ m: 1, width: 220, backgroundColor: 'primary' }}
           InputProps={{ inputProps: { max: today } }}
           InputLabelProps={{ shrink: true }}
-          value={dateOfBirth}
+          value={dateOfBirth.substring(0, 10)}
           onChange={(e) => setDateOfBirth(e.target.value)}
           required
         />

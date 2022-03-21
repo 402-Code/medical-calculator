@@ -9,8 +9,8 @@ import { authMiddleware } from '../middlewares/auth';
 const apiRouter = Router();
 
 apiRouter.use('/auth', authRouter);
+apiRouter.use('/users', authMiddleware, userRouter);
 apiRouter.use('/drugs', authMiddleware, drugRouter);
-apiRouter.use('/users', userRouter);
 apiRouter.use('/diseases', authMiddleware, diseaseRouter);
 apiRouter.use('/kids', authMiddleware, kidRouter);
 
