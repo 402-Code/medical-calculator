@@ -13,6 +13,7 @@ import Header from './components/Header/Header';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import RequireAuth from './components/RequireAuth/RequireAuth';
+import Error404 from './components/Error404/Error404';
 
 function App() {
   const [selectedDrug, setSelectedDrug] = useState({});
@@ -49,6 +50,7 @@ function App() {
             <Route path={routes.editKid} element={<Profile />} />
             <Route path={routes.history} element={<History drug={selectedDrug} />} />
           </Route>
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </RequireAgreement>
     </ThemeProvider>

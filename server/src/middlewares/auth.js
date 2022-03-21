@@ -13,7 +13,7 @@ export async function authMiddleware(req, res, next) {
 
     const user = await User.findById(payload._id);
     req.user = user;
-
+  
     return next();
   } catch (err) {
     res.status(401).send({ message: 'Brak autoryzacji' });

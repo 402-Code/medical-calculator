@@ -11,7 +11,7 @@ const apiRouter = Router();
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/drugs', authMiddleware, drugRouter);
 apiRouter.use('/users', userRouter);
-apiRouter.use('/diseases', diseaseRouter);
-apiRouter.use('/kids', authMiddleware, kidRouter)
+apiRouter.use('/diseases', authMiddleware, diseaseRouter);
+apiRouter.use('/kids', authMiddleware, kidRouter);
 
 export default apiRouter;

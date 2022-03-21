@@ -1,10 +1,7 @@
-﻿import { StatusCodes } from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 const getAllKids = async (req, res) => {
   try {
-    // const kids = req.user.kids
-
-    // res.send(kids);
     const users = req.user;
     res.send(users.kids);
   } catch (error) {

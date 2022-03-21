@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Typography, Paper } from '@mui/material';
-
 import MedicationCantBeServed from './MedicationCantBeServed';
 import MedicationInfo from './MedicationInfo';
 

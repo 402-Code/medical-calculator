@@ -18,7 +18,7 @@ const NewDragScreen = ({ setSelectedDrug }) => {
     })();
   }, [user]);
 
-  if (kids.length > 0) {
+  if (kids?.length > 0 && activeKid) {
     return (
       <>
         <KidSelect activeKid={activeKid} setActiveKid={setActiveKid} kids={kids} />

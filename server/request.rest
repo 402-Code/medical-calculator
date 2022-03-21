@@ -16,11 +16,11 @@ GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44
 Content-Type: application/json
 
 ### all kids for a user 
-GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids
+GET http://localhost:3000/api/users/622b629c334dde3042611fe3/kids
 Content-Type: application/json
 
 ### get one kid 
-GET http://localhost:3000/api/users/621e8cb924b74f4dd1952d44/kids/621f7825eff8eac9bfda2345
+GET http://localhost:3000/api/users/622b629c334dde3042611fe3/kids/622b67420a0ac394fdcbb496
 Content-Type: application/json
 
 ### delete kid for a user 
