@@ -3,6 +3,7 @@ import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Button } from 
 import { UserContext } from '../../../context/UserContext';
 import getLastApplication from './getLastApplication';
 import scheduleApplicationsArray from './scheduleApplicationsArray';
+import LastDoseTableRow from './LastDoseTableRow';
 
 const NO_OF_PLANNED_APPLICATIONS = 4;
 
@@ -29,23 +30,24 @@ const PlannedDoses = ({ kidName }) => {
       <Table>
         <TableHead>
           <TableRow>
+            <TableCell />
             <TableCell>Godz.</TableCell>
             <TableCell>Lek</TableCell>
             <TableCell>Dawka</TableCell>
-            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>
+          <LastDoseTableRow kidName={kidName} />
           {plannedApplications.map((row) => (
             <TableRow key={row.hour} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell>
+                <Button>Podaj</Button>
+              </TableCell>
               <TableCell>
                 {row.hour}:{row.minutes}
               </TableCell>
               <TableCell>{row.drugName}</TableCell>
               <TableCell>{row.dose}</TableCell>
-              <TableCell>
-                <Button>Podaj</Button>
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>
