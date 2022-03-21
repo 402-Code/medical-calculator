@@ -1,15 +1,24 @@
-import React from 'react';
-import { Alert, AlertTitle } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Alert } from '@mui/material';
+import { differenceInMonths } from 'date-fns'
 
-const MedicationCantBeServed = ({ activeKid, selectedDrug }) => {
-  const a = activeKid.gender === 'female' ? 'mała' : 'mały';
+const MedicationCantBeServed = ({ activeKid, selectedDrug = {} }) => {
+  const { applicationRequirement } = selectedDrug;
+  const [age, setAge] = useState()
+  const kidsDateOfBirth = new Date(activeKid.dateOfBirth)
+  const kidsAgeInMonths = differenceInMonths(new Date(), kidsDateOfBirth)
+
+  useEffect(() => {
+    if (applicationRequirement?.minAge >= kidsAgeInMonths) {
+      (setAge(`poniżej ${applicationRequirement?.minAge}`))
+    } else if (applicationRequirement?.maxAge <= kidsAgeInMonths) {
+      (setAge(`powyżej ${applicationRequirement?.maxAge}`))
+    }
+  })
+
   return (
     <Alert severity="warning" variant="outlined" sx={{ fontSize: 'large' }}>
-      <AlertTitle sx={{ fontSize: 'large' }}>
-        {activeKid.name} jest za {a}
-      </AlertTitle>
-      Wybranego leku <strong>nie można</strong> podać dziecku poniżej {selectedDrug.min_access_age_in_months}-go
-      miesiąca życia.
+      Wybranego leku <strong>nie można</strong> podawać dziecku {age} miesiecy!
     </Alert>
   );
 };
