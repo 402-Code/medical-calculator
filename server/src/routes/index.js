@@ -10,7 +10,7 @@ const apiRouter = Router();
 
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/drugs', drugRouter);
-apiRouter.use('/users', userRouter);
+apiRouter.use('/users', authMiddleware, userRouter);
 apiRouter.use('/diseases', authMiddleware, diseaseRouter);
 apiRouter.use('/kids', authMiddleware, kidRouter);
 
