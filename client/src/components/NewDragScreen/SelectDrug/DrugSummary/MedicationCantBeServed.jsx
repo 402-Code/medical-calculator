@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import { Alert, AlertTitle } from '@mui/material';
-import ageInMonths from '../../../../utils/ageInMonths';
+import React, { useState, useEffect } from 'react';
+import { Alert } from '@mui/material';
+import { differenceInMonths } from 'date-fns'
 
 const MedicationCantBeServed = ({ activeKid, selectedDrug = {} }) => {
   const { applicationRequirement } = selectedDrug;
-  const a = activeKid.gender === 'female' ? 'mała' : 'mały';
-  const [age1, setAge] = useState('');
+  const [age, setAge] = useState()
+  const kidsDateOfBirth = new Date(activeKid.dateOfBirth)
+  const kidsAgeInMonths = differenceInMonths(new Date(), kidsDateOfBirth)
 
-  if (ageInMonths(activeKid) <= applicationRequirement?.minAge) setAge(applicationRequirement?.minAge);
-
-  if (ageInMonths(activeKid) >= applicationRequirement?.maxAge) setAge(applicationRequirement?.maxAge);
+  useEffect(() => {
+    if (applicationRequirement?.minAge >= kidsAgeInMonths) {
+      (setAge(`poniżej ${applicationRequirement?.minAge}`))
+    } else if (applicationRequirement?.maxAge <= kidsAgeInMonths) {
+      (setAge(`powyżej ${applicationRequirement?.maxAge}`))
+    }
+  })
 
   return (
     <Alert severity="warning" variant="outlined" sx={{ fontSize: 'large' }}>
-      <AlertTitle sx={{ fontSize: 'large' }}>
-        {activeKid.name} jest za {a}
-      </AlertTitle>
-      Wybranego leku <strong>nie można</strong> podać dziecku poniżej {age1}-go miesiąca życia.
+      Wybranego leku <strong>nie można</strong> podawać dziecku {age} miesiecy!
     </Alert>
   );
 };

@@ -23,21 +23,22 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   useEffect(() => {
     setSelectedDrug({});
     getDrugFromDataBase();
+    setSelectedMedicine('');
+    setActiveSubstance('');
   }, [activeKid._id]);
-
-  useEffect(() => {
-    if (selectedMedicine) {
-      const drug = drugs.find(({ name }) => name === selectedMedicine);
-      setActiveDrug(drug);
-    }
-  }, [drugs, selectedMedicine]);
 
   const handleActiveSubstanceChange = (event) => {
     setActiveSubstance(event.target.value);
     setRequiredMedicine('');
   };
+
   const handleMedicationSelectChange = (event) => {
-    setSelectedMedicine(event.target.value);
+    const selectedMedicine = event.target.value
+    if (selectedMedicine) {
+      const drug = drugs.find(({ name }) => name === selectedMedicine);
+      setActiveDrug(drug);
+    }
+    setSelectedMedicine(selectedMedicine);
   };
 
   function handleStartNewDrug() {
