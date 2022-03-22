@@ -9,7 +9,6 @@ const LastAppliedDose = ({ lastApplication, drug }) => {
     setLastApplicationDate(date);
   }, [lastApplication]);
 
-  console.log(lastApplicationDate.toLocaleString());
   return (
     <Paper elevation={16} square sx={{ mb: 2, pb: 2, px: 2, boxShadow: 'none' }}>
       <Typography variant="h5" component="h2" sx={{ py: 2 }}>
