@@ -5,9 +5,10 @@ import Slide from '@mui/material/Slide';
 import SymSelector from './SymSelector';
 import { UserContext } from '../../../context/UserContext';
 
-function Transition(props, ref) {
+// eslint-disable-next-line prefer-arrow-callback
+const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
-}
+});
 
 export default function SymScreen({ kidname, open, setOpen }) {
   const userContext = useContext(UserContext);
@@ -23,7 +24,7 @@ export default function SymScreen({ kidname, open, setOpen }) {
   };
 
   return (
-    <Dialog fullScreen open={open} onClose={() => setOpen(false)} TransitionComponent={forwardRef(Transition)}>
+    <Dialog fullScreen open={open} onClose={() => setOpen(false)} TransitionComponent={Transition}>
       <SymSelector open={open} onCancel={() => setOpen(false)} onSave={handleSave} />
     </Dialog>
   );

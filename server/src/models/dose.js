@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const doseSchema = new mongoose.Schema({
-    unit: Number,
+    unit: String,
     value: Number
 });
 
