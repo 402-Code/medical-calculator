@@ -4,25 +4,27 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import SymSelector from './SymSelector';
-import {UserContext} from '../../../context/UserContext';
+import { UserContext } from '../../../context/UserContext';
 
-const Transition = (props, ref) => {
+function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
-};
+}
 
-export default function SymScreen({kidname}) {
+export default function SymScreen({ kidname }) {
   const [open, setOpen] = useState(false);
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const kid = userContext.user.kids.find(kid => kid.name === kidname)
+  const kid = userContext.user.kids.find((kid) => kid.name === kidname);
+  console.log('🚀 ~ file: SymScreen.jsx ~ line 20 ~ SymScreen ~ kid', kid);
   const handleSave = (selected) => {
-     axios.post(`api/diseases/${kid.diseases[0]._id}/symptom`, { selected })
-    .then((res) => console.log(res))
-    .catch(err => console.log(err));
-     
-  setOpen(false);
+    axios
+      .post(`api/diseases/${kid.diseases[0]._id}/symptom`, { selected })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    setOpen(false);
   };
 
   return (

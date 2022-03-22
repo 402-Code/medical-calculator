@@ -5,7 +5,7 @@ const addKid = async (req, res) => {
     const kid = { ...req.body };
     const user = req.user;
     const isNameAlreadyExist = user.kids.some(({ name }) => name.toLowerCase() === kid.name.toLowerCase());
-    if (isNameAlreadyExist) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Imię już istnieję' });
+    if (isNameAlreadyExist) return res.status(StatusCodes.BAD_REQUEST).send({ message: 'Imię już istnieje' });
     user.kids.push(kid);
     await user.save();
     res.status(StatusCodes.CREATED).send(user);
