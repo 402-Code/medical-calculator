@@ -7,7 +7,7 @@ const drugApplicationSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   },
   drugId: {
     type: mongoose.SchemaTypes.ObjectId,

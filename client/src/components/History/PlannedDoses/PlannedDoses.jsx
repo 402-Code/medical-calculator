@@ -69,7 +69,7 @@ const PlannedDoses = ({ kidName }) => {
           </ButtonGroup>
         </Box>
       </PlannedDosesTable>
-      <SymScreen open={symptomsOpen} setOpen={setSymptomsOpen} />
+      <SymScreen open={symptomsOpen} setOpen={setSymptomsOpen} kidname={kidName} />
     </>
   );
 };
