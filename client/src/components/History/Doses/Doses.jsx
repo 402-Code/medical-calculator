@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Checkbox, Typography, Box, TextField, InputAdornment, Card } from '@mui/material';
 import './Doses.scss';
 import SymScreen from '../Symptoms/SymScreen';
@@ -19,11 +20,11 @@ const Doses = () => {
 
   const currentTime = `${hour}:${minutes}`;
   const defaultTime = ['8:00', '14:00', '20:00', '02:00'];
-
+  const {kidname} = useParams()
   const dose = defaultTime.map((item, key) => {
     const [checked, setChecked] = React.useState(false);
     const [time, setTime] = React.useState(0);
-
+   
     useEffect(() => {
       if (!checked) {
         setTime(item);
@@ -31,7 +32,7 @@ const Doses = () => {
         setTime(currentTime);
       }
     }, [checked]);
-
+  
     return (
       <Card elevation={16} key={key} value={item} className="doses__items" component="div">
         <Typography key={key} className="doses__item" variant="subtitle2" component="div">
@@ -60,6 +61,7 @@ const Doses = () => {
           aria-describedby="standard--helper-text"
         />
         <SymScreen
+          kidname = {kidname}
           symptoms={[]}
           onChange={(a) => {
             console.log('selected symptoms', a);
