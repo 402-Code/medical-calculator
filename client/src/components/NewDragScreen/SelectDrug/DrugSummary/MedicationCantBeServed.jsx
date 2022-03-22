@@ -4,21 +4,21 @@ import { differenceInMonths } from 'date-fns'
 
 const MedicationCantBeServed = ({ activeKid, selectedDrug = {} }) => {
   const { applicationRequirement } = selectedDrug;
-  const [age, setAge] = useState()
+  const [alert, setAlert] = useState()
   const kidsDateOfBirth = new Date(activeKid.dateOfBirth)
   const kidsAgeInMonths = differenceInMonths(new Date(), kidsDateOfBirth)
 
   useEffect(() => {
     if (applicationRequirement?.minAge >= kidsAgeInMonths) {
-      (setAge(`poniżej ${applicationRequirement?.minAge}`))
+      (setAlert(`poniżej ${applicationRequirement?.minAge} miesięcy`))
     } else if (applicationRequirement?.maxAge <= kidsAgeInMonths) {
-      (setAge(`powyżej ${applicationRequirement?.maxAge}`))
+      (setAlert(`powyżej ${applicationRequirement?.maxAge} miesięcy`))
     }
   })
 
   return (
     <Alert severity="warning" variant="outlined" sx={{ fontSize: 'large' }}>
-      Wybranego leku <strong>nie można</strong> podawać dziecku {age} miesiecy!
+      Wybranego leku <strong>nie można</strong> podawać dziecku {alert}!
     </Alert>
   );
 };
