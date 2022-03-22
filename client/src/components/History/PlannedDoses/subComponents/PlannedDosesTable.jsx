@@ -11,6 +11,7 @@ const PlannedDosesTable = ({ plannedApplications, children }) => {
         <Table size="small">
           <TableHead>
             <TableRow>
+              <TableCell>Dzień</TableCell>
               <TableCell>Godz.</TableCell>
               <TableCell>Lek</TableCell>
               <TableCell>Dawka</TableCell>
@@ -19,6 +20,7 @@ const PlannedDosesTable = ({ plannedApplications, children }) => {
           <TableBody>
             {plannedApplications.map((row, index) => (
               <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell>{row.day}</TableCell>
                 <TableCell>{row.hoursAndMinutes}</TableCell>
                 <TableCell>{row.drugName}</TableCell>
                 <TableCell>{row.dose}</TableCell>

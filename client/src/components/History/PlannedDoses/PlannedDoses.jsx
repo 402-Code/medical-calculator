@@ -36,6 +36,7 @@ const PlannedDoses = ({ kidName }) => {
       new Date(lastApplication.createdAt),
       drug
     );
+    console.log(plannedArray);
 
     setPlannedApplications(plannedArray);
   }, [lastApplication]);

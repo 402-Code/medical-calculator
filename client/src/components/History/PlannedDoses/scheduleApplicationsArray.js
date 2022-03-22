@@ -13,7 +13,8 @@ const scheduleApplicationsArray = (noOfPlannedApplications, lastApplicationDate,
   for (let i = 0; i < noOfPlannedApplications; i++) {
     date.setHours(date.getHours() + drug.interval);
     const hoursAndMinutes = date.toTimeString().slice(0, 5);
-    plannedArray.push({ hoursAndMinutes, ...nextDose });
+    const day = date.toLocaleString().slice(0, 5);
+    plannedArray.push({ day, hoursAndMinutes, ...nextDose });
   }
   return plannedArray;
 };
