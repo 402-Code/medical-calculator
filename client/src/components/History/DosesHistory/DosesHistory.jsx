@@ -3,7 +3,7 @@ import { Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/ma
 import axios from 'axios';
 import { UserContext } from '../../../context/UserContext';
 
-const Doses = ({ kidName }) => {
+const DosesHistory = ({ kidName }) => {
   const [disease, setDisease] = useState([]);
   const [drug, setDrug] = useState('');
   const { user } = useContext(UserContext);
@@ -21,7 +21,7 @@ const Doses = ({ kidName }) => {
 
   return (
     <Paper elevation={16} square sx={{ pb: 2, px: 2, boxShadow: 'none' }}>
-      <Table>
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Godzina</TableCell>
@@ -43,4 +43,4 @@ const Doses = ({ kidName }) => {
   );
 };
 
-export default Doses;
+export default DosesHistory;
