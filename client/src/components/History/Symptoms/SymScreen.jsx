@@ -1,6 +1,5 @@
-import React, { forwardRef, useContext, useState } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import axios from 'axios';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import SymSelector from './SymSelector';
@@ -10,14 +9,10 @@ function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 }
 
-export default function SymScreen({ kidname }) {
-  const [open, setOpen] = useState(false);
+export default function SymScreen({ kidname, open, setOpen }) {
   const userContext = useContext(UserContext);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
   const kid = userContext.user.kids.find((kid) => kid.name === kidname);
-  console.log('🚀 ~ file: SymScreen.jsx ~ line 20 ~ SymScreen ~ kid', kid);
   const handleSave = (selected) => {
     axios
       .post(`api/diseases/${kid.diseases[0]._id}/symptom`, { selected })
@@ -28,13 +23,8 @@ export default function SymScreen({ kidname }) {
   };
 
   return (
-    <div>
-      <Button sx={{ color: '#2196F3' }} className="doses__item" onClick={handleClickOpen}>
-        Dodaj
-      </Button>
-      <Dialog fullScreen open={open} onClose={() => setOpen(false)} TransitionComponent={forwardRef(Transition)}>
-        <SymSelector open={open} onCancel={() => setOpen(false)} onSave={handleSave} />
-      </Dialog>
-    </div>
+    <Dialog fullScreen open={open} onClose={() => setOpen(false)} TransitionComponent={forwardRef(Transition)}>
+      <SymSelector open={open} onCancel={() => setOpen(false)} onSave={handleSave} />
+    </Dialog>
   );
 }
