@@ -5,6 +5,7 @@ import axios from 'axios';
 const getLastApplication = async (user, kidName) => {
   const kid = user.kids.find((kid) => kid.name === kidName);
   const lastApplication = kid.diseases[0].drugApplications.slice(-1)[0];
+  console.log(kid.diseases[0].drugApplications);
 
   const { data } = await axios.get('/api/drugs');
   const drug = data.find((drug) => drug._id === kid.diseases[0].initialDrug);

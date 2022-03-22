@@ -17,16 +17,18 @@ const PlannedDoses = ({ kidName }) => {
   const [drug, setDrug] = useState({});
   const [plannedApplications, setPlannedApplications] = useState([]);
   const [activeDiseaseId, setActiveDiseaseId] = useState('');
-  const { user } = useContext(UserContext);
+  const { user, refresh } = useContext(UserContext);
   const [symptomsOpen, setSymptomsOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
+      await refresh();
       const { lastApplication, diseaseId, drug } = await getLastApplication(user, kidName);
       setDrug(drug);
       setActiveDiseaseId(diseaseId);
       setLastApplication(lastApplication);
       setIsLoading(false);
+      console.log('GET lastApplication useEffect');
     })();
   }, []);
 
