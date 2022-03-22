@@ -20,13 +20,13 @@ const SymList = ({ symptoms, onChange }) => {
   return (
     <Box sx={{ '& button': { m: 0.5 } }}>
       <div>
-        {symptomsList.map((symptom, index) => (
+        {symptomsList.map((symptom) => (
           <Symptom
             key={symptom}
             name={symptom}
-            selected={symptoms.includes(index)}
+            selected={symptoms.includes(symptom)}
             onSelect={() =>
-              onChange((state) => (state.includes(index) ? state.filter((v) => v !== index) : [...state, index]))
+              onChange((state) => (state.includes(symptom) ? state.filter((v) => v !== symptom) : [...state, symptom]))
             }
           />
         ))}
