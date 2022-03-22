@@ -22,13 +22,11 @@ const PlannedDoses = ({ kidName }) => {
 
   useEffect(() => {
     (async () => {
-      await refresh();
       const { lastApplication, diseaseId, drug } = await getLastApplication(user, kidName);
       setDrug(drug);
       setActiveDiseaseId(diseaseId);
       setLastApplication(lastApplication);
       setIsLoading(false);
-      console.log('GET lastApplication useEffect');
     })();
   }, []);
 
@@ -48,6 +46,7 @@ const PlannedDoses = ({ kidName }) => {
         drugId: plannedApplications[0].drugId
       });
       setLastApplication(response.data.drugApplications.slice(-1)[0]);
+      await refresh();
     } catch (err) {
       // TODO - co tu zrobić
     }
@@ -70,7 +69,7 @@ const PlannedDoses = ({ kidName }) => {
           </ButtonGroup>
         </Box>
       </PlannedDosesTable>
-      <SymScreen open={symptomsOpen} setOpen={setSymptomsOpen} />
+      <SymScreen open={symptomsOpen} setOpen={setSymptomsOpen} kidname={kidName} />
     </>
   );
 };
