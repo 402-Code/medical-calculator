@@ -16,7 +16,6 @@ import RequireAuth from './components/RequireAuth/RequireAuth';
 import Error404 from './components/Error404/Error404';
 
 function App() {
-  const [selectedDrug, setSelectedDrug] = useState({});
   const [darkMode, setDarkMode] = useState(true);
 
   const paletteType = darkMode ? 'dark' : 'light';
@@ -45,10 +44,10 @@ function App() {
           <Route path={routes.signUp} element={<SignUp />} />
           <Route path={routes.signIn} element={<SignIn />} />
           <Route element={<RequireAuth />}>
-            <Route path={routes.findDrug} element={<NewDragScreen setSelectedDrug={setSelectedDrug} />} />
+            <Route path={routes.findDrug} element={<NewDragScreen />} />
             <Route path={routes.addKid} element={<Profile />} />
             <Route path={routes.editKid} element={<Profile />} />
-            <Route path={routes.history} element={<History drug={selectedDrug} />} />
+            <Route path={routes.history} element={<History />} />
           </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>

@@ -4,7 +4,7 @@ import { InputLabel, Select, MenuItem, FormControl, Typography, Paper, FormHelpe
 import axios from 'axios';
 import DrugSummary from './DrugSummary/DrugSummary';
 
-const SelectDrug = ({ setSelectedDrug, activeKid }) => {
+const SelectDrug = ({ activeKid }) => {
   const [activeSubstance, setActiveSubstance] = useState('');
   const [selectedMedicine, setSelectedMedicine] = useState('');
   const [requiredActivSubst, setRequiredActivSubst] = useState('');
@@ -21,7 +21,6 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   };
 
   useEffect(() => {
-    setSelectedDrug({});
     getDrugFromDataBase();
     setSelectedMedicine('');
     setActiveSubstance('');
@@ -33,7 +32,7 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
   };
 
   const handleMedicationSelectChange = (event) => {
-    const selectedMedicine = event.target.value
+    const selectedMedicine = event.target.value;
     if (selectedMedicine) {
       const drug = drugs.find(({ name }) => name === selectedMedicine);
       setActiveDrug(drug);
@@ -41,16 +40,17 @@ const SelectDrug = ({ setSelectedDrug, activeKid }) => {
     setSelectedMedicine(selectedMedicine);
   };
 
-  function handleStartNewDrug() {
+  const handleStartNewDrug = async () => {
     if (selectedMedicine === '' && activeSubstance === '') {
       setRequiredActivSubst('Najpierw wybierz substancję czynną');
     } else if (selectedMedicine === '') {
       setRequiredMedicine('Wybierz lekarstwo');
     } else {
-      drugs.map((med) => (med.name === selectedMedicine ? setSelectedDrug(med) : null));
+      const drug = drugs.find(({ name }) => name === selectedMedicine);
+      const { data: disease } = await axios.post('api/diseases', { initialDrugId: drug._id, kidId: activeKid._id });
       navigate(`/history/${activeKid.name}`);
     }
-  }
+  };
 
   const handleErrorSelect2 = () => {
     if (activeSubstance === '') {

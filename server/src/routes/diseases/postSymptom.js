@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 
 const postSymptom = async (req, res) => {
-  const symptomsSpotted = { symptoms: req.body.appliedSymptoms };
+  const symptomsSpotted = { symptoms: req.body.selected };
   let foundedDisease;
   req.user.kids.forEach((kid) => {
     kid.diseases.forEach((disease) => {

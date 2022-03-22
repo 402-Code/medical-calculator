@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import SymList from './SymList';
 
-const SymSelector = ({ symptoms: initialSymptoms, onSave, onCancel }) => {
-  const [symptoms, setSymptoms] = useState(initialSymptoms);
-
+const SymSelector = ({ onSave, onCancel }) => {
+  const [symptoms, setSymptoms] = useState([]);
+  
   return (
     <>
       <AppBar sx={{ position: 'relative' }}>
