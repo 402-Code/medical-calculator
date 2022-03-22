@@ -1,10 +1,8 @@
 import React from 'react';
 import { List, ListItem, ListItemText, Divider, Typography } from '@mui/material';
-import singleDose from './toDisplay/singleDose';
 import doseInterval from './toDisplay/doseInterval';
-import maxDailyDose from './toDisplay/maxDailyDose';
 
-const MedicationInfo = ({ activeKid, selectedDrug }) => {
+const MedicationInfo = ({ selectedDrug }) => {
   return (
     <List sx={{ width: '100%', bgcolor: 'transparent', p: 0 }}>
       <Divider />
@@ -12,7 +10,7 @@ const MedicationInfo = ({ activeKid, selectedDrug }) => {
         <ListItemText
           primary={
             <Typography variant="body1" color="text.primary">
-              Pojedyńcza dawka: {singleDose(activeKid, selectedDrug)}
+              Pojedyńcza dawka: {selectedDrug.recommendedDose} mg
             </Typography>
           }
         />
@@ -32,7 +30,7 @@ const MedicationInfo = ({ activeKid, selectedDrug }) => {
         <ListItemText
           primary={
             <Typography variant="body1" color="text.primary">
-              Maksymalna dawka dzienna: {maxDailyDose(activeKid, selectedDrug)}
+              Maksymalna dawka dzienna: {selectedDrug.maximumDose} mg
             </Typography>
           }
         />
