@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import HistoryName from './HistoryName/HistoryName';
+import HistoryTabs from './Calendar/HistoryTabs';
 import PlannedDoses from './PlannedDoses/PlannedDoses';
-import Calendar from './Calendar/Calendar';
 import DosesHistory from './DosesHistory/DosesHistory';
 
 const History = () => {
@@ -10,9 +10,10 @@ const History = () => {
   return (
     <>
       <HistoryName kidName={params.kidname} />
-      <Calendar />
-      {/* <PlannedDoses kidName={params.kidname} /> */}
-      <DosesHistory kidName={params.kidname} />
+      <HistoryTabs
+        itemOne={<DosesHistory kidName={params.kidname} />}
+        itemTwo={<PlannedDoses kidName={params.kidname} />}
+      />
     </>
   );
 };
