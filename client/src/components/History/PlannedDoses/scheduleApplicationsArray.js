@@ -7,13 +7,13 @@ const scheduleApplicationsArray = (noOfPlannedApplications, lastApplicationDate,
   const nextDose = {
     drugName: drug.name,
     drugId: drug._id,
-    dose: 333
+    dose: `${drug?.schedulingPolicy[0]?.recommendedDose?.value}${drug?.schedulingPolicy[0]?.recommendedDose?.unit}`
   };
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < noOfPlannedApplications; i++) {
     date.setHours(date.getHours() + drug.interval);
-    const hoursAndMinutes = date.toTimeString().slice(0, 5);
-    const day = date.toLocaleString().slice(0, 5);
+    const hoursAndMinutes = date.toLocaleTimeString().slice(0, 5);
+    const day = `${date.getDate()}.${date.getMonth()}`;
     plannedArray.push({ day, hoursAndMinutes, ...nextDose });
   }
   return plannedArray;
