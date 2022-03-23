@@ -12,7 +12,7 @@ module.exports = {
     filename: 'bundle.[contenthash].js'
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new HtmlWebpackPlugin({ template: './src/index.html', favicon: './src/icons/favicon.ico' }),
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
     new EnvironmentPlugin({ SERVER_BASE_URL: 'http://localhost:3000' })

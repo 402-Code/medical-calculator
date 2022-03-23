@@ -7,8 +7,8 @@ const PlannedDosesTable = ({ plannedApplications, children }) => {
       <Typography variant="h5" component="h2" sx={{ py: 2 }}>
         Plan kolejnych dawek:
       </Typography>
-      <Paper variant="outlined" sx={{ background: 'none', boxShadow: 'none' }}>
-        <Table size="small">
+      <Paper variant="outlined" sx={{ background: 'none', boxShadow: 'none', borderRadius: 0 }}>
+        <Table stickyHeader size="small">
           <TableHead>
             <TableRow>
               <TableCell>Dzień</TableCell>

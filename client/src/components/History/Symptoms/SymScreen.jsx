@@ -11,15 +11,12 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 export default function SymScreen({ kidname, open, setOpen }) {
-  const userContext = useContext(UserContext);
+  const { user, refresh } = useContext(UserContext);
 
-  const kid = userContext.user.kids.find((kid) => kid.name === kidname);
-  const handleSave = (selected) => {
-    axios
-      .post(`api/diseases/${kid.diseases[0]._id}/symptom`, { selected })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-
+  const kid = user.kids.find((kid) => kid.name === kidname);
+  const handleSave = async (selected) => {
+    await axios.post(`api/diseases/${kid.diseases[0]._id}/symptom`, { selected });
+    await refresh();
     setOpen(false);
   };
 
