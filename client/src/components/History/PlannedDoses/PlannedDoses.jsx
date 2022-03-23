@@ -14,7 +14,7 @@ const NO_OF_PLANNED_APPLICATIONS = 4;
 const PlannedDoses = ({ kidName }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [lastApplication, setLastApplication] = useState({});
-  const [drug, setDrug] = useState({});
+  const [drug, setDrug] = useState({ schedulingPolicy: [] });
   const [plannedApplications, setPlannedApplications] = useState([]);
   const [activeDiseaseId, setActiveDiseaseId] = useState('');
   const { user, refresh } = useContext(UserContext);

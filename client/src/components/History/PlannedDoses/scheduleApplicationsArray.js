@@ -7,7 +7,7 @@ const scheduleApplicationsArray = (noOfPlannedApplications, lastApplicationDate,
   const nextDose = {
     drugName: drug.name,
     drugId: drug._id,
-    dose: 333
+    dose: `${drug?.schedulingPolicy[0]?.recommendedDose?.value}${drug?.schedulingPolicy[0]?.recommendedDose?.unit}`
   };
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < noOfPlannedApplications; i++) {

@@ -12,7 +12,14 @@ const HistoryTableBody = ({ historyArray, drug, page, rowsPerPage }) => {
               {new Date(row.createdAt).getDate()}.{new Date(row.createdAt).getMonth()}
             </TableCell>
             <TableCell>{new Date(row.createdAt).toLocaleTimeString().slice(0, 5)}</TableCell>
-            {row.drugId ? <TableCell>{drug.name}, 350mg</TableCell> : <TableCell>{row.symptoms.join(', ')}</TableCell>}
+            {row.drugId ? (
+              <TableCell>
+                {drug.name}, {drug.schedulingPolicy[0].recommendedDose.value}
+                {drug.schedulingPolicy[0].recommendedDose.unit}
+              </TableCell>
+            ) : (
+              <TableCell>{row.symptoms.join(', ')}</TableCell>
+            )}
           </TableRow>
         )
       )}
