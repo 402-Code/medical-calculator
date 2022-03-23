@@ -12,8 +12,8 @@ const scheduleApplicationsArray = (noOfPlannedApplications, lastApplicationDate,
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < noOfPlannedApplications; i++) {
     date.setHours(date.getHours() + drug.interval);
-    const hoursAndMinutes = date.toTimeString().slice(0, 5);
-    const day = date.toLocaleString().slice(0, 5);
+    const hoursAndMinutes = date.toLocaleTimeString().slice(0, 5);
+    const day = `${date.getDate()}.${date.getMonth()}`;
     plannedArray.push({ day, hoursAndMinutes, ...nextDose });
   }
   return plannedArray;

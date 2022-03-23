@@ -1,38 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TableFooter,
-  TablePagination,
-  Paper,
-  Typography
-} from '@mui/material';
+import { Table, TableHead, TableRow, TableCell, TableFooter, TablePagination, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import TablePaginationActions from './subComponents/TablePaginationActions';
 import { UserContext } from '../../../context/UserContext';
 import LoadingInProcess from '../../LoadingInProcess/LoadingInProcess';
+import HistoryTableBody from './subComponents/HistoryTableBody';
 
 const DosesHistory = ({ kidName }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [historyArray, setHistoryArray] = useState([]);
   const [drug, setDrug] = useState('');
   const { user } = useContext(UserContext);
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - historyArray.length) : 0;
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
   useEffect(() => {
     (async () => {
@@ -51,6 +29,16 @@ const DosesHistory = ({ kidName }) => {
     })();
   }, []);
 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   return isLoading ? (
     <LoadingInProcess />
   ) : (
@@ -65,28 +53,9 @@ const DosesHistory = ({ kidName }) => {
               <TableCell>Data</TableCell>
               <TableCell>Godzina</TableCell>
               <TableCell>Lek / Symptomy</TableCell>
-              <TableCell>Dawka</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? historyArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : historyArray
-            ).map((row) => (
-              <TableRow key={row._id}>
-                <TableCell>{new Date(row.createdAt).toLocaleString().slice(0, 5)}</TableCell>
-                <TableCell>{new Date(row.createdAt).toLocaleString().slice(12, 17)}</TableCell>
-                {row.drugId ? <TableCell>{drug.name}</TableCell> : <TableCell>{row.symptoms.join(', ')}</TableCell>}
-                {row.drugId ? <TableCell>352</TableCell> : <TableCell />}
-              </TableRow>
-            ))}
-
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
+          <HistoryTableBody historyArray={historyArray} drug={drug} page={page} rowsPerPage={rowsPerPage} />
           <TableFooter>
             <TableRow>
               <TablePagination
