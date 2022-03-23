@@ -19,7 +19,7 @@ function Kid({ kid }) {
       </CardContent>
       <CardActions sx={{ pt: 0 }}>
         <ButtonGroup variant="contained">
-          <Button component={Link} to={`/history/${kid.name}`}>
+          <Button component={Link} to={`/history/${kid.name}`} disabled={kid.diseases.length < 1}>
             Historia dawkowania
           </Button>
           <Button component={Link} to={`/edit/${kid.name}`}>
