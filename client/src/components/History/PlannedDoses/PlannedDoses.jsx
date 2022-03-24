@@ -19,7 +19,6 @@ const PlannedDoses = ({ kidName }) => {
   const [activeDiseaseId, setActiveDiseaseId] = useState('');
   const { user, refresh } = useContext(UserContext);
   const [symptomsOpen, setSymptomsOpen] = useState(false);
-
   useEffect(() => {
     (async () => {
       const { lastApplication, diseaseId, drug } = await getLastApplication(user, kidName);
