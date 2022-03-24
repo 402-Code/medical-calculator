@@ -6,14 +6,11 @@ import PlannedDoses from './PlannedDoses/PlannedDoses';
 import DosesHistory from './DosesHistory/DosesHistory';
 
 const History = () => {
-  const params = useParams();
+  const { kidname } = useParams();
   return (
     <>
-      <HistoryName kidName={params.kidname} />
-      <HistoryTabs
-        itemOne={<DosesHistory kidName={params.kidname} />}
-        itemTwo={<PlannedDoses kidName={params.kidname} />}
-      />
+      <HistoryName kidName={kidname} />
+      <HistoryTabs itemOne={<DosesHistory kidName={kidname} />} itemTwo={<PlannedDoses kidName={kidname} />} />
     </>
   );
 };

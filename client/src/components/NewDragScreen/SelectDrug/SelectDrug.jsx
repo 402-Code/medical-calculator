@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InputLabel, Select, MenuItem, FormControl, Typography, Paper, FormHelperText, Button } from '@mui/material';
 import axios from 'axios';
 import DrugSummary from './DrugSummary/DrugSummary';
+import { UserContext } from '../../../context/UserContext';
 
 const SelectDrug = ({ activeKid }) => {
   const [activeSubstance, setActiveSubstance] = useState('');
@@ -11,6 +12,7 @@ const SelectDrug = ({ activeKid }) => {
   const [requiredMedicine, setRequiredMedicine] = useState('');
   const [activeDrug, setActiveDrug] = useState();
   const [drugs, setDrugs] = useState([]);
+  const { refresh } = useContext(UserContext);
   const navigate = useNavigate();
 
   const uniqueActiveSub = [];
@@ -47,7 +49,8 @@ const SelectDrug = ({ activeKid }) => {
       setRequiredMedicine('Wybierz lekarstwo');
     } else {
       const drug = drugs.find(({ name }) => name === selectedMedicine);
-      const { data: disease } = await axios.post('api/diseases', { initialDrugId: drug._id, kidId: activeKid._id });
+      await axios.post('api/diseases', { initialDrugId: drug._id, kidId: activeKid._id });
+      await refresh();
       navigate(`/history/${activeKid.name}`);
     }
   };
